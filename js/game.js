@@ -37,6 +37,17 @@ var game = {
 		
         //me.state.set(me.state.MENU, new game.TitleScreen());
         me.state.set(me.state.PLAY, new game.PlayScreen());
+		
+		
+		// enable the keyboard
+	  	me.input.bindKey(me.input.KEY.LEFT,  "left");
+	  	me.input.bindKey(me.input.KEY.RIGHT, "right");
+	  	// map X, Up Arrow and Space for jump
+	  	me.input.bindKey(me.input.KEY.X,      "jump", true);
+	  	me.input.bindKey(me.input.KEY.UP,     "jump", true);
+	  	me.input.bindKey(me.input.KEY.SPACE,  "jump", true);
+
+		
 
         // Start the game.
         me.state.change(me.state.PLAY);
