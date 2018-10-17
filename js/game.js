@@ -1,4 +1,3 @@
-
 /* Game namespace */
 var game = {
 

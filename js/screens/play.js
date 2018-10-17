@@ -4,8 +4,8 @@ game.PlayScreen = me.ScreenObject.extend({
      */
     onResetEvent: function() {
 		me.levelDirector.loadLevel("sample");
-		me.game.world.addChild(me.pool.pull("player"), 1);
-		me.game.world.addChild(me.pool.pull("enemy", 50, 50), 2);
+		//me.game.world.addChild(me.pool.pull("player"), 1);
+		me.game.world.addChild(me.pool.pull("enemy", 608, 32), 2);
 
     },
 
