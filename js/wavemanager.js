@@ -4,9 +4,9 @@ game.waveManagerEasy = me.Container.extend({
 		
 		// Instantiate numerical data
 		this.numberSpawned = 0;
-		this.maxSpawn = 10;
+		this.maxSpawn = 5;
 		this.waveNumber = 1;
-		this.spawnTime = 0.5;
+		this.spawnTime = 1;
 		
 		// Instantiate booleans
 		this.waveComplete = false;
@@ -16,9 +16,7 @@ game.waveManagerEasy = me.Container.extend({
 		this.currentTime = me.timer.getTime() / 1000;
 		this.roundStartTime = me.timer.getTime() / 1000;
 		this.roundEndTime;
-		
-		// Instantiate global variables
-		game.data.currentlySpawned = 0;
+	
   	},
 	
 	update: function (dt) {
@@ -90,22 +88,7 @@ game.waveManagerEasy = me.Container.extend({
 		if (time >= this.roundStartTime + 5) {
 			this.roundStart = true;
 		}
-	},
-	
-	
-	
-	// Function provided by melonJS that activates when an object is
-	// "born" into the game world. It is only called once.
-	onActivateEvent : function () {
-
-	},
-
-	// Function provided by melonJS that activates when the world is
-	// destroyed 
-	onDeactivateEvent : function () {
-
 	}
   
 });
 
-// we probably want to add a movement speed function to the enemy class just so we can change the movement speed for each wave case. This is the same for the health.

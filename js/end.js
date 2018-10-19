@@ -5,7 +5,10 @@ game.End = me.Entity.extend({
             width : 32,
           	height : 32
       	}]);
+		
+		this.body.collisionType = me.collision.types.ACTION_OBJECT;
 	},
+	
 	
 	update: function (dt) {
     	this._super(me.Entity, "update", [dt]);
@@ -15,6 +18,7 @@ game.End = me.Entity.extend({
 	
 	onCollision: function (res, other) {
 		if (other.body.collisionType === me.collision.types.ENEMY_OBJECT) {
+			other.body.setCollisionMask(me.collision.types.NO_OBJECT);
 			me.game.world.removeChild(other);
 			game.data.health--;
 			game.data.currentlySpawned--;

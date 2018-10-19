@@ -3,13 +3,10 @@ game.MissileAir = me.Entity.extend({
         this._super(me.Entity, "init", [x, y,  {width: 7, height: 7} ]);
         
         this.body.setVelocity(0, 0);
-		//this.body.vel.x = 0;
-		//this.body.vel.y = 0;
         this.body.collisionType = me.collision.types.PROJECTILE_OBJECT;
-
 		this.speed = 0.2;
-		this.target;
-		
+		this.target;	
+		this.alwaysUpdate = true;
         this.renderable = new (me.Renderable.extend({
             init : function () {
                 this._super(me.Renderable, "init", [0, 0, 7, 7]);
@@ -22,7 +19,7 @@ game.MissileAir = me.Entity.extend({
                 renderer.setColor(color);
             }
         }));
-        this.alwaysUpdate = true;
+
     },
 	
 	getTarget: function(target) {
@@ -32,8 +29,9 @@ game.MissileAir = me.Entity.extend({
 	// https://www.youtube.com/watch?v=e3-TZ7TfJjA
 	// https://www.gamedev.net/forums/topic/339753-noob-need-code-on-2d-homing-missile/
 	calculateDirection: function(target) {
-		console.log("X pos: " + this.pos.x + "   Y pos: " + this.pos.y);
-		
+		// The following formula was derived from the two sources above. They
+		// Calculate the relative distance and velocities between the missile
+		// and the target enemy unit and follows it until collision occurs
 		var totalMovement = 1;
 		var xRelativeDistance = Math.abs(target.pos.x - this.pos.x);
 		var yRelativeDistance = Math.abs(target.pos.y - this.pos.y);
@@ -43,8 +41,6 @@ game.MissileAir = me.Entity.extend({
 		this.body.vel.x = xPercentOfMovement;
 		this.body.vel.y = totalMovement - xPercentOfMovement;
 		
-		
-		console.log("X vel: " + this.body.vel.x + "     Y vel: " + this.body.vel.y);
 		
 		if (target.pos.x < this.pos.x) {
 			this.body.vel.x *= -1;
@@ -60,11 +56,16 @@ game.MissileAir = me.Entity.extend({
 		this.calculateDirection(this.target);
 		this.pos.x += this.body.vel.x * this.speed * time;
 		this.pos.y += this.body.vel.y * this.speed * time;
-		
 
+		this.removeMissile();
 		
-       // this.body.vel.y -= this.body.accel.y * time / 1000;
-		
+        this.body.update();
+        me.collision.check(this);
+
+        return true;
+    },
+	
+	removeMissile: function() {
         if (this.pos.y + this.height <= 0) {
             me.game.world.removeChild(this);
         }
@@ -76,24 +77,7 @@ game.MissileAir = me.Entity.extend({
         }
 		if (this.pos.x + this.height >= 640) {
 			me.game.world.removeChild(this);
-		}
-		
-        this.body.update();
-        me.collision.check(this);
-
-        return true;
-    },
-	
-	// Function provided by melonJS that activates when an object is
-	// "born" into the game world. It is only called once.
-	onActivateEvent : function () {
-
-	},
-
-	// Function provided by melonJS that activates when the world is
-	// destroyed 
-	onDeactivateEvent : function () {
-
-	}	
+		}		
+	}
 });
 

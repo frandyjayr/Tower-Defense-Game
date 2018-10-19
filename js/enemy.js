@@ -26,12 +26,12 @@ game.Enemy = me.Entity.extend({
 	  
 		this.body.vel.x = 0;
 		this.body.vel.y = 0;
-		this.gameVelocity = 150;
+		this.gameVelocity = 200;
 		this.size = 32;
 		this.currentMove = 'L';
 		this.currentX = 19;
 		this.currentY = 1;
-		this.health = 1;
+		this.currentOther;
 		this.body.collisionType = me.collision.types.ENEMY_OBJECT;
 },
 	
@@ -78,10 +78,13 @@ game.Enemy = me.Entity.extend({
 	
 	onCollision: function (res, other) {
 		if (other.body.collisionType === me.collision.types.PROJECTILE_OBJECT) {
+			other.body.setCollisionMask(me.collision.types.NO_OBJECT);
 			me.game.world.removeChild(other);
 			me.game.world.removeChild(this);
 			game.data.currentlySpawned--;
-		}
+		} 
+		
+		//if (other.body.collisionType === me.collision.types.PROJECTILE_OBJECT
 		return false;
 	}
 });

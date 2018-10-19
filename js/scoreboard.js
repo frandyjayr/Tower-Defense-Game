@@ -43,7 +43,6 @@ game.HUD.ScoreItem = me.Renderable.extend({
 
 		// local copy of the global score
 		this.health = 10;
-		game.data.health = 10;
   	},
 
   /**
