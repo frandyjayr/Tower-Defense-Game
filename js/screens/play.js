@@ -9,6 +9,8 @@ game.PlayScreen = me.ScreenObject.extend({
 		me.game.world.addChild(me.pool.pull("wavemanagereasy", 608, 32), 1);
 		//me.game.world.addChild(me.pool.pull("enemy", 608, 32), 1);
 		me.game.world.addChild(me.pool.pull("end", 0, 416), 2);
+		
+		me.game.world.addChild(me.pool.pull("towerEasy",-64, 32), 3);
 
     },
 

@@ -4,8 +4,9 @@ game.waveManagerEasy = me.Container.extend({
 		
 		// Instantiate numerical data
 		this.numberSpawned = 0;
-		this.maxSpawn = 5;
+		this.maxSpawn = 10;
 		this.waveNumber = 1;
+		this.spawnTime = 0.5;
 		
 		// Instantiate booleans
 		this.waveComplete = false;
@@ -33,8 +34,7 @@ game.waveManagerEasy = me.Container.extend({
 	
 	startRound: function () {
 		var newTime = me.timer.getTime() / 1000;
-		if (newTime >= this.currentTime + 0.5 && this.numberSpawned < this.maxSpawn && this.roundStart) {
-			console.log("startRound function activated");
+		if (newTime >= this.currentTime + this.spawnTime && this.numberSpawned < this.maxSpawn && this.roundStart) {
 			this.generateWave(this.waveNumber);
 			this.currentTime = newTime;
 		}
@@ -107,3 +107,5 @@ game.waveManagerEasy = me.Container.extend({
 	}
   
 });
+
+// we probably want to add a movement speed function to the enemy class just so we can change the movement speed for each wave case. This is the same for the health.

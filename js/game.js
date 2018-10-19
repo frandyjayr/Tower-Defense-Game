@@ -35,8 +35,12 @@ var game = {
 		me.pool.register("enemy", game.Enemy);
 		// add our end path entity in the entity pool
 		me.pool.register("end", game.End);
+		// add towers entities to the entity pool
+		me.pool.register("towerEasy", game.TowerEasy);
 		// add the wave manager to the entity pool
 		me.pool.register("wavemanagereasy", game.waveManagerEasy);
+		// add the missiles to the entity pool
+		me.pool.register("missileAir", game.MissileAir);
 		
         //me.state.set(me.state.MENU, new game.TitleScreen());
         me.state.set(me.state.PLAY, new game.PlayScreen());

@@ -42,8 +42,8 @@ game.HUD.ScoreItem = me.Renderable.extend({
 		this.font.textBaseline = 'bottom';
 
 		// local copy of the global score
-		this.score = 10;
-		game.data.score = 10;
+		this.health = 10;
+		game.data.health = 10;
   	},
 
   /**
@@ -52,8 +52,8 @@ game.HUD.ScoreItem = me.Renderable.extend({
 	update : function (dt) {
 		// we don't do anything fancy here, so just
 		// return true if the score has been updated
-		if (this.score !== game.data.score) {
-		  this.score = game.data.score;
+		if (this.health !== game.data.health) {
+		  this.health = game.data.health;
 		  return true;
 		}
 		return false;
@@ -63,6 +63,6 @@ game.HUD.ScoreItem = me.Renderable.extend({
    * draw the score
    */
 	draw : function (renderer) {
-    	this.font.draw (renderer, game.data.score, me.game.viewport.width + this.pos.x, me.game.viewport.height + this.pos.y);
+    	this.font.draw (renderer, game.data.health, me.game.viewport.width + this.pos.x, me.game.viewport.height + this.pos.y);
   	}
 });
