@@ -4,8 +4,9 @@ game.MissileAir = me.Entity.extend({
         
         this.body.setVelocity(0, 0);
         this.body.collisionType = me.collision.types.PROJECTILE_OBJECT;
-		this.speed = 0.2;
+		this.speed = 0.45;
 		this.target;	
+		this.targetTemp = null;
 		this.alwaysUpdate = true;
         this.renderable = new (me.Renderable.extend({
             init : function () {
@@ -23,7 +24,12 @@ game.MissileAir = me.Entity.extend({
     },
 	
 	getTarget: function(target) {
-		this.target = target;
+		if (this.targetTemp === null) {
+			this.targetTemp = target;
+			this.target = target;
+		} else if (this.targetTemp === target) {
+			this.target = target;
+		}
 	},
 	
 	// https://www.youtube.com/watch?v=e3-TZ7TfJjA
