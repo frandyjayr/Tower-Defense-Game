@@ -1,9 +1,9 @@
-game.TowerEasy = me.Entity.extend({
+game.TowerAir = me.Entity.extend({
 	init: function (x, y) {
     	this._super(me.Entity, "init", [x, y, {
-        	image : "towerEasy",
+        	image : "towerAir",
             width : 224,
-          	height : 96
+          	height : 160
       	}]);
 		this.body.collisionType = me.collision.types.PLAYER_OBJECT;
 		this.currentTime = me.timer.getTime() / 1000;
@@ -22,7 +22,7 @@ game.TowerEasy = me.Entity.extend({
 		if (other.body.collisionType === me.collision.types.ENEMY_OBJECT) {
 			var newTime = me.timer.getTime() / 1000;
 			if (newTime >= this.currentTime + this.spawnTime) {
-				this.newMissile = new game.MissileAir(this.pos.x + (3 * 32) + 32 / 2, this.pos.y + 32 + 32 / 3);
+				this.newMissile = new game.MissileAir(this.pos.x + (3 * 32) + 32 / 2, this.pos.y + (2 * 32) + 32 / 3);
 				this.newMissile.getTarget(other);
 				me.game.world.addChild(this.newMissile, 2);
 				this.currentTime = newTime;

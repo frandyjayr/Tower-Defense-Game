@@ -5,6 +5,7 @@ game.MissileAir = me.Entity.extend({
         this.body.setVelocity(0, 0);
         this.body.collisionType = me.collision.types.PROJECTILE_OBJECT;
 		this.speed = 0.45;
+		this.newDistance = 0;
 		this.target;	
 		this.targetTemp = null;
 		this.alwaysUpdate = true;
@@ -47,13 +48,14 @@ game.MissileAir = me.Entity.extend({
 		this.body.vel.x = xPercentOfMovement;
 		this.body.vel.y = totalMovement - xPercentOfMovement;
 		
-		
 		if (target.pos.x < this.pos.x) {
 			this.body.vel.x *= -1;
 		}
 		if (target.pos.y < this.pos.y) {
 			this.body.vel.y *= -1;
 		}
+		
+		this.removeIdleMissile(target);
 	},
 	
     update : function (time) {
@@ -71,17 +73,25 @@ game.MissileAir = me.Entity.extend({
         return true;
     },
 	
+	removeIdleMissile(target) {
+		if (this.newDistance === target.pos.x + target.pos.y) {
+			me.game.world.removeChild(this);
+		} else {
+			this.newDistance = target.pos.x + target.pos.y;
+		}
+	},
+	
 	removeMissile: function() {
-        if (this.pos.y + this.height <= 0) {
+        if (this.pos.y + this.height <= game.data.gameScreenStartPosY) {
             me.game.world.removeChild(this);
         }
-		if (this.pos.y + this.height >= 480) {
+		if (this.pos.y + this.height >= game.data.gameScreenEndPosY) {
 			me.game.world.removeChild(this);
 		}
-        if (this.pos.x + this.height <= 0) {
+        if (this.pos.x + this.height <= game.data.gameScreenStartPosX) {
             me.game.world.removeChild(this);
         }
-		if (this.pos.x + this.height >= 640) {
+		if (this.pos.x + this.height >= game.data.gameScreenEndPosX) {
 			me.game.world.removeChild(this);
 		}		
 	}
