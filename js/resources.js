@@ -6,7 +6,8 @@ game.resources = [
 	{ name: "towerDefense_tilesheet", type: "image", src: "data/img/towerDefense_tilesheet.png" },
 	{ name: "PressStart2P", type: "image", src: "data/fnt/PressStart2P.png" },
 	{ name: "PressStart2P", type: "binary", src: "data/fnt/PressStart2P.fnt" },
-	{ name: "buttonTowerAir", type: "image", src: "data/img/buttonTowerAir.png" }
+	{ name: "buttonTowerAir", type: "image", src: "data/img/buttonTowerAir.png" },
+	{ name: "TowerAirSpawnBad", type: "image", src: "data/img/TowerAirSpawnBad.png" }
 	
 ];
 

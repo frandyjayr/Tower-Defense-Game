@@ -9,17 +9,28 @@ game.TowerAir = me.Entity.extend({
 		this.currentTime = me.timer.getTime() / 1000;
 		this.spawnTime = 2;
 		this.newMissile;
+		this.towerOn = false;
 	},
 	
 	update: function (dt) {
-    	this._super(me.Entity, "update", [dt]);
-		me.collision.check(this);
+		
+		this._super(me.Entity, "update", [dt]);
+		me.collision.check(this);			
+
 		
 		return true;
   	},
 	
+	toggleTower: function () {
+		if (this.towerOn) {
+			this.towerOn = false;
+		} else {
+			this.towerOn = true;
+		}
+	},
+	
 	onCollision: function (res, other) {
-		if (other.body.collisionType === me.collision.types.ENEMY_OBJECT) {
+		if (other.body.collisionType === me.collision.types.ENEMY_OBJECT && this.towerOn) {
 			var newTime = me.timer.getTime() / 1000;
 			if (newTime >= this.currentTime + this.spawnTime) {
 				this.newMissile = new game.MissileAir(this.pos.x + (3 * 32) + 32 / 2, this.pos.y + (2 * 32) + 32 / 3);

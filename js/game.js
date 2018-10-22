@@ -5,14 +5,16 @@ var game = {
     data : {
 		health: 10,
 		currentlySpawned: 0,
+		waveNumber: 1,
 		gameScreenStartPosX: 0,
 		gameScreenStartPosY: 0,
-		gameScreenEndPosX: 640,
+		gameScreenEndPosX: 608,
 		gameScreenEndPosY: 448,
-		utilityScreenStartPosX: 640,
+		utilityScreenStartPosX: 608,
 		utilityScreenStartPosY: 0,
 		utilityScreenEndPosX: 736,
-		utilityScreenEndPosY: 448
+		utilityScreenEndPosY: 448,
+		gameDifficulty: 'EASY'
     },
 
 	
@@ -51,8 +53,15 @@ var game = {
 		me.pool.register("missileAir", game.MissileAir);
 		// add the buttons to the entity pool
 		me.pool.register("buttonTowerAir", game.ButtonTowerAir);
+		// add the tower manager to the entity pool
+		me.pool.register("towermanager", game.TowerManager);
 		
-
+		
+		
+		
+		me.pool.register("spawnTowerAir", game.SpawnTowerAir);
+		
+		
 		
         //me.state.set(me.state.MENU, new game.TitleScreen());
         me.state.set(me.state.PLAY, new game.PlayScreen());

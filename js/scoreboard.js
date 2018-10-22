@@ -43,6 +43,7 @@ game.HUD.ScoreItem = me.Renderable.extend({
 
 		// local copy of the global score
 		this.health = 10;
+		this.font.resize(0.5);
   	},
 
   /**
@@ -62,6 +63,11 @@ game.HUD.ScoreItem = me.Renderable.extend({
    * draw the score
    */
 	draw : function (renderer) {
-    	this.font.draw (renderer, "Lives: " + game.data.health, me.game.viewport.width + this.pos.x, me.game.viewport.height + this.pos.y);
+    	this.font.draw(renderer, "Lives: ", me.game.viewport.width + this.pos.x - 46, me.game.viewport.height + this.pos.y);
+		this.font.draw(renderer, game.data.health, me.game.viewport.width + this.pos.x - 10, me.game.viewport.height + this.pos.y);
+		
+		this.font.draw(renderer, "Wave: ", me.game.viewport.width + this.pos.x - 55, me.game.viewport.height + this.pos.y - 32); 
+		this.font.draw(renderer, game.data.waveNumber + "/10", me.game.viewport.width + this.pos.x, me.game.viewport.height + this.pos.y - 32); 
+
   	}
 });

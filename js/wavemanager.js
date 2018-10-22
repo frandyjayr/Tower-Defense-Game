@@ -4,8 +4,7 @@ game.waveManagerEasy = me.Container.extend({
 		
 		// Instantiate numerical data
 		this.numberSpawned = 0;
-		this.maxSpawn = 5;
-		this.waveNumber = 1;
+		this.maxSpawn = 10;
 		this.spawnTime = 1;
 		
 		// Instantiate booleans
@@ -33,7 +32,7 @@ game.waveManagerEasy = me.Container.extend({
 	startRound: function () {
 		var newTime = me.timer.getTime() / 1000;
 		if (newTime >= this.currentTime + this.spawnTime && this.numberSpawned < this.maxSpawn && this.roundStart) {
-			this.generateWave(this.waveNumber);
+			this.generateWave(game.data.waveNumber);
 			this.currentTime = newTime;
 		}
 	},
@@ -47,20 +46,28 @@ game.waveManagerEasy = me.Container.extend({
 				me.game.world.addChild(me.pool.pull("enemy", 608, 32), 2);				
 				break;
 			case 3:
+				me.game.world.addChild(me.pool.pull("enemy", 608, 32), 2);
 				break;
 			case 4:
+				me.game.world.addChild(me.pool.pull("enemy", 608, 32), 2);
 				break;
 			case 5:
+				me.game.world.addChild(me.pool.pull("enemy", 608, 32), 2);
 				break;
 			case 6:
+				me.game.world.addChild(me.pool.pull("enemy", 608, 32), 2);
 				break;
 			case 7:
+				me.game.world.addChild(me.pool.pull("enemy", 608, 32), 2);
 				break;
 			case 8:
+				me.game.world.addChild(me.pool.pull("enemy", 608, 32), 2);
 				break;
 			case 9:
+				me.game.world.addChild(me.pool.pull("enemy", 608, 32), 2);
 				break;
 			case 10:
+				me.game.world.addChild(me.pool.pull("enemy", 608, 32), 2);
 				break;
 			default:
 				console.log("GAME WON");
@@ -77,7 +84,7 @@ game.waveManagerEasy = me.Container.extend({
 			console.log("ROUND OVER");
 			this.roundStart = false;
 			this.numberSpawned = 0;
-			this.waveNumber++;
+			game.data.waveNumber++;
 			this.roundStartTime = me.timer.getTime() / 1000;
 		}
 	},

@@ -6,23 +6,7 @@ game.Enemy = me.Entity.extend({
           	height : 32
       	}]);
 	  
-	  	this.path = [
-['G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G' ],
-['D', 'L', 'L', 'L', 'L', 'L', 'L', 'L', 'L', 'L', 'L', 'L', 'L', 'L', 'L', 'L', 'L', 'L', 'L', 'L' ],
-['D', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G' ],
-['D', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G' ],
-['R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'D' ],
-['G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'D' ],
-['G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'D' ],
-['D', 'L', 'L', 'L', 'L', 'L', 'L', 'L', 'L', 'L', 'L', 'L', 'L', 'L', 'L', 'L', 'L', 'L', 'L', 'L' ],
-['D', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G' ],
-['D', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G' ],
-['R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'D' ],
-['G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'D' ],
-['G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'D' ],
-['E', 'L', 'L', 'L', 'L', 'L', 'L', 'L', 'L', 'L', 'L', 'L', 'L', 'L', 'L', 'L', 'L', 'L', 'L', 'L' ],
-['G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G' ]
-];
+	  	this.path = game.mapEasy
 	  
 		this.body.vel.x = 0;
 		this.body.vel.y = 0;
@@ -47,28 +31,28 @@ game.Enemy = me.Entity.extend({
 		if (this.currentMove === 'L') {
 			this.body.vel.y = 0;
 			this.body.vel.x = this.gameVelocity * -1;
-			this.pos.x += this.body.vel.x * dt / 992;
+			this.pos.x += this.body.vel.x * dt / 1000;
 			if (this.pos.x <= this.currentX * this.size - this.size) {
 				this.currentX--;
 			}
 		} else if (this.currentMove === 'R') {
 			this.body.vel.y = 0;
 			this.body.vel.x = this.gameVelocity;
-			this.pos.x += this.body.vel.x * dt / 992;
+			this.pos.x += this.body.vel.x * dt / 1000;
 			if (this.pos.x >= this.currentX * this.size + this.size) {
 				this.currentX++;
 			}			
 		} else if (this.currentMove === 'U') {
 			this.body.vel.x = 0;
 			this.body.vel.y = this.gameVelocity * -1;
-			this.pos.y += this.body.vel.y * dt / 992
+			this.pos.y += this.body.vel.y * dt / 1000
 			if (this.pos.y <= this.currentY * this.size - this.size) {
 				this.currentY--;
 			}				
 		} else if (this.currentMove === 'D') {
 			this.body.vel.x = 0;
 			this.body.vel.y = this.gameVelocity;
-			this.pos.y += this.body.vel.y * dt / 992
+			this.pos.y += this.body.vel.y * dt / 1000
 			if (this.pos.y >= this.currentY * this.size + this.size) {
 				this.currentY++;
 			}			

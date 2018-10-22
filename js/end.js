@@ -23,6 +23,7 @@ game.End = me.Entity.extend({
 			game.data.health--;
 			game.data.currentlySpawned--;
 			return false;
-		}
+		} 
+		return false;	
 	}
 });
