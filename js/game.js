@@ -6,6 +6,7 @@ var game = {
 		health: 10,
 		currentlySpawned: 0,
 		waveNumber: 1,
+		score: 0,
 		gameScreenStartPosX: 0,
 		gameScreenStartPosY: 0,
 		gameScreenEndPosX: 608,
