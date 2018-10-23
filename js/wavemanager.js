@@ -7,9 +7,11 @@ game.waveManagerEasy = me.Container.extend({
 		this.maxSpawn = 10;
 		this.spawnTime = 1;
 		
+		// Instantiate fonts
+		this.font = new me.BitmapFont(me.loader.getBinary('PressStart2P')); 
+		
 		// Instantiate booleans
 		this.waveComplete = false;
-		this.roundStart = false;
 		
 		// Instantiate time-related data
 		this.currentTime = me.timer.getTime() / 1000;
@@ -20,18 +22,19 @@ game.waveManagerEasy = me.Container.extend({
 	
 	update: function (dt) {
     	this._super(me.Container, "update", [dt]);
-		
 		// Each round will go through all 3 functions from start to finish
 		this.preRoundPreparation();
 		this.startRound();
-		this.endRound();
+		this.endRound();			
+
+
 		
 		return true;
   	},
 	
 	startRound: function () {
 		var newTime = me.timer.getTime() / 1000;
-		if (newTime >= this.currentTime + this.spawnTime && this.numberSpawned < this.maxSpawn && this.roundStart) {
+		if (newTime >= this.currentTime + this.spawnTime && this.numberSpawned < this.maxSpawn && game.data.waveStart) {
 			this.generateWave(game.data.waveNumber);
 			this.currentTime = newTime;
 		}
@@ -40,34 +43,34 @@ game.waveManagerEasy = me.Container.extend({
 	generateWave: function (wave) {
 		switch(wave) {
 			case 1:
-				me.game.world.addChild(me.pool.pull("enemy", 608, 32), 1);
+				me.game.world.addChild(me.pool.pull("enemyAir", 608, 32), 1);
 				break;
 			case 2:
-				me.game.world.addChild(me.pool.pull("enemy", 608, 32), 2);				
+				me.game.world.addChild(me.pool.pull("enemyAir", 608, 32), 2);				
 				break;
 			case 3:
-				me.game.world.addChild(me.pool.pull("enemy", 608, 32), 2);
+				me.game.world.addChild(me.pool.pull("enemyAir", 608, 32), 2);
 				break;
 			case 4:
-				me.game.world.addChild(me.pool.pull("enemy", 608, 32), 2);
+				me.game.world.addChild(me.pool.pull("enemyAir", 608, 32), 2);
 				break;
 			case 5:
-				me.game.world.addChild(me.pool.pull("enemy", 608, 32), 2);
+				me.game.world.addChild(me.pool.pull("enemyAir", 608, 32), 2);
 				break;
 			case 6:
-				me.game.world.addChild(me.pool.pull("enemy", 608, 32), 2);
+				me.game.world.addChild(me.pool.pull("enemyAir", 608, 32), 2);
 				break;
 			case 7:
-				me.game.world.addChild(me.pool.pull("enemy", 608, 32), 2);
+				me.game.world.addChild(me.pool.pull("enemyAir", 608, 32), 2);
 				break;
 			case 8:
-				me.game.world.addChild(me.pool.pull("enemy", 608, 32), 2);
+				me.game.world.addChild(me.pool.pull("enemyAir", 608, 32), 2);
 				break;
 			case 9:
-				me.game.world.addChild(me.pool.pull("enemy", 608, 32), 2);
+				me.game.world.addChild(me.pool.pull("enemyAir", 608, 32), 2);
 				break;
 			case 10:
-				me.game.world.addChild(me.pool.pull("enemy", 608, 32), 2);
+				me.game.world.addChild(me.pool.pull("enemyAir", 608, 32), 2);
 				break;
 			default:
 				console.log("GAME WON");
@@ -80,9 +83,10 @@ game.waveManagerEasy = me.Container.extend({
 	},
 
 	endRound: function() {
-		if (this.roundStart === true && game.data.currentlySpawned === 0) {
+		if (game.data.waveStart === true && game.data.currentlySpawned === 0 && this.numberSpawned === this.maxSpawn) {
 			console.log("ROUND OVER");
-			this.roundStart = false;
+			game.data.waveStart = false;
+			game.data.waveStart = false;
 			this.numberSpawned = 0;
 			game.data.waveNumber++;
 			this.roundStartTime = me.timer.getTime() / 1000;
@@ -90,10 +94,9 @@ game.waveManagerEasy = me.Container.extend({
 	},
 	
 	preRoundPreparation: function() {
-		var time = me.timer.getTime() / 1000;
-		
-		if (time >= this.roundStartTime + 5) {
-			this.roundStart = true;
+		if (me.input.isKeyPressed("P") && game.data.currentlySpawned === 0) {
+			console.log("Wave Begin");
+			game.data.waveStart = true;
 		}
 	}
   

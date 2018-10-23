@@ -42,8 +42,9 @@ game.HUD.ScoreItem = me.Renderable.extend({
 		this.font.textBaseline = 'bottom';
 
 		// local copy of the global score
-		this.health = 10;
-		this.font.resize(0.5);
+		this.gold = game.data.startingGold;
+		this.health = game.data.startingHealth;
+		this.font.resize(0.5);	
   	},
 
   /**
@@ -53,9 +54,14 @@ game.HUD.ScoreItem = me.Renderable.extend({
 		// we don't do anything fancy here, so just
 		// return true if the score has been updated
 		if (this.health !== game.data.health) {
-		  this.health = game.data.health;
-		  return true;
+		 	 this.health = game.data.health;
+		  	return true;
 		}
+		if (this.gold !== game.data.gold) {
+			this.gold = game.data.gold;
+			return true;
+		}
+		
 		return false;
   	},
 
@@ -63,10 +69,14 @@ game.HUD.ScoreItem = me.Renderable.extend({
    * draw the score
    */
 	draw : function (renderer) {
+		this.font.resize(0.5);
+		// Render gold
+		this.font.draw(renderer, "Gold: ", me.game.viewport.width + this.pos.x - 62, me.game.viewport.height + this.pos.y - 96); 
+		this.font.draw(renderer, game.data.gold, me.game.viewport.width + this.pos.x + 5, me.game.viewport.height + this.pos.y - 96); 		
 		
 		// Render score
 		this.font.draw(renderer, "Score: ", me.game.viewport.width + this.pos.x - 50, me.game.viewport.height + this.pos.y - 64); 
-		this.font.draw(renderer, game.data.score, me.game.viewport.width + this.pos.x + 5, me.game.viewport.height + this.pos.y - 64); 				
+		this.font.draw(renderer, game.data.score, me.game.viewport.width + this.pos.x + 5, me.game.viewport.height + this.pos.y - 64); 		
 		
 		// Render user lives
     	this.font.draw(renderer, "Lives: ", me.game.viewport.width + this.pos.x - 52, me.game.viewport.height + this.pos.y - 32);
@@ -76,6 +86,14 @@ game.HUD.ScoreItem = me.Renderable.extend({
 		this.font.draw(renderer, "Wave: ", me.game.viewport.width + this.pos.x - 60, me.game.viewport.height + this.pos.y); 
 		this.font.draw(renderer, game.data.waveNumber + "/10", me.game.viewport.width + this.pos.x, me.game.viewport.height + this.pos.y); 
 
+		// Render Wave Number
+		if (game.data.waveStart === false) {
+			this.font.resize(1.5);
+			this.font.draw(renderer, "Wave " + game.data.waveNumber, me.game.viewport.width / 2 + 50, me.game.viewport.height / 2);
+			this.font.resize(0.6);
+			this.font.draw(renderer, "Prepare Your Towers and Then" , me.game.viewport.width / 2 + 130, me.game.viewport.height / 2 + 35);			
+			this.font.draw(renderer, "Press 'P' to Start Wave " + game.data.waveNumber, me.game.viewport.width / 2 + 110, me.game.viewport.height / 2 + 55);			
+		}
 
   	}
 });

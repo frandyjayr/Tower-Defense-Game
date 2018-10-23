@@ -21,12 +21,20 @@ game.TowerAir = me.Entity.extend({
 		return true;
   	},
 	
+	buyTower: function() {
+		game.data.gold -= game.me.data.towerAirCost;	
+	},
+	
 	toggleTower: function () {
 		if (this.towerOn) {
 			this.towerOn = false;
 		} else {
 			this.towerOn = true;
 		}
+	},
+	
+	buyTower: function() {
+		game.data.gold -= game.data.towerAirCost;
 	},
 	
 	onCollision: function (res, other) {
@@ -39,7 +47,8 @@ game.TowerAir = me.Entity.extend({
 				this.currentTime = newTime;
 			}
 			this.newMissile.getTarget(other);
-		}
+		}				
+		
 		return false;
 	}
 });
