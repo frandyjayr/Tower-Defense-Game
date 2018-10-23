@@ -12,11 +12,13 @@ game.EnemyAir = me.Entity.extend({
 		this.body.vel.y = 0;
 		this.gameVelocity = 200;
 		this.size = 32;
-		this.goldWorth = 20;
-		this.scoreWorth = 10;
-		this.currentMove = 'L';
-		this.currentX = 19;
-		this.currentY = 1;
+
+		this.currentMove = 'D';
+		this.currentX = 2;
+		this.currentY = 0;
+    this.goldWorth = 20;
+    this.scoreWorth = 10;
+
 		this.currentOther;
 		this.body.collisionType = me.collision.types.ENEMY_OBJECT;
 },
@@ -58,6 +60,77 @@ game.EnemyAir = me.Entity.extend({
 			if (this.pos.y >= this.currentY * this.size + this.size) {
 				this.currentY++;
 			}			
+		} else if (this.currentMove === 'RD') {
+			this.body.vel.y = 0;
+			this.body.vel.x = this.gameVelocity;
+			this.pos.x += this.body.vel.x * dt / 1000;
+			if (this.pos.x >= this.currentX * this.size + this.size) {
+				this.currentX++;
+			}
+			this.renderable.currentTransform.rotate(-0.159);
+		} 
+		else if (this.currentMove === 'UR') {
+			this.body.vel.x = 0;
+			this.body.vel.y = this.gameVelocity * -1;
+			this.pos.y += this.body.vel.y * dt / 1000
+			if (this.pos.y <= this.currentY * this.size - this.size) {
+				this.currentY--;
+			}
+			this.renderable.currentTransform.rotate(-0.143);
+		}
+		else if (this.currentMove === 'RU') {
+			this.body.vel.y = 0;
+			this.body.vel.x = this.gameVelocity;
+			this.pos.x += this.body.vel.x * dt / 1000;
+			if (this.pos.x >= this.currentX * this.size + this.size) {
+				this.currentX++;
+			}
+			this.renderable.currentTransform.rotate(0.175);
+		}
+		else if (this.currentMove === 'DR') {
+			this.body.vel.x = 0;
+			this.body.vel.y = this.gameVelocity;
+			this.pos.y += this.body.vel.y * dt / 1000
+			if (this.pos.y >= this.currentY * this.size + this.size) {
+				this.currentY++;
+			}
+			this.renderable.currentTransform.rotate(0.160);
+		}
+		else if (this.currentMove === 'LD') {
+			this.body.vel.y = 0;
+			this.body.vel.x = this.gameVelocity * -1;
+			this.pos.x += this.body.vel.x * dt / 1000;
+			if (this.pos.x <= this.currentX * this.size - this.size) {
+				this.currentX--;
+			}
+			this.renderable.currentTransform.rotate(0.140);
+		}
+		else if (this.currentMove === 'UL') {
+			this.body.vel.x = 0;
+			this.body.vel.y = this.gameVelocity * -1;
+			this.pos.y += this.body.vel.y * dt / 1000
+			if (this.pos.y <= this.currentY * this.size - this.size) {
+				this.currentY--;
+			}
+			this.renderable.currentTransform.rotate(0.145);
+		}
+		else if (this.currentMove === 'LU') {
+			this.body.vel.y = 0;
+			this.body.vel.x = this.gameVelocity * -1;
+			this.pos.x += this.body.vel.x * dt / 1000;
+			if (this.pos.x <= this.currentX * this.size - this.size) {
+				this.currentX--;
+			}
+			this.renderable.currentTransform.rotate(-0.155);
+		}
+		else if (this.currentMove === 'DL') {
+			this.body.vel.x = 0;
+			this.body.vel.y = this.gameVelocity;
+			this.pos.y += this.body.vel.y * dt / 1000
+			if (this.pos.y >= this.currentY * this.size + this.size) {
+				this.currentY++;
+			}
+			this.renderable.currentTransform.rotate(-0.145);
 		}
 		this.currentMove = this.path[this.currentY][this.currentX]; 		
 	},

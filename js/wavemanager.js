@@ -43,34 +43,35 @@ game.waveManagerEasy = me.Container.extend({
 	generateWave: function (wave) {
 		switch(wave) {
 			case 1:
-				me.game.world.addChild(me.pool.pull("enemyAir", 608, 32), 1);
+				me.game.world.addChild(me.pool.pull("enemyAir", 64, 0), 1);
 				break;
 			case 2:
-				me.game.world.addChild(me.pool.pull("enemyAir", 608, 32), 2);				
+				me.game.world.addChild(me.pool.pull("enemyAir", 64, 0), 2);				
 				break;
 			case 3:
-				me.game.world.addChild(me.pool.pull("enemyAir", 608, 32), 2);
+				me.game.world.addChild(me.pool.pull("enemyAir", 64, 0), 2);
 				break;
 			case 4:
-				me.game.world.addChild(me.pool.pull("enemyAir", 608, 32), 2);
+				me.game.world.addChild(me.pool.pull("enemyAir", 64, 0), 2);
 				break;
 			case 5:
-				me.game.world.addChild(me.pool.pull("enemyAir", 608, 32), 2);
+				me.game.world.addChild(me.pool.pull("enemyAir", 64, 0), 2);
 				break;
 			case 6:
-				me.game.world.addChild(me.pool.pull("enemyAir", 608, 32), 2);
+				me.game.world.addChild(me.pool.pull("enemyAir", 64, 0), 2);
 				break;
 			case 7:
-				me.game.world.addChild(me.pool.pull("enemyAir", 608, 32), 2);
+				me.game.world.addChild(me.pool.pull("enemyAir", 64, 0), 2);
 				break;
 			case 8:
-				me.game.world.addChild(me.pool.pull("enemyAir", 608, 32), 2);
+				me.game.world.addChild(me.pool.pull("enemyAir", 64, 0), 2);
 				break;
 			case 9:
-				me.game.world.addChild(me.pool.pull("enemyAir", 608, 32), 2);
+				me.game.world.addChild(me.pool.pull("enemyAir", 64, 0), 2);
 				break;
 			case 10:
-				me.game.world.addChild(me.pool.pull("enemyAir", 608, 32), 2);
+				me.game.world.addChild(me.pool.pull("enemyAir", 64, 0), 2);
+
 				break;
 			default:
 				console.log("GAME WON");
