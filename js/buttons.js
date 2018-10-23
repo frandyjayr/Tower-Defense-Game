@@ -4,8 +4,8 @@ game.ButtonTowerAir = me.GUI_Object.extend(
    	{
       	var settings = {}
     	settings.image = "buttonTowerAir";
-      	settings.framewidth = 40;
-      	settings.frameheight = 40;
+      	settings.framewidth = 32;
+      	settings.frameheight = 32;
       	// super constructor
       	this._super(me.GUI_Object, "init", [x, y, settings]);
       	// define the object z order
@@ -22,7 +22,7 @@ game.ButtonTowerAir = me.GUI_Object.extend(
 
 		}
       	return true;
-   	}
+   	},
 	
 });
 
