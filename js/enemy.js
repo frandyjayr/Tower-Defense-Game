@@ -12,9 +12,9 @@ game.Enemy = me.Entity.extend({
 		this.body.vel.y = 0;
 		this.gameVelocity = 200;
 		this.size = 32;
-		this.currentMove = 'L';
-		this.currentX = 19;
-		this.currentY = 1;
+		this.currentMove = 'D';
+		this.currentX = 2;
+		this.currentY = 0;
 		this.currentOther;
 		this.body.collisionType = me.collision.types.ENEMY_OBJECT;
 },
