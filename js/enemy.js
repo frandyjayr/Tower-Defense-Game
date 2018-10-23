@@ -1,4 +1,4 @@
-game.Enemy = me.Entity.extend({
+game.EnemyAir = me.Entity.extend({
 	init: function (x, y) {
     	this._super(me.Entity, "init", [x, y, {
         	image : "player",
@@ -12,9 +12,13 @@ game.Enemy = me.Entity.extend({
 		this.body.vel.y = 0;
 		this.gameVelocity = 200;
 		this.size = 32;
+
 		this.currentMove = 'D';
 		this.currentX = 2;
 		this.currentY = 0;
+    this.goldWorth = 20;
+    this.scoreWorth = 10;
+
 		this.currentOther;
 		this.body.collisionType = me.collision.types.ENEMY_OBJECT;
 },
@@ -131,12 +135,21 @@ game.Enemy = me.Entity.extend({
 		this.currentMove = this.path[this.currentY][this.currentX]; 		
 	},
 	
+	updateData: function() {
+		game.data.score += this.scoreWorth;	
+		game.data.gold += this.goldWorth;
+	},
+	
+	
 	onCollision: function (res, other) {
 		if (other.body.collisionType === me.collision.types.PROJECTILE_OBJECT) {
 			other.body.setCollisionMask(me.collision.types.NO_OBJECT);
+			this.updateData();
+			
 			me.game.world.removeChild(other);
 			me.game.world.removeChild(this);
 			game.data.currentlySpawned--;
+			
 		} 
 		
 		//if (other.body.collisionType === me.collision.types.PROJECTILE_OBJECT

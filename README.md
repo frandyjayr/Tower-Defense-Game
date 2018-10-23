@@ -29,7 +29,7 @@ Running the game:
 
 	grunt serve
 
-And you will have the boilerplate example running on http://localhost:8000
+And you will have the boilerplate example running on http://localhost:8080
 
 ## Building Release Versions
 

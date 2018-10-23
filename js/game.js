@@ -6,6 +6,11 @@ var game = {
 		health: 10,
 		currentlySpawned: 0,
 		waveNumber: 1,
+		score: 0,
+		gold: 100,
+		startingGold: 100,
+		startingHealth: 10,
+		towerAirCost: 50,
 		gameScreenStartPosX: 0,
 		gameScreenStartPosY: 0,
 		gameScreenEndPosX: 608,
@@ -14,7 +19,9 @@ var game = {
 		utilityScreenStartPosY: 0,
 		utilityScreenEndPosX: 736,
 		utilityScreenEndPosY: 448,
-		gameDifficulty: 'EASY'
+		gameDifficulty: 'EASY',
+		waveStart: false,
+		towerMap: null
     },
 
 	
@@ -42,7 +49,7 @@ var game = {
 		// add our player entity in the entity pool
 		me.pool.register("player", game.Player);
 		// add our enemy entity in the entity pool
-		me.pool.register("enemy", game.Enemy);
+		me.pool.register("enemyAir", game.EnemyAir);
 		// add our end path entity in the entity pool
 		me.pool.register("end", game.End);
 		// add towers entities to the entity pool
@@ -68,5 +75,6 @@ var game = {
 
         // Start the game.
         me.state.change(me.state.PLAY);
+
     }
 };
