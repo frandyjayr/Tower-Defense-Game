@@ -28,6 +28,34 @@ game.ButtonTowerAir = me.GUI_Object.extend(
 	
 });
 
+game.ButtonTowerWater = me.GUI_Object.extend(
+	{
+		init:function (x, y)
+		   {
+			  var settings = {}
+			settings.image = "buttonTowerWater";
+			  settings.framewidth = 32;
+			  settings.frameheight = 32;
+			  // super constructor
+			  this._super(me.GUI_Object, "init", [x, y, settings]);
+			  // define the object z order
+			  this.pos.z = 4;
+			this.alwaysUpdate = true;
+			this.anchorPoint.set(0,0);
+		   },
+	
+		   // output something in the console
+		   // when the object is clicked
+		   update: function (time)
+		   {
+			if (me.input.isKeyPressed("W")) {
+	
+			}
+			  return true;
+		   },
+		
+	});
+
 
 
 
