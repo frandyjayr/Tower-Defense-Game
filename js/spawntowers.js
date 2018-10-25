@@ -34,33 +34,37 @@
 			
 			this.spawnChild = new game.TowerAir(0, 0);
 			this.spawnChild.collisionType = me.collision.types.PLAYER_OBJECT;
-			me.game.world.addChild(this.spawnChild);
+			me.game.world.addChild(this.spawnChild, 1);
         },
 
         update : function(time) {
-				if (this.justSpawned && this.towerMap[(this.pos.y + 64) / 32][(this.pos.x + 96) / 32] === 'X') {
-					this.setIndicatorColor('#FF0000')
-					this.justSpawned = false;
-				}
-			
-				if (this.movedLocation) {
 
-					if (this.newLocation !== 'G' || this.newTowerLocation === 'X') {
-						this.setIndicatorColor('#FF0000');
-					} else if (this.currentLocation === 'G' && this.newLocation === 'G' && 			this.newTowerLocation === 'O'){
-						this.setIndicatorColor('#5EFF7E');
-					}else if (this.currentLocation === this.newLocation){
-						// do nothing
-					} else if (this.currentLocation !== 'G' && this.newLocation === 'G') {
-						this.setIndicatorColor('#5EFF7E');
-					} 
-					this.currentLocation = this.newLocation;
-					this.movedLocation = false;
-				}
-			
+			this.changeIndicator();
 			this.moveSpawnTower();
             return false;
         },
+		
+		changeIndicator: function() {
+			if (this.justSpawned && this.towerMap[(this.pos.y + 64) / 32][(this.pos.x + 96) / 32] === 'X') {
+				this.setIndicatorColor('#FF0000')
+				this.justSpawned = false;
+			}
+
+			if (this.movedLocation) {
+
+				if (this.newLocation !== 'G' || this.newTowerLocation === 'X') {
+					this.setIndicatorColor('#FF0000');
+				} else if (this.currentLocation === 'G' && this.newLocation === 'G' && 			this.newTowerLocation === 'O'){
+					this.setIndicatorColor('#5EFF7E');
+				}else if (this.currentLocation === this.newLocation){
+					// do nothing
+				} else if (this.currentLocation !== 'G' && this.newLocation === 'G') {
+					this.setIndicatorColor('#5EFF7E');
+				} 
+				this.currentLocation = this.newLocation;
+				this.movedLocation = false;
+			}			
+		},
 		
 		
 		moveSpawnTower: function() {

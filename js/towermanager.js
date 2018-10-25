@@ -12,8 +12,10 @@ game.TowerManager = me.Container.extend({
 			this.towerAir = new game.SpawnTowerAir(0,0);
 			me.game.world.addChild(this.towerAir, 2);
 			this.spawnTowerActive = true;
+			game.data.towerButtonPressed = true;
 		} else if (me.input.isKeyPressed("esc") || me.input.isKeyPressed("enter")) {
 			this.spawnTowerActive = false;
+			game.data.towerButtonPressed = false;
 		}
 		
 		return true;

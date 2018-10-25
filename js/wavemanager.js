@@ -87,7 +87,6 @@ game.waveManagerEasy = me.Container.extend({
 		if (game.data.waveStart === true && game.data.currentlySpawned === 0 && this.numberSpawned === this.maxSpawn) {
 			console.log("ROUND OVER");
 			game.data.waveStart = false;
-			game.data.waveStart = false;
 			this.numberSpawned = 0;
 			game.data.waveNumber++;
 			this.roundStartTime = me.timer.getTime() / 1000;
@@ -95,9 +94,10 @@ game.waveManagerEasy = me.Container.extend({
 	},
 	
 	preRoundPreparation: function() {
-		if (me.input.isKeyPressed("P") && game.data.currentlySpawned === 0) {
+		if (me.input.isKeyPressed("P") && game.data.currentlySpawned === 0 && 		  game.data.towerButtonPressed === false) {
 			console.log("Wave Begin");
 			game.data.waveStart = true;
+			game.data.preRoundHasStarted = false;
 		}
 	}
   

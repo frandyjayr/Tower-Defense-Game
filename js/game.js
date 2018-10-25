@@ -21,6 +21,8 @@ var game = {
 		utilityScreenEndPosY: 448,
 		gameDifficulty: 'EASY',
 		waveStart: false,
+		preRoundHasStarted: false,
+		towerButtonPressed: false,
 		towerMap: null
     },
 
