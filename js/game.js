@@ -56,17 +56,11 @@ var game = {
 	
     // Run on game resources loaded.
     "loaded" : function () {
-		// add our player entity in the entity pool
-		me.pool.register("player", game.Player);
 		// add our enemy entity in the entity pool
 		me.pool.register("enemy", game.Enemy);
 		// add our end path entity in the entity pool
 		me.pool.register("end", game.End);
 		// add towers entities to the entity pool
-
-		//me.pool.register("towerAir", game.TowerAir);
-		//me.pool.register("towerWater", game.TowerWater);
-		//me.pool.register("towerAir", game.TowerAir);
 
 		// add the wave manager to the entity pool
 		me.pool.register("wavemanagereasy", game.waveManagerEasy);
