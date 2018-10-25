@@ -18,8 +18,10 @@ game.ButtonTowerAir = me.GUI_Object.extend(
    	// when the object is clicked
    	update: function (time)
    	{
-		if (me.input.isKeyPressed("Q")) {
-
+		if (me.input.isKeyPressed("Q") || me.input.isKeyPressed("W") ||
+		    me.input.isKeyPressed("R") || me.input.isKeyPressed("R") && 
+		    game.data.preRoundHasStarted === false) {
+			game.data.preRoundHasStarted = true;
 		}
       	return true;
    	},
