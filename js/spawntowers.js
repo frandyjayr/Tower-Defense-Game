@@ -1,5 +1,5 @@
-    game.SpawnTowerAir = me.Entity.extend({
-        init : function(x, y) {
+    game.SpawnTower = me.Entity.extend({
+        init : function(x, y, settings, missileType) {
             // position, width, height
             this._super(me.Entity, "init", [x, y, {
 				image: "towerAir.png",
@@ -32,7 +32,7 @@
 				}
 			}));
 			
-			this.spawnChild = new game.TowerAir(0, 0);
+			this.spawnChild = new game.Tower(0, 0, settings, missileType);
 			this.spawnChild.collisionType = me.collision.types.PLAYER_OBJECT;
 			me.game.world.addChild(this.spawnChild, 1);
         },
