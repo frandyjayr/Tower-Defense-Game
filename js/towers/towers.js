@@ -9,8 +9,7 @@ game.Tower = me.Entity.extend({
 		this.spawnTime = 2;
 		this.newMissile;
 		this.towerOn = false;
-		this.missileType = settings.missileType;
-		this.towerType = settings.missileType;
+		this.elementType = settings.missileType;
 		this.towerCost;
 		this.chooseTowerType();
 	},
@@ -35,26 +34,26 @@ game.Tower = me.Entity.extend({
 	},
 	
 	chooseTowerType: function() {
-		if (this.towerType === "AIR") {
+		if (this.elementType === "AIR") {
 			this.towerCost = game.data.towerAirCost;
-		} else if (this.towerType === "EARTH") {
+		} else if (this.elementType === "EARTH") {
 			this.towerCost = game.data.towerEarthCost;
-		} else if (this.towerType === "FIRE") {
+		} else if (this.elementType === "FIRE") {
 			this.towerCost = game.data.towerFireCost;
-		} else if (this.towerType === "WATER") {
+		} else if (this.elementType === "WATER") {
 			this.towerCost = game.data.towerWaterCost;
 		}
 	},
 	
 	spawnMissile: function(other) {
-		if (this.missileType === 'AIR') {
-			this.newMissile = new game.Missile(this.pos.x + (3 * 32) + 32 / 2, this.pos.y + (2 * 32) + 32 / 3, this.missileType);
-		} else if (this.missileType === 'EARTH') {
-			this.newMissile = new game.Missile(this.pos.x + (3 * 32) + 32 / 2, this.pos.y + (2 * 32) + 32 / 3, this.missileType);			
-		} else if (this.missileType === 'FIRE') {
-			this.newMissile = new game.Missile(this.pos.x + (3 * 32) + 32 / 2, this.pos.y + (2 * 32) + 32 / 3, this.missileType);			
-		} else if (this.missileType === 'WATER') {
-			this.newMissile = new game.Missile(this.pos.x + (3 * 32) + 32 / 2, this.pos.y + (2 * 32) + 32 / 3, this.missileType);			
+		if (this.elementType === 'AIR') {
+			this.newMissile = new game.Missile(this.pos.x + (3 * 32) + 32 / 2, this.pos.y + (2 * 32) + 32 / 3, this.elementType);
+		} else if (this.elementType === 'EARTH') {
+			this.newMissile = new game.Missile(this.pos.x + (3 * 32) + 32 / 2, this.pos.y + (2 * 32) + 32 / 3, this.elementType);			
+		} else if (this.elementType === 'FIRE') {
+			this.newMissile = new game.Missile(this.pos.x + (3 * 32) + 32 / 2, this.pos.y + (2 * 32) + 32 / 3, this.elementType);			
+		} else if (this.elementType === 'WATER') {
+			this.newMissile = new game.Missile(this.pos.x + (3 * 32) + 32 / 2, this.pos.y + (2 * 32) + 32 / 3, this.elementType);			
 		}   
 		this.newMissile.getTarget(other);
 		me.game.world.addChild(this.newMissile, 2);	
