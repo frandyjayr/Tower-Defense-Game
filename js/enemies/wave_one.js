@@ -1,3 +1,8 @@
+game.collisionTypes = { // define types of collision based off missile
+	MissileAir		: me.collision.types.USER << 0,
+	MissileWater	: me.collision.types.USER << 1,
+};
+
 game.EnemyAir = me.Entity.extend({
 	init: function (x, y) {
     	this._super(me.Entity, "init", [x, y, {
@@ -12,6 +17,8 @@ game.EnemyAir = me.Entity.extend({
 		this.body.vel.y = 0;
 		this.gameVelocity = 200;
 		this.size = 32;
+		this.enemyHealth = 50; // enemy health variable.
+		this.slowBool = 0; // boolean variable to track whether enemy should be slowed by water tower
 
 		this.currentMove = 'D';
 		this.currentX = 2;
@@ -136,23 +143,38 @@ game.EnemyAir = me.Entity.extend({
 	},
 	
 	updateData: function() {
-		game.data.score += this.scoreWorth;	
-		game.data.gold += this.goldWorth;
+		game.data.score += this.scoreWorth;	//add score to player
+		game.data.gold += this.goldWorth; // add gold to player
+		//me.game.world.removeChild(other);
+		me.game.world.removeChild(this); // remove the enemy from board
+		game.data.currentlySpawned--; // update currentlyspawned variable
 	},
 	
 	
 	onCollision: function (res, other) {
-		if (other.body.collisionType === me.collision.types.PROJECTILE_OBJECT) {
-			other.body.setCollisionMask(me.collision.types.NO_OBJECT);
-			this.updateData();
-			
-			me.game.world.removeChild(other);
-			me.game.world.removeChild(this);
-			game.data.currentlySpawned--;
-			
-		} 
+		var projectile_damage = 0; // acts as both a bool val for whether a collision was detected and the damage val to subtract from unit HP
+		if (other.body.collisionType === game.collisionTypes.MissileAir) 
+		{
+			projectile_damage = 2;	
+		}
 		
-		//if (other.body.collisionType === me.collision.types.PROJECTILE_OBJECT
+		if (other.body.collisionType === game.collisionTypes.MissileWater) 
+		{
+			projectile_damage = 10;	
+			console.log("WATER MISSILE HIT");
+		}
+
+		if (projectile_damage > 0)
+		{
+			other.body.setCollisionMask(me.collision.types.NO_OBJECT);
+			this.enemyHealth = this.enemyHealth - projectile_damage; // ENEMY HEALTH subtracted by X for every hit. we need to try and track what projectile is hitting what creature
+			me.game.world.removeChild(other); // removes missile
+			console.log("unit health: ", this.enemyHealth);
+			if (this.enemyHealth <= 0) // is enemy out of hp?
+			{
+				this.updateData(); //update data to get rid of enemy
+			}
+		}
 		return false;
 	}
 });

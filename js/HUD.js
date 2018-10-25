@@ -18,6 +18,8 @@ game.HUD.Container = me.Container.extend({
 		// give a name
 		this.name = "HUD";
 		me.game.world.addChild(me.pool.pull("buttonTowerAir", game.data.utilityScreenStartPosX + 96, game.data.utilityScreenStartPosY + 32), 4);
+		me.game.world.addChild(me.pool.pull("buttonTowerWater", game.data.utilityScreenStartPosX + 96, game.data.utilityScreenStartPosY + 96), 4);
+
 		
 		// add our child score object
 		this.addChild(new game.HUD.ScoreItem(-10, -10));
