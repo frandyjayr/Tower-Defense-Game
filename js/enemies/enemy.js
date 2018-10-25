@@ -3,10 +3,10 @@ game.collisionTypes = { // define types of collision based off missile
 	MissileWater	: me.collision.types.USER << 1,
 };
 
-game.EnemyAir = me.Entity.extend({
-	init: function (x, y) {
+game.Enemy = me.Entity.extend({
+	init: function (x, y, settings) {
     	this._super(me.Entity, "init", [x, y, {
-        	image : "player",
+        	image : settings.image,
             width : 32,
           	height : 32
       	}]);
@@ -15,18 +15,17 @@ game.EnemyAir = me.Entity.extend({
 	  
 		this.body.vel.x = 0;
 		this.body.vel.y = 0;
-		this.gameVelocity = 200;
+		this.gameVelocity = settings.velocity;
 		this.size = 32;
-		this.enemyHealth = 50; // enemy health variable.
+		this.enemyHealth = settings.health;
 		this.slowBool = 0; // boolean variable to track whether enemy should be slowed by water tower
 
 		this.currentMove = 'D';
 		this.currentX = 2;
 		this.currentY = 0;
-    this.goldWorth = 20;
-    this.scoreWorth = 10;
+    	this.goldWorth = settings.goldWorth;
+    	this.scoreWorth = settings.scoreWorth;
 
-		this.currentOther;
 		this.body.collisionType = me.collision.types.ENEMY_OBJECT;
 },
 	
@@ -145,7 +144,6 @@ game.EnemyAir = me.Entity.extend({
 	updateData: function() {
 		game.data.score += this.scoreWorth;	//add score to player
 		game.data.gold += this.goldWorth; // add gold to player
-		//me.game.world.removeChild(other);
 		me.game.world.removeChild(this); // remove the enemy from board
 		game.data.currentlySpawned--; // update currentlyspawned variable
 	},
@@ -153,17 +151,23 @@ game.EnemyAir = me.Entity.extend({
 	
 	onCollision: function (res, other) {
 		var projectile_damage = 0; // acts as both a bool val for whether a collision was detected and the damage val to subtract from unit HP
-		if (other.body.collisionType === game.collisionTypes.MissileAir) 
-		{
+		if (other.body.collisionType === game.collisionTypes.MissileAir) {
 			projectile_damage = 2;	
-		}
-		
-		if (other.body.collisionType === game.collisionTypes.MissileWater) 
-		{
+		} else if (other.body.collisionType === game.collisionTypes.MissileWater) {
 			projectile_damage = 10;	
 			console.log("WATER MISSILE HIT");
+		} else if (other.body.collisionType === game.collisionTypes.MissileFire) {
+			// NEED TO CHANGE THIS VALUE
+			projectile_damage = 10;	
+			console.log("FIRE MISSILE HIT");
+		} else if (other.body.collisionType === game.collisionTypes.MissileEarth) {
+			// NEED TO CHANGE THIS VALUE
+			projectile_damage = 10;	
+			console.log("EARTH MISSILE HIT");
 		}
 
+		
+		
 		if (projectile_damage > 0)
 		{
 			other.body.setCollisionMask(me.collision.types.NO_OBJECT);

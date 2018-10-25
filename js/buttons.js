@@ -1,9 +1,9 @@
-game.ButtonTowerAir = me.GUI_Object.extend(
-{
-	init:function (x, y)
-   	{
+game.ButtonTower = me.GUI_Object.extend({
+	init: function (x, y, towerType){
+		this.towerImage;
+		this.setTowerImage(towerType);
       	var settings = {}
-    	settings.image = "buttonTowerAir";
+    	settings.image = this.towerImage;
       	settings.framewidth = 32;
       	settings.frameheight = 32;
       	// super constructor
@@ -19,42 +19,27 @@ game.ButtonTowerAir = me.GUI_Object.extend(
    	update: function (time)
    	{
 		if (me.input.isKeyPressed("Q") || me.input.isKeyPressed("W") ||
-		    me.input.isKeyPressed("R") || me.input.isKeyPressed("R") && 
+		    me.input.isKeyPressed("E") || me.input.isKeyPressed("R") && 
 		    game.data.preRoundHasStarted === false) {
 			game.data.preRoundHasStarted = true;
 		}
       	return true;
    	},
 	
+	setTowerImage: function(towerType) {
+		if (towerType === 'AIR') {
+			this.towerImage = "buttonTowerAir";
+		} else if (towerType === 'WATER') {
+			this.towerImage = "buttonTowerWater";
+		} else if (towerType === 'FIRE') {
+			this.towerImage = "buttonTowerFire";
+		} else if (towerType === 'EARTH') {
+			this.towerImage = "buttonTowerEarth";
+		}
+	}
+	
 });
 
-game.ButtonTowerWater = me.GUI_Object.extend(
-	{
-		init:function (x, y)
-		   {
-			  var settings = {}
-			settings.image = "buttonTowerWater";
-			  settings.framewidth = 32;
-			  settings.frameheight = 32;
-			  // super constructor
-			  this._super(me.GUI_Object, "init", [x, y, settings]);
-			  // define the object z order
-			  this.pos.z = 4;
-			this.alwaysUpdate = true;
-			this.anchorPoint.set(0,0);
-		   },
-	
-		   // output something in the console
-		   // when the object is clicked
-		   update: function (time)
-		   {
-			if (me.input.isKeyPressed("W")) {
-	
-			}
-			  return true;
-		   },
-		
-	});
 
 
 

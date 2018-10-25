@@ -1,16 +1,17 @@
 game.collisionTypes = { // define types of collision based off missile
 	MissileAir		: me.collision.types.USER << 0,
 	MissileWater	: me.collision.types.USER << 1,
+	MissileEarth	: me.collision.types.USER << 2,
+	MissileFire		: me.collision.types.USER << 3,
 };
 
 //Air Missile
-game.MissileAir = me.Entity.extend({
+game.Missile = me.Entity.extend({
 		
-	init : function (x, y) {
+	init : function (x, y, missileType) {
         this._super(me.Entity, "init", [x, y,  {width: 7, height: 7} ]);
-        
+        this.setMissileType(missileType);
         this.body.setVelocity(0, 0);
-        this.body.collisionType = game.collisionTypes.MissileAir;
 		this.speed = 0.45;
 		this.newDistance = 0;
 		this.missileID = 1; // implement missleID's to track what missiles are hitting enemies
@@ -40,6 +41,18 @@ game.MissileAir = me.Entity.extend({
 			this.target = target;
 		} else if (this.targetTemp === target) {
 			this.target = target;
+		}
+	},
+	
+	setMissileType: function(missileType) {
+		if (missileType === 'AIR') {
+        	this.body.collisionType = game.collisionTypes.MissileAir;
+		} else if (missileType === 'WATER') {
+			this.body.collisionType = game.collisionTypes.MissileWater;
+		} else if (missileType === 'EARTH') {
+			this.body.collisionType = game.collisionTypes.MissileEarth;
+		} else if (missileType === 'FIRE') {
+			this.body.collisionType = game.collisionTypes.MissileFire;
 		}
 	},
 	

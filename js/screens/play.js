@@ -10,6 +10,8 @@ game.PlayScreen = me.ScreenObject.extend({
 		me.input.bindKey(me.input.KEY.DOWN, "down");
 		me.input.bindKey(me.input.KEY.Q, "Q");
 		me.input.bindKey(me.input.KEY.W, "W");
+		me.input.bindKey(me.input.KEY.E, "E");
+		me.input.bindKey(me.input.KEY.R, "R");
 		me.input.bindKey(me.input.KEY.ESC, "esc");
 		me.input.bindKey(me.input.KEY.ENTER, "enter");
 		me.input.bindKey(me.input.KEY.P, "P");

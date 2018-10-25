@@ -25,6 +25,7 @@ var game = {
 		utilityScreenStartPosY: 0,
 		utilityScreenEndPosX: 736,
 		utilityScreenEndPosY: 448,
+		
 		gameDifficulty: 'EASY',
 		waveStart: false,
 		preRoundHasStarted: false,
@@ -58,7 +59,7 @@ var game = {
 		// add our player entity in the entity pool
 		me.pool.register("player", game.Player);
 		// add our enemy entity in the entity pool
-		me.pool.register("enemyAir", game.EnemyAir);
+		me.pool.register("enemy", game.Enemy);
 		// add our end path entity in the entity pool
 		me.pool.register("end", game.End);
 		// add towers entities to the entity pool
@@ -70,14 +71,13 @@ var game = {
 		// add the wave manager to the entity pool
 		me.pool.register("wavemanagereasy", game.waveManagerEasy);
 		// add the missiles to the entity pool
-		me.pool.register("missileAir", game.MissileAir);
-		me.pool.register("missileWater", game.MissileWater);
+
+		me.pool.register("missile", game.Missile);
 		// add the buttons to the entity pool
-		me.pool.register("buttonTowerAir", game.ButtonTowerAir);
-		me.pool.register("buttonTowerWater", game.ButtonTowerWater);
+		me.pool.register("buttonTower", game.ButtonTower);
 		// add the tower manager to the entity pool
 		me.pool.register("towermanager", game.TowerManager);
-		
+		me.pool.register("tower", game.Tower);			
 		
 		
 		
@@ -86,7 +86,7 @@ var game = {
 
 
 		me.state.set(me.state.MENU, new game.titlescreen());
-		me.pool.register("tower", game.Tower);	
+
 		
         //me.state.set(me.state.MENU, new game.TitleScreen());
         me.state.set(me.state.PLAY, new game.PlayScreen());

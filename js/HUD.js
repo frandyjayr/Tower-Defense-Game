@@ -17,8 +17,10 @@ game.HUD.Container = me.Container.extend({
 
 		// give a name
 		this.name = "HUD";
-		me.game.world.addChild(me.pool.pull("buttonTowerAir", game.data.utilityScreenStartPosX + 96, game.data.utilityScreenStartPosY + 32), 4);
-		me.game.world.addChild(me.pool.pull("buttonTowerWater", game.data.utilityScreenStartPosX + 96, game.data.utilityScreenStartPosY + 96), 4);
+		me.game.world.addChild(me.pool.pull("buttonTower", game.data.utilityScreenStartPosX + 96, game.data.utilityScreenStartPosY + 32, "AIR"), 4);
+		me.game.world.addChild(me.pool.pull("buttonTower", game.data.utilityScreenStartPosX + 96, game.data.utilityScreenStartPosY + 96, "WATER"), 4);
+		me.game.world.addChild(me.pool.pull("buttonTower", game.data.utilityScreenStartPosX + 96, game.data.utilityScreenStartPosY + 160, "FIRE"), 4);
+		me.game.world.addChild(me.pool.pull("buttonTower", game.data.utilityScreenStartPosX + 96, game.data.utilityScreenStartPosY + 225, "EARTH"), 4);
 
 		
 		// add our child score object
@@ -114,15 +116,15 @@ game.HUD.ScoreItem = me.Renderable.extend({
 		
 		// Render W
 		this.font.resize(1);
-		this.font.draw(renderer, "W", game.data.utilityScreenStartPosX + 75, game.data.utilityScreenStartPosY + 105); 	
+		this.font.draw(renderer, "W", game.data.utilityScreenStartPosX + 75, game.data.utilityScreenStartPosY + 120); 	
 		
 		// Render E
 		this.font.resize(1);
-		this.font.draw(renderer, "E", game.data.utilityScreenStartPosX + 75, game.data.utilityScreenStartPosY + 155); 	
+		this.font.draw(renderer, "E", game.data.utilityScreenStartPosX + 75, game.data.utilityScreenStartPosY + 185); 	
 		
 		// Render R
 		this.font.resize(1);
-		this.font.draw(renderer, "R", game.data.utilityScreenStartPosX + 75, game.data.utilityScreenStartPosY + 205); 
+		this.font.draw(renderer, "R", game.data.utilityScreenStartPosX + 75, game.data.utilityScreenStartPosY + 250); 
 	},
   /**
    * draw the score
