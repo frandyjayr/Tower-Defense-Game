@@ -25,6 +25,7 @@ game.MissileAir = me.Entity.extend({
     },
 	
 	getTarget: function(target) {
+		
 		if (this.targetTemp === null) {
 			this.targetTemp = target;
 			this.target = target;

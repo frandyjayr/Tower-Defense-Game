@@ -46,7 +46,11 @@ game.TowerAir = me.Entity.extend({
 				me.game.world.addChild(this.newMissile, 2);
 				this.currentTime = newTime;
 			}
-			this.newMissile.getTarget(other);
+			// Prevents missile from being created if enemy dies or spawns too fast to register
+			if (typeof something !== "undefined") {
+				this.newMissile.getTarget(other);
+			}
+
 		}				
 		
 		return false;

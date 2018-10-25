@@ -96,7 +96,7 @@ game.HUD.ScoreItem = me.Renderable.extend({
 	
 	renderWaveIntro: function(renderer) {
 		// Render Wave Number
-		if (game.data.waveStart === false) {
+		if (game.data.waveStart === false && game.data.preRoundHasStarted === false) {
 			this.font.resize(1.5);
 			this.font.draw(renderer, "Wave " + game.data.waveNumber, me.game.viewport.width / 2 + 50, me.game.viewport.height / 2);
 			this.font.resize(0.6);
