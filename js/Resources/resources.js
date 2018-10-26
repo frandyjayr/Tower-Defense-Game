@@ -1,5 +1,8 @@
 game.resources = [
-    { name: "player", type: "image", src: "data/img/player.png" },
+    { name: "enemyAir", type: "image", src: "data/img/enemyAir.png" },
+    { name: "enemyEarth", type: "image", src: "data/img/enemyEarth.png" },
+    { name: "enemyFire", type: "image", src: "data/img/enemyFire.png" },
+    { name: "enemyWater", type: "image", src: "data/img/enemyWater.png" },
     { name: "ships", type: "image", src: "data/img/ships.png" },
 	{ name: "towerAir", type: "image", src: "data/img/towerAir.png" },
 	{ name: "towerWater", type: "image", src: "data/img/towerWater.png" },

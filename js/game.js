@@ -12,10 +12,30 @@ var game = {
 		startingHealth: 10,
 		towerAirCost: 50,
 
-		towerWaterCost: 100,
+		towerAirCost: 100,
 		towerEarthCost: 100,
 		towerFireCost: 150,
 		towerWaterCost: 200,
+		
+		airMissileDamage: 5,
+		EarthMissileDamage: 10,
+		FireMissileDamage: 10,
+		WaterMissileDamage: 2,
+		
+		enemyAirGoldWorth: 20,
+		enemyEarthGoldWorth: 50,
+		enemyFireGoldWorth: 50,
+		enemyWaterGoldWorth: 30,		
+		
+		enemyAirVelocity: 200,
+		enemyEarthVelocity: 200,
+		enemyFireVelocity: 200,
+		enemyWaterVelocity: 200,		
+		
+		enemyAirHealth: 20,
+		enemyEarthHealth: 50,
+		enemyFireHealth: 50,
+		enemyWaterHealth: 30,
 
 		gameScreenStartPosX: 0,
 		gameScreenStartPosY: 0,

@@ -148,21 +148,25 @@ game.Enemy = me.Entity.extend({
 		game.data.currentlySpawned--; // update currentlyspawned variable
 	},
 	
+	activateWaterMissile() {
+		
+	},
+	
 	
 	onCollision: function (res, other) {
 		var projectile_damage = 0; // acts as both a bool val for whether a collision was detected and the damage val to subtract from unit HP
 		if (other.body.collisionType === game.collisionTypes.MissileAir) {
-			projectile_damage = 2;	
+			projectile_damage = game.data.airMissileDamage;	
 		} else if (other.body.collisionType === game.collisionTypes.MissileWater) {
-			projectile_damage = 10;	
+			projectile_damage = game.data.WaterMissileDamage;	
 			console.log("WATER MISSILE HIT");
 		} else if (other.body.collisionType === game.collisionTypes.MissileFire) {
 			// NEED TO CHANGE THIS VALUE
-			projectile_damage = 10;	
+			projectile_damage = game.data.FireMissileDamage;	
 			console.log("FIRE MISSILE HIT");
 		} else if (other.body.collisionType === game.collisionTypes.MissileEarth) {
 			// NEED TO CHANGE THIS VALUE
-			projectile_damage = 10;	
+			projectile_damage = game.data.EarthMissileDamage;	
 			console.log("EARTH MISSILE HIT");
 		}
 
