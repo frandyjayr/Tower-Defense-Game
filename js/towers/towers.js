@@ -6,7 +6,7 @@ game.Tower = me.Entity.extend({
     	this._super(me.Entity, "init", [x, y, settings]);
 		this.body.collisionType = me.collision.types.PLAYER_OBJECT;
 		this.currentTime = me.timer.getTime() / 1000;
-		this.spawnTime = 2;
+		this.spawnTime;
 		this.newMissile;
 		this.towerOn = false;
 		this.elementType = settings.missileType;
@@ -36,15 +36,19 @@ game.Tower = me.Entity.extend({
 	chooseTowerType: function() {
 		if (this.elementType === "AIR") {
 			this.towerCost = game.data.towerAirCost;
+			this.spawnTime = game.data.airMissileSpawnTime;
 		} else if (this.elementType === "EARTH") {
 			this.towerCost = game.data.towerEarthCost;
+			this.spawnTime = game.data.earthMissileSpawnTime;
 		} else if (this.elementType === "FIRE") {
 			this.towerCost = game.data.towerFireCost;
+			this.spawnTime = game.data.fireMissileSpawnTime;
 		} else if (this.elementType === "WATER") {
 			this.towerCost = game.data.towerWaterCost;
+			this.spawnTime = game.data.waterMissileSpawnTime;
 		}
 	},
-	
+
 	spawnMissile: function(other) {
 		if (this.elementType === 'AIR') {
 			this.newMissile = new game.Missile(this.pos.x + (3 * 32) + 32 / 2, this.pos.y + (2 * 32) + 32 / 3, this.elementType);

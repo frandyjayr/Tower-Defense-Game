@@ -16,6 +16,7 @@ game.Enemy = me.Entity.extend({
 		this.body.vel.x = 0;
 		this.body.vel.y = 0;
 		this.gameVelocity = settings.velocity;
+		this.constantVelocity = settings.velocity;
 		this.size = 32;
 		this.enemyHealth = settings.health;
 		this.slowBool = 0; // boolean variable to track whether enemy should be slowed by water tower
@@ -25,6 +26,9 @@ game.Enemy = me.Entity.extend({
 		this.currentY = 0;
     	this.goldWorth = settings.goldWorth;
     	this.scoreWorth = settings.scoreWorth;
+		this.angle = 0;
+		this.rotationReady = true;
+		this.rotationValue = 0.20;
 
 		this.body.collisionType = me.collision.types.ENEMY_OBJECT;
 },
@@ -39,6 +43,7 @@ game.Enemy = me.Entity.extend({
 	
 	moveUnit: function(dt) {
 		if (this.currentMove === 'L') {
+			this.rotationReady = true;
 			this.body.vel.y = 0;
 			this.body.vel.x = this.gameVelocity * -1;
 			this.pos.x += this.body.vel.x * dt / 1000;
@@ -46,6 +51,7 @@ game.Enemy = me.Entity.extend({
 				this.currentX--;
 			}
 		} else if (this.currentMove === 'R') {
+			this.rotationReady = true;
 			this.body.vel.y = 0;
 			this.body.vel.x = this.gameVelocity;
 			this.pos.x += this.body.vel.x * dt / 1000;
@@ -53,6 +59,7 @@ game.Enemy = me.Entity.extend({
 				this.currentX++;
 			}			
 		} else if (this.currentMove === 'U') {
+			this.rotationReady = true;			
 			this.body.vel.x = 0;
 			this.body.vel.y = this.gameVelocity * -1;
 			this.pos.y += this.body.vel.y * dt / 1000
@@ -60,6 +67,7 @@ game.Enemy = me.Entity.extend({
 				this.currentY--;
 			}				
 		} else if (this.currentMove === 'D') {
+			this.rotationReady = true;			
 			this.body.vel.x = 0;
 			this.body.vel.y = this.gameVelocity;
 			this.pos.y += this.body.vel.y * dt / 1000
@@ -73,7 +81,8 @@ game.Enemy = me.Entity.extend({
 			if (this.pos.x >= this.currentX * this.size + this.size) {
 				this.currentX++;
 			}
-			this.renderable.currentTransform.rotate(-0.159);
+			//this.renderable.currentTransform.rotate(-0.159);
+			this.rotateCorner(-1 * this.rotationValue, dt);
 		} 
 		else if (this.currentMove === 'UR') {
 			this.body.vel.x = 0;
@@ -82,7 +91,10 @@ game.Enemy = me.Entity.extend({
 			if (this.pos.y <= this.currentY * this.size - this.size) {
 				this.currentY--;
 			}
-			this.renderable.currentTransform.rotate(-0.143);
+			//this.renderable.currentTransform.rotate(-0.143);
+			//this.renderable.currentTransform.rotate(-0.143);
+			this.rotateCorner(-1 * this.rotationValue, dt);
+
 		}
 		else if (this.currentMove === 'RU') {
 			this.body.vel.y = 0;
@@ -91,7 +103,8 @@ game.Enemy = me.Entity.extend({
 			if (this.pos.x >= this.currentX * this.size + this.size) {
 				this.currentX++;
 			}
-			this.renderable.currentTransform.rotate(0.175);
+			//this.renderable.currentTransform.rotate(0.175);
+			this.rotateCorner(this.rotationValue, dt);
 		}
 		else if (this.currentMove === 'DR') {
 			this.body.vel.x = 0;
@@ -100,7 +113,8 @@ game.Enemy = me.Entity.extend({
 			if (this.pos.y >= this.currentY * this.size + this.size) {
 				this.currentY++;
 			}
-			this.renderable.currentTransform.rotate(0.160);
+			//this.renderable.currentTransform.rotate(0.160);
+			this.rotateCorner(this.rotationValue, dt);
 		}
 		else if (this.currentMove === 'LD') {
 			this.body.vel.y = 0;
@@ -109,7 +123,8 @@ game.Enemy = me.Entity.extend({
 			if (this.pos.x <= this.currentX * this.size - this.size) {
 				this.currentX--;
 			}
-			this.renderable.currentTransform.rotate(0.140);
+			//this.renderable.currentTransform.rotate(0.140);
+			this.rotateCorner(this.rotationValue, dt);
 		}
 		else if (this.currentMove === 'UL') {
 			this.body.vel.x = 0;
@@ -118,7 +133,8 @@ game.Enemy = me.Entity.extend({
 			if (this.pos.y <= this.currentY * this.size - this.size) {
 				this.currentY--;
 			}
-			this.renderable.currentTransform.rotate(0.145);
+			//this.renderable.currentTransform.rotate(0.145);
+			this.rotateCorner(this.rotationValue, dt);
 		}
 		else if (this.currentMove === 'LU') {
 			this.body.vel.y = 0;
@@ -127,7 +143,8 @@ game.Enemy = me.Entity.extend({
 			if (this.pos.x <= this.currentX * this.size - this.size) {
 				this.currentX--;
 			}
-			this.renderable.currentTransform.rotate(-0.155);
+			//this.renderable.currentTransform.rotate(-0.155);
+			this.rotateCorner(-1 * this.rotationValue, dt);
 		}
 		else if (this.currentMove === 'DL') {
 			this.body.vel.x = 0;
@@ -136,7 +153,8 @@ game.Enemy = me.Entity.extend({
 			if (this.pos.y >= this.currentY * this.size + this.size) {
 				this.currentY++;
 			}
-			this.renderable.currentTransform.rotate(-0.145);
+			//this.renderable.currentTransform.rotate(-0.145);
+			this.rotateCorner(-1 * this.rotationValue, dt);			
 		}
 		this.currentMove = this.path[this.currentY][this.currentX]; 		
 	},
@@ -148,16 +166,35 @@ game.Enemy = me.Entity.extend({
 		game.data.currentlySpawned--; // update currentlyspawned variable
 	},
 	
-	activateWaterMissile() {
-		
+	rotateCorner: function(radians, dt) {	
+		if (this.angle <= 1.5 && this.rotationReady) {
+			this.angle += Math.abs(radians);
+			this.renderable.currentTransform.rotate(radians);			
+		} else {
+			this.angle = 0;
+			this.rotationReady = false;
+		}
 	},
 	
+	activateWaterMissile: function() {
+		this.gameVelocity = 50;
+
+		var that = this;
+		setTimeout(function() {
+			that.regainSpeed();
+		}, 5000);
+	},
+	
+	regainSpeed: function() {
+		this.gameVelocity = this.constantVelocity;	
+	},
 	
 	onCollision: function (res, other) {
 		var projectile_damage = 0; // acts as both a bool val for whether a collision was detected and the damage val to subtract from unit HP
 		if (other.body.collisionType === game.collisionTypes.MissileAir) {
 			projectile_damage = game.data.airMissileDamage;	
 		} else if (other.body.collisionType === game.collisionTypes.MissileWater) {
+			this.activateWaterMissile();
 			projectile_damage = game.data.WaterMissileDamage;	
 			console.log("WATER MISSILE HIT");
 		} else if (other.body.collisionType === game.collisionTypes.MissileFire) {
