@@ -12,15 +12,20 @@ var game = {
 		startingHealth: 10,
 		towerAirCost: 50,
 
-		towerAirCost: 100,
+		towerAirCost: 200,
 		towerEarthCost: 100,
 		towerFireCost: 150,
 		towerWaterCost: 200,
 		
 		airMissileDamage: 5,
-		EarthMissileDamage: 10,
+		EarthMissileDamage: 15,
 		FireMissileDamage: 10,
-		WaterMissileDamage: 2,
+		WaterMissileDamage: 1,
+		
+		airMissileSpawnTime: 0.5,
+		earthMissileSpawnTime: 5,
+		fireMissileSpawnTime: 2,
+		waterMissileSpawnTime: 1.5,
 		
 		enemyAirGoldWorth: 20,
 		enemyEarthGoldWorth: 50,
