@@ -20,7 +20,8 @@ game.Enemy = me.Entity.extend({
 		this.constantVelocity = settings.velocity;
 		this.size = 32;
 		this.enemyHealth = settings.health;
-		this.slowBool = 0; // boolean variable to track whether enemy should be slowed by water tower
+		this.maxHealth = settings.health;
+		this.timeOut;
 
 		this.currentMove = 'D'
 		this.currentX = 2;
@@ -192,13 +193,16 @@ game.Enemy = me.Entity.extend({
 	},
 	
 	activateWaterMissile: function() {
+		if (this.slowActive) {
+			clearTimeout(this.timeOut);
+		}
 		this.gameVelocity = 50;
 		this.slowActive = true;
 		var that = this;
-		setTimeout(function() {
+		this.timeOut = setTimeout(function() {
 			that.slowActive = false;
 			that.regainSpeed();
-		}, 5000);
+		}, 3000);
 	},
 	
 	activateFireMissile: function() {
@@ -254,6 +258,7 @@ game.Enemy = me.Entity.extend({
 			renderer.fillRect(-16, -16, this.width, this.height);
 		}
 
+		this.drawHealthBar(renderer);
 	},
 	
 	regainSpeed: function() {
@@ -265,6 +270,16 @@ game.Enemy = me.Entity.extend({
 		{
 			this.updateData(); //update data to get rid of enemy
 		}		
+	},
+	
+	drawHealthBar: function(renderer) {
+		renderer.setColor("rgba(0,0,0,1)");
+		renderer.fillRect(-16, -25, 32, 5);
+		
+		var remainingHealth = (this.enemyHealth / this.maxHealth) * 32;
+		
+		renderer.setColor("rgba(124,252,1)");
+		renderer.fillRect(-16, -25, remainingHealth, 5);
 	},
 	
 	onCollision: function (res, other) {
@@ -282,7 +297,6 @@ game.Enemy = me.Entity.extend({
 		}
 		if (other.body.collisionType === game.collisionTypes.MissileEarth) {
 			projectile_damage = game.data.EarthMissileDamage;	
-			console.log("EARTH MISSILE HIT");
 		}
 		
 		if (projectile_damage > 0)
