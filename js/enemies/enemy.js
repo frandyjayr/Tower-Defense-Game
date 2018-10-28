@@ -35,7 +35,8 @@ game.Enemy = me.Entity.extend({
 
 		this.body.collisionType = me.collision.types.ENEMY_OBJECT;
 		this.alive = true;
-		this.AOEActive = false
+		this.AOEActive = false;
+		this.slowActive = false;
 		
 },
 	
@@ -192,9 +193,10 @@ game.Enemy = me.Entity.extend({
 	
 	activateWaterMissile: function() {
 		this.gameVelocity = 50;
-
+		this.slowActive = true;
 		var that = this;
 		setTimeout(function() {
+			that.slowActive = false;
 			that.regainSpeed();
 		}, 5000);
 	},
@@ -246,6 +248,10 @@ game.Enemy = me.Entity.extend({
 		if (this.AOEActive) {
 			renderer.setColor("rgba(255, 0, 0, 0.5)");
 			renderer.fillRect(-16, -16, this.width, this.height);		
+		}
+		if (this.slowActive) {
+			renderer.setColor("rgba(0, 0, 255, 0.5)");
+			renderer.fillRect(-16, -16, this.width, this.height);
 		}
 
 	},
