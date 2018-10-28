@@ -17,8 +17,8 @@ var game = {
 		towerWaterCost: 200,
 		
 		airMissileDamage: 5,
-		EarthMissileDamage: 15,
-		FireMissileDamage: 10,
+		EarthMissileDamage: 20,
+		FireMissileDamage: 8,
 		WaterMissileDamage: 1,
 		
 		airMissileSpawnTime: 0.5,
