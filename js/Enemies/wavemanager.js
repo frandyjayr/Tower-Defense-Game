@@ -4,7 +4,7 @@ game.waveManagerEasy = me.Container.extend({
 		
 		// Instantiate numerical data
 		this.numberSpawned = 0;
-		this.maxSpawn = 100;
+		this.maxSpawn = 10;
 		this.spawnTime = 0.3;
 		
 		// Instantiate fonts

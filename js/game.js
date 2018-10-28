@@ -95,10 +95,7 @@ var game = {
 		me.pool.register("buttonTower", game.ButtonTower);
 		// add the tower manager to the entity pool
 		me.pool.register("towermanager", game.TowerManager);
-		me.pool.register("tower", game.Tower);			
-		me.pool.register("fireAOEImage", game.fireAOEImage);			
-		
-		
+		me.pool.register("tower", game.Tower);					
 		
 		me.pool.register("spawnTower", game.SpawnTower);
 		
