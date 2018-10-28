@@ -4,8 +4,8 @@ game.waveManagerEasy = me.Container.extend({
 		
 		// Instantiate numerical data
 		this.numberSpawned = 0;
-		this.maxSpawn = 1;
-		this.spawnTime = 1;
+		this.maxSpawn = 100;
+		this.spawnTime = 0.3;
 		
 		// Instantiate fonts
 		this.font = new me.BitmapFont(me.loader.getBinary('PressStart2P')); 

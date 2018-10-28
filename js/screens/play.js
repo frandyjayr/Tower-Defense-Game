@@ -25,10 +25,11 @@ game.PlayScreen = me.ScreenObject.extend({
 		
 		me.game.world.addChild(me.pool.pull("end", 288, 448), 2);
 		
+		me.game.world.addChild(me.pool.pull("towermanager", 0 ,0), 4);	
+			
 		
 		
-		me.game.world.addChild(me.pool.pull("towermanager", 0 ,0), 4);
-		//me.game.world.addChild(me.pool.pull("towerAir", -32, 0), 3);
+		
 
 		me.game.world.addChild(this.HUD, 4);
     },
