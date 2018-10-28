@@ -10,7 +10,6 @@ var game = {
 		gold: 1000,
 		startingGold: 100,
 		startingHealth: 10,
-		towerAirCost: 50,
 
 		towerAirCost: 200,
 		towerEarthCost: 100,
@@ -24,7 +23,7 @@ var game = {
 		
 		airMissileSpawnTime: 0.5,
 		earthMissileSpawnTime: 5,
-		fireMissileSpawnTime: 2,
+		fireMissileSpawnTime: 1,
 		waterMissileSpawnTime: 1.5,
 		
 		enemyAirGoldWorth: 20,
@@ -97,6 +96,7 @@ var game = {
 		// add the tower manager to the entity pool
 		me.pool.register("towermanager", game.TowerManager);
 		me.pool.register("tower", game.Tower);			
+		me.pool.register("fireAOEImage", game.fireAOEImage);			
 		
 		
 		
