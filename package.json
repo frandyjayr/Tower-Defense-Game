@@ -15,5 +15,8 @@
     "grunt-download-electron": "^2.1.4",
     "grunt-processhtml": "^0.4.1",
     "grunt-replace": "^1.0.1"
+  },
+  "dependencies": {
+    "express": "^4.16.4"
   }
 }
