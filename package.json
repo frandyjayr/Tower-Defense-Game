@@ -23,7 +23,6 @@
     "grunt-contrib-uglify": "2.3.0"
   },
   "scripts": {
-    "postinstall": "grunt uglify",
-    "start": "grunt serve"
+    "start": "electron ."
   }
 }
