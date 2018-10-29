@@ -64,6 +64,7 @@ app.use('/data', express.static(__dirname + '/data'));
 app.use('/lib', express.static(__dirname + '/lib'));
 app.use('/build', express.static(__dirname + '/build'));
 app.use('/js', express.static(__dirname + '/js'));
+//app.use('/js/enemies', express.static(__dirname + '/js'));
 
 // Routing
 app.get('/', function(request, response) {
