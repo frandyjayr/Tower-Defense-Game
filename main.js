@@ -53,18 +53,26 @@ app.on('activate', function () {
 var express = require('express');
 var http = require('http');
 var path = require('path');
-var socketIO = require('socket.io');
+
 var app = express();
 var server = http.Server(app);
-var io = socketIO(server);
-app.set('port', process.argv[2]);
+
+const PORT = process.env.PORT || 5000
+
 app.use('/static', express.static(__dirname + '/static'));
+app.use('/data', express.static(__dirname + '/data'));
+app.use('/lib', express.static(__dirname + '/lib'));
+app.use('/build', express.static(__dirname + '/build'));
+
 // Routing
 app.get('/', function(request, response) {
   response.sendFile(path.join(__dirname, 'index.html'));
+
 });
 // Starts the server.
-server.listen(app.get('port'), function() {
-  console.log('Starting server on port ' + app.get('port') + '; press Ctrl-C to terminate.');
+server.listen(PORT, function() {
+  console.log('Starting server on port ' + PORT + '; press Ctrl-C to terminate.');
 });
+
+
 

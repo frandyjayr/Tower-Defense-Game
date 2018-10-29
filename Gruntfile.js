@@ -98,10 +98,8 @@ module.exports = function(grunt) {
     connect: {
       server: {
         options: {
-          port: '8000',
-		  useAvailablePort: true,
-          keepalive: false,
-		  host: "0.0.0.0",
+          port: 8080,
+          keepalive: false
         }
       }
     },
@@ -166,33 +164,61 @@ module.exports = function(grunt) {
       },
     },
 	  
-  buildcontrol: {
-    options: {
-      dir: 'dist',
-      commit: true,
-      push: true,
-      message: 'Built %sourceName% from commit %sourceCommit% on branch %sourceBranch%'
-    },
-    pages: {
-      options: {
-        remote: 'git@github.com:frandyjayr/Tower-Defense-Game.git',
-        branch: 'gh-pages'
-      }
-    },
-    heroku: {
-      options: {
-        remote: 'git@heroku.com:example-heroku-webapp-1988.git',
-        branch: 'master',
-        tag: pkg.version
-      }
-    },
-    local: {
-      options: {
-        remote: '../',
-        branch: 'build'
-      }
-    }
-  }
+	  express: {
+		options: {
+		  // Override defaults here
+			cmd: process.argv[0],
+		 	opts: [ ],
+      		args: [ ],
+		  // Setting to `false` will effectively just run `node path/to/server.js`
+		  background: true,
+
+		  // Called when the spawned server throws errors
+		  fallback: function() {},
+
+		  // Override node env's PORT
+		  port: 3000,
+
+		  // Override node env's NODE_ENV
+		  node_env: undefined,
+
+		  // Enable Node's --harmony flag
+		  harmony: false,
+
+		  // Consider the server to be "running" after an explicit delay (in milliseconds)
+		  // (e.g. when server has no initial output)
+		  delay: 0,
+
+		  // Regular expression that matches server output to indicate it is "running"
+		  output: ".+",
+
+		  // Set --debug (true | false | integer from 1024 to 65535, has precedence over breakOnFirstLine)
+		  debug: false,
+
+		  // Set --debug-brk (true | false | integer from 1024 to 65535)
+		  breakOnFirstLine: false,
+
+		  // Object with properties `out` and `err` both will take a path to a log file and
+		  // append the output of the server. Make sure the folders exist.
+		  logs: undefined
+		},
+		dev: {
+		  options: {
+			script: 'path/to/dev/server.js'
+		  }
+		},
+		prod: {
+		  options: {
+			script: 'path/to/prod/server.js',
+			node_env: 'production'
+		  }
+		},
+		test: {
+		  options: {
+			script: 'main.js'
+		  }
+		}
+	  }
   });
 
   grunt.loadNpmTasks('grunt-contrib-concat');
@@ -205,6 +231,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-connect');
   grunt.loadNpmTasks('grunt-download-electron');
   grunt.loadNpmTasks('grunt-asar');
+  grunt.loadNpmTasks('grunt-express-server');
 
   // Custom Tasks
   grunt.loadTasks('tasks');
