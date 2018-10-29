@@ -16,6 +16,6 @@
     "grunt-replace": "^1.0.1"
   },
   "scripts": {
-	  "start": "electron ."
+	  "start": "./node_modules/.bin/electron ."
   }
 }
