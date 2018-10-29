@@ -12,10 +12,11 @@
     "grunt-contrib-uglify": "^2.0.0",
     "grunt-contrib-watch": "^1.0.0",
     "grunt-download-electron": "^2.1.4",
+    "grunt-electron-installer": "^2.1.0",
     "grunt-processhtml": "^0.4.1",
     "grunt-replace": "^1.0.1"
   },
   "scripts": {
-	  "start": "./node_modules/.bin/electron ."
+    "start": "./node_modules/.bin/electron ."
   }
 }
