@@ -22,6 +22,7 @@
     "express": "^4.16.4"
   },
   "scripts": {
-    "start": "grunt serve"
+    "start": "grunt serve",
+	"postinstall": "ng build"
   }
 }
