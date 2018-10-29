@@ -4,11 +4,13 @@
 game.Tower = me.Entity.extend({
 	init: function (x, y, settings) {
     	this._super(me.Entity, "init", [x, y, settings]);
+		this.font = new me.BitmapFont(me.loader.getBinary('PressStart2P'), me.loader.getImage('PressStart2P'));
 		this.body.collisionType = me.collision.types.PLAYER_OBJECT;
 		this.currentTime = me.timer.getTime() / 1000;
 		this.spawnTime;
 		this.newMissile;
 		this.towerOn = false;
+		this.purchaseComplete;
 		this.elementType = settings.missileType;
 		this.towerCost;
 		this.chooseTowerType();
@@ -30,6 +32,7 @@ game.Tower = me.Entity.extend({
 			this.towerOn = false;
 		} else {
 			this.towerOn = true;
+			this.purchaseComplete = true;
 		}
 	},
 	
@@ -61,6 +64,22 @@ game.Tower = me.Entity.extend({
 		}   
 		this.newMissile.getTarget(other);
 		me.game.world.addChild(this.newMissile, 2);	
+	},
+	
+	// https://groups.google.com/forum/#!topic/melonjs/O-On-pIJyUY
+	draw: function(renderer) {
+		this._super(me.Entity, "draw", [renderer]);		
+		if (this.purchaseComplete) {
+			this.font.resize(0.5)
+        	this.font.draw(renderer, "-" + this.towerCost + " gold", -50, -32);
+			
+			var that = this;
+			new me.Tween(this.font).to({ alpha: 0.0 }, 1000) // time in milliseconds
+			.onComplete(function () {
+				that.purchaseComplete = false;
+			}).start();			
+		}
+		
 	},
 	
 	onCollision: function (res, other) {
