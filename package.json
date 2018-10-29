@@ -24,6 +24,6 @@
   },
   "scripts": {
     "postinstall": "grunt uglify",
-    "start": "node server.js"
+    "start": "grunt serve"
   }
 }
