@@ -190,5 +190,6 @@ module.exports = function(grunt) {
     'clean:app',
   ]);
   grunt.registerTask('dist', ['default', 'download-electron', 'asar']);
+  grunt.registerTask('heroku', ['compass:dist', 'autoprefixer', 'imagemin']);
   grunt.registerTask('serve', ['resources', 'connect', 'watch']);
 }
