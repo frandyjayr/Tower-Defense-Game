@@ -24,6 +24,8 @@
     "grunt-contrib-uglify": "2.3.0"
   },
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "build": "electron-packager . app --platform win32 --arch x64 --out dist/",
+    "setup": "electron-installer-windows --src dist/app-win32-x64/ --dest dist/in
   }
 }
