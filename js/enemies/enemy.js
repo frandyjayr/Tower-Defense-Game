@@ -50,10 +50,8 @@ game.Enemy = me.Entity.extend({
 				this.effect.updatePosition(this.pos.x, this.pos.y);				
 			}
 
-		}
-		
-		return true;
-		
+		}	
+		return true;	
   	}, 
 	
 	moveUnit: function(dt) {
@@ -106,7 +104,6 @@ game.Enemy = me.Entity.extend({
 			if (this.pos.y <= this.currentY * this.size - this.size) {
 				this.currentY--;
 			}
-			//this.renderable.currentTransform.rotate(-0.143);
 			//this.renderable.currentTransform.rotate(-0.143);
 			this.rotateCorner(-1 * this.rotationValue, dt);
 
@@ -206,11 +203,9 @@ game.Enemy = me.Entity.extend({
 	},
 	
 	activateFireMissile: function() {
-		//console.log(me.collision.quadTree.retrieve(this));
 		var entity = me.collision.quadTree.retrieve(this);
 		for (var i = 0; i < entity.length; i++) {
 			if (typeof entity[i].body !== "undefined" && entity[i].body.collisionType === me.collision.types.ENEMY_OBJECT) {
-
 				if (this.inAOERange(entity[i])) {
 					if(entity[i] !== this) {
 						entity[i].applyAOEDamage();
@@ -218,7 +213,6 @@ game.Enemy = me.Entity.extend({
 						this.applyAOEEffect();						
 					}
 				}
-
 			}
 		}
 	},
