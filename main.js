@@ -1,3 +1,4 @@
+/*
 const electron = require('electron');
 const app = electron.app;  // Module to control application life.
 const BrowserWindow = electron.BrowserWindow;  // Module to create native browser window.
@@ -46,3 +47,24 @@ app.on('activate', function () {
     createWindow();
   }
 });
+*/
+
+
+var express = require('express');
+var http = require('http');
+var path = require('path');
+var socketIO = require('socket.io');
+var app = express();
+var server = http.Server(app);
+var io = socketIO(server);
+app.set('port', process.argv[2]);
+app.use('/static', express.static(__dirname + '/static'));
+// Routing
+app.get('/', function(request, response) {
+  response.sendFile(path.join(__dirname, 'index.html'));
+});
+// Starts the server.
+server.listen(app.get('port'), function() {
+  console.log('Starting server on port ' + app.get('port') + '; press Ctrl-C to terminate.');
+});
+
