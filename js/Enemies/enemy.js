@@ -12,7 +12,14 @@ game.Enemy = me.Entity.extend({
       	}]);	
 	  	this.regularImage = settings.image
 		this.AOEImage;
-	  	this.path = game.mapEasy
+		
+		if (game.data.gameDifficulty === 'EASY') {
+			this.path = game.mapEasy;	
+		} else if (game.data.gameDifficulty === 'MEDIUM') {
+			this.path = game.mapMedium;
+		} else if (game.data.gameDifficulty === 'HARD') {
+			this.path = game.mapHard;
+		}
 	  
 		this.body.vel.x = 0;
 		this.body.vel.y = 0;
