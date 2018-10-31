@@ -31,10 +31,10 @@ var game = {
 		enemyFireGoldWorth: 50,
 		enemyWaterGoldWorth: 30,		
 		
-		enemyAirVelocity: 200,
-		enemyEarthVelocity: 200,
-		enemyFireVelocity: 200,
-		enemyWaterVelocity: 200,		
+		enemyAirVelocity: 150,
+		enemyEarthVelocity: 150,
+		enemyFireVelocity: 150,
+		enemyWaterVelocity: 150,		
 		
 		enemyAirHealth: 20,
 		enemyEarthHealth: 50,
