@@ -18,18 +18,33 @@ game.Missile = me.Entity.extend({
 		this.target;	
 		this.targetTemp = null;
 		this.alwaysUpdate = true;
+		
+
         this.renderable = new (me.Renderable.extend({
             init : function () {
-                this._super(me.Renderable, "init", [0, 0, 7, 7]);
+                this._super(me.Renderable, "init", [0, 0, 8, 8]);
             },
             destroy : function () {},
             draw : function (renderer) {
                 var color = renderer.getColor();
-                renderer.setColor('#5EFF7E');
+                renderer.setColor(this.getColor());
                 renderer.fillRect(0, 0, this.width, this.height);
                 renderer.setColor(color);
-            }
+            },
+			
+			getColor: function() {
+				if (missileType === "AIR") {
+					return '#ffffff';
+				} else if (missileType === "WATER") {
+					return '#0d70fd';
+				} else if (missileType === "FIRE") {
+					return '#de0202';
+				} else if (missileType === "EARTH") {
+					return '#6c3333';
+				}
+			}
         }));
+
 
 	},
 	

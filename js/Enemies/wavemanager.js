@@ -43,50 +43,7 @@ game.waveManagerEasy = me.Container.extend({
 	},
 	
 	generateWave: function (wave) {
-		this.wave[game.data.waveNumber - 1][this.numberSpawned]();		
-
-		/*
-		var enemyAirSettings = game.enemyAir;
-		var enemyEarthSettings = game.enemyEarth;
-		var enemyFireSettings = game.enemyFire;
-		var enemyWaterSettings = game.enemyWater;
-		
-		switch(wave) {
-			case 1:
-				me.game.world.addChild(me.pool.pull("enemy", 64, 0, enemyAirSettings), 2);
-				break;
-			case 2:
-				me.game.world.addChild(me.pool.pull("enemy", 64, 0, enemyEarthSettings), 2);		
-				break;
-			case 3:
-				me.game.world.addChild(me.pool.pull("enemy", 64, 0, enemyFireSettings), 2);
-				break;
-			case 4:
-				me.game.world.addChild(me.pool.pull("enemy", 64, 0, enemyWaterSettings), 2);
-				break;
-			case 5:
-				me.game.world.addChild(me.pool.pull("enemy", 64, 0, enemyAirSettings), 2);
-				break;
-			case 6:
-				me.game.world.addChild(me.pool.pull("enemy", 64, 0, enemyAirSettings), 2);
-				break;
-			case 7:
-				me.game.world.addChild(me.pool.pull("enemy", 64, 0, enemyAirSettings), 2);
-				break;
-			case 8:
-				me.game.world.addChild(me.pool.pull("enemy", 64, 0, enemyAirSettings), 2);
-				break;
-			case 9:
-				me.game.world.addChild(me.pool.pull("enemy", 64, 0, enemyAirSettings), 2);
-				break;
-			case 10:
-				me.game.world.addChild(me.pool.pull("enemy", 64, 0, enemyAirSettings), 2);
-				break;
-			default:
-				console.log("GAME WON");
-				break;
-		}*/
-		
+		this.wave[game.data.waveNumber - 1][this.numberSpawned]();			
 		this.numberSpawned++;
 		game.data.currentlySpawned++;
 
