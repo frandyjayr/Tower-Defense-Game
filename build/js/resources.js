@@ -15,19 +15,9 @@ game.resources = [
         "src": "data/img/buttonTowerEarth.png"
     },
     {
-        "name": "buttonTowerFire_old",
-        "type": "image",
-        "src": "data/img/buttonTowerFire_old.png"
-    },
-    {
         "name": "buttonTowerFire",
         "type": "image",
         "src": "data/img/buttonTowerFire.png"
-    },
-    {
-        "name": "buttonTowerWater_old",
-        "type": "image",
-        "src": "data/img/buttonTowerWater_old.png"
     },
     {
         "name": "buttonTowerWater",
@@ -35,14 +25,14 @@ game.resources = [
         "src": "data/img/buttonTowerWater.png"
     },
     {
-        "name": "enemyAir_old",
-        "type": "image",
-        "src": "data/img/enemyAir_old.png"
-    },
-    {
         "name": "enemyAir",
         "type": "image",
         "src": "data/img/enemyAir.png"
+    },
+    {
+        "name": "enemyEarth_old",
+        "type": "image",
+        "src": "data/img/enemyEarth_old.png"
     },
     {
         "name": "enemyEarth",
@@ -90,19 +80,9 @@ game.resources = [
         "src": "data/img/towerEarth.png"
     },
     {
-        "name": "towerFire_old",
-        "type": "image",
-        "src": "data/img/towerFire_old.png"
-    },
-    {
         "name": "towerFire",
         "type": "image",
         "src": "data/img/towerFire.png"
-    },
-    {
-        "name": "towerWater_old",
-        "type": "image",
-        "src": "data/img/towerWater_old.png"
     },
     {
         "name": "towerWater",
@@ -115,19 +95,14 @@ game.resources = [
         "src": "data/map/easy_map.tmx"
     },
     {
-        "name": "sample",
+        "name": "medium_map",
         "type": "tmx",
-        "src": "data/map/sample.tmx"
+        "src": "data/map/medium_map.tmx"
     },
     {
         "name": "map_tiles",
         "type": "tsx",
         "src": "data/map/map_tiles.tsx"
-    },
-    {
-        "name": "towerDefense_tilesheet",
-        "type": "tsx",
-        "src": "data/map/towerDefense_tilesheet.tsx"
     },
     {
         "name": "PressStart2P",

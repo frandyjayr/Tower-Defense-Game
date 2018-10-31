@@ -214,6 +214,12 @@
 		if (game.data.gameDifficulty === 'EASY') {
 			return game.mapEasy;
 		}
+		else if (game.data.gameDifficulty === 'MEDIUM') {
+			return game.mapMedium;
+		}
+		else if (game.data.gameDifficulty === 'HARD') {
+			return game.mapHard;
+		}
 	}
 		
 });

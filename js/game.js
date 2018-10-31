@@ -50,8 +50,8 @@ var game = {
 		utilityScreenEndPosX: 736,
 		utilityScreenEndPosY: 448,
 		
-		lastPlacedTowerX: 0,
-		lastPlacedTowerY: 0,
+		lastPlacedTowerX: 96,
+		lastPlacedTowerY: 96,
 		
 		gameDifficulty: 'EASY',
 		waveStart: false,
