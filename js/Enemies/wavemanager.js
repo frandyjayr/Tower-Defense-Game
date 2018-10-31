@@ -4,7 +4,6 @@ game.waveManagerEasy = me.Container.extend({
 		
 		// Instantiate numerical data
 		this.numberSpawned = 0;
-		this.maxSpawn = 10;
 		this.spawnTime = 0.3;
 		
 		// Instantiate fonts
@@ -17,6 +16,9 @@ game.waveManagerEasy = me.Container.extend({
 		this.currentTime = me.timer.getTime() / 1000;
 		this.roundStartTime = me.timer.getTime() / 1000;
 		this.roundEndTime;
+		this.wave;
+		this.getWaveByDifficulty();
+		this.maxSpawn;
 	
   	},
 	
@@ -41,6 +43,9 @@ game.waveManagerEasy = me.Container.extend({
 	},
 	
 	generateWave: function (wave) {
+		this.wave[game.data.waveNumber - 1][this.numberSpawned]();		
+
+		/*
 		var enemyAirSettings = game.enemyAir;
 		var enemyEarthSettings = game.enemyEarth;
 		var enemyFireSettings = game.enemyFire;
@@ -80,7 +85,7 @@ game.waveManagerEasy = me.Container.extend({
 			default:
 				console.log("GAME WON");
 				break;
-		}
+		}*/
 		
 		this.numberSpawned++;
 		game.data.currentlySpawned++;
@@ -100,8 +105,21 @@ game.waveManagerEasy = me.Container.extend({
 	preRoundPreparation: function() {
 		if (me.input.isKeyPressed("P") && game.data.currentlySpawned === 0 && 		  game.data.towerButtonPressed === false) {
 			console.log("Wave Begin");
+			this.maxSpawn = this.wave[game.data.waveNumber - 1].length;
+	 		this.numberSpawned = 0;
 			game.data.waveStart = true;
 			game.data.preRoundHasStarted = false;
+		}
+	},
+	
+	getWaveByDifficulty: function() {
+		if (game.data.gameDifficulty === 'EASY') {
+			this.wave = game.waveEasy;	
+			console.log(this.wave);
+		} else if (game.data.gameDifficulty === 'MEDIUM') {
+			this.wave = game.waveMedium;
+		} else if (game.data.gameDifficulty === 'HARD') {
+			this.wave = game.waveHard;
 		}
 	}
   
