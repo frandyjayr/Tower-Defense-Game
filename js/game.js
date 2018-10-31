@@ -7,7 +7,7 @@ var game = {
 		currentlySpawned: 0,
 		waveNumber: 1,
 		score: 0,
-		gold: 1000,
+		gold: 400,
 		startingGold: 100,
 		startingHealth: 10,
 
@@ -49,6 +49,9 @@ var game = {
 		utilityScreenStartPosY: 0,
 		utilityScreenEndPosX: 736,
 		utilityScreenEndPosY: 448,
+		
+		lastPlacedTowerX: 0,
+		lastPlacedTowerY: 0,
 		
 		gameDifficulty: 'EASY',
 		waveStart: false,

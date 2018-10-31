@@ -17,7 +17,7 @@ game.PlayScreen = me.ScreenObject.extend({
 		me.input.bindKey(me.input.KEY.P, "P");
 		
 		game.data.towerMap = Array(15).fill().map(() => Array(20).fill('O'));
-		me.levelDirector.loadLevel("easy_map");
+		me.levelDirector.loadLevel(this.loadLevel(game.data.gameDifficulty));
 
 		this.HUD = new game.HUD.Container();
 
@@ -27,7 +27,7 @@ game.PlayScreen = me.ScreenObject.extend({
 		
 		me.game.world.addChild(me.pool.pull("towermanager", 0 ,0), 4);	
 			
-		
+		console.log(game.data.gameDifficulty)
 		
 		
 
@@ -39,5 +39,16 @@ game.PlayScreen = me.ScreenObject.extend({
      */
     onDestroyEvent: function() {
 		me.game.world.removeChild(this.HUD);
-    }
+    },
+	
+	loadLevel: function(level) {
+		switch(level) {
+			case 'EASY':
+				return 'easy_map';
+			case 'MEDIUM':
+				return 'medium_map';
+			case 'HARD':
+				return 'hard_map';
+		}	
+	}
 });

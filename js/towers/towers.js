@@ -19,6 +19,7 @@ game.Tower = me.Entity.extend({
 	update: function (dt) {
 		
 		this._super(me.Entity, "update", [dt]);
+		//console.log(this.z)
 		me.collision.check(this);			
 		return true;
   	},
@@ -70,6 +71,8 @@ game.Tower = me.Entity.extend({
 	draw: function(renderer) {
 		this._super(me.Entity, "draw", [renderer]);		
 		if (this.purchaseComplete) {
+			this.pos.z = 0;
+			this.font.pos.z = 6
 			this.font.resize(0.5)
         	this.font.draw(renderer, "-" + this.towerCost + " gold", -50, -32);
 			

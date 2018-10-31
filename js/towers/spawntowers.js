@@ -29,7 +29,7 @@
 		
 		this.greenColor = '#006400';
 		this.redColor = '#FF0000'
-		this.spawnChild = new game.Tower(0, 0, settings);
+		this.spawnChild = new game.Tower(game.data.lastPlacedTowerX, game.data.lastPlacedTowerY, settings);
 		this.spawnChild.collisionType = me.collision.types.PLAYER_OBJECT;
 		me.game.world.addChild(this.spawnChild, 1);
 	},
@@ -104,10 +104,16 @@
 			me.game.world.removeChild(this);
 			me.game.world.removeChild(this.spawnChild);
 		} else if (me.input.isKeyPressed("enter") && this.currentLocation === 'G' && this.towerMap[(this.pos.y + 64) / 32][(this.pos.x + 96) / 32] !== 'X') {
-			me.game.world.removeChild(this);
 			this.towerMap[(this.pos.y + 64) / 32][(this.pos.x + 96) / 32] = 'X';
 			this.spawnChild.toggleTower();
 			this.spawnChild.buyTower();
+			console.log(this.pos.x / 32)
+			console.log(this.pos.y / 32)
+			game.data.lastPlacedTowerX = this.pos.x;
+			game.data.lastPlacedTowerY = this.pos.y;
+			me.game.world.removeChild(this);
+		}  else if (me.input.isKeyPressed("enter") && this.currentLocation !== 'G') {
+			game.data.towerButtonPressed = true;
 		}
 
 		if (me.input.isKeyPressed("left") === false && this.lastPressedKey === "left") {

@@ -21,29 +21,54 @@ game.titlescreen = me.ScreenObject.extend({
                 //this.font.setOpacity (1);
                 this.title = "Welcome to Element Tower Defense!";
                 this.start = "Press Enter to Start";
+				this.difficulty = "Choose a difficulty level:"
                 
             },    
 
             update : function (dt) {
+				this.changeDifficulty();
                 return true;
             },
 
             draw : function (renderer) {
                 this.font.draw(renderer, this.title, 420, 500);
                 this.font.draw(renderer, this.start, 550, 540);
-                //console.log("draw stuff");
+                this.font.draw(renderer, this.difficulty, 460, 600);
+                this.font.draw(renderer, "< " + game.data.gameDifficulty + " >", 640, 630);
             },
+	
+			changeDifficulty: function() {
+				if (me.input.isKeyPressed("right")) {
+
+					if (game.data.gameDifficulty === 'EASY') {
+						game.data.gameDifficulty = 'MEDIUM'; 			
+					} else if (game.data.gameDifficulty === 'MEDIUM') {
+						game.data.gameDifficulty = 'HARD'
+					} else if (game.data.gameDifficulty === 'HARD') {
+						game.data.gameDifficulty = 'EASY'
+					}
+				} else if (me.input.isKeyPressed("left")) {
+					if (game.data.gameDifficultyDifficulty === 'EASY') {
+						game.data.gameDifficulty = 'HARD'; 			
+					} else if (game.data.gameDifficulty === 'MEDIUM') {
+						game.data.gameDifficulty = 'EASY'
+					} else if (game.data.gameDifficulty === 'HARD') {
+						game.data.gameDifficulty = 'HARD'
+					}
+				}		
+			}
 
 
         })), 2);
 
 
         me.input.bindKey(me.input.KEY.ENTER, "enter", true);
+        me.input.bindKey(me.input.KEY.RIGHT, "right", true);
+        me.input.bindKey(me.input.KEY.LEFT, "left", true);
         this.handler = me.event.subscribe(me.event.KEYDOWN, function (action) {
             if (action === "enter") {              
                 me.state.change(me.state.PLAY);
-
-            }
+            } 
         });
         
     },
@@ -52,6 +77,8 @@ game.titlescreen = me.ScreenObject.extend({
      */
     onDestroyEvent: function() {
         me.input.unbindKey(me.input.KEY.ENTER);
+        me.input.unbindKey(me.input.KEY.RIGHT);
+        me.input.unbindKey(me.input.KEY.LEFT);
         me.event.unsubscribe(this.handler);
     }
 });
