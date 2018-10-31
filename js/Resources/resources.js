@@ -4,6 +4,7 @@ game.resources = [
     { name: "enemyFire", type: "image", src: "data/img/enemyFire.png" },
     { name: "enemyWater", type: "image", src: "data/img/enemyWater.png" },
     { name: "AOEDamage", type: "image", src: "data/img/AOEDamage.png" },
+    { name: "fireMissile", type: "image", src: "data/img/fireMissile.png" },
     { name: "ships", type: "image", src: "data/img/ships.png" },
 	{ name: "towerAir", type: "image", src: "data/img/towerAir.png" },
 	{ name: "towerWater", type: "image", src: "data/img/towerWater.png" },

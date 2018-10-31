@@ -60,6 +60,11 @@ game.resources = [
         "src": "data/img/enemyWater.png"
     },
     {
+        "name": "fireMissile",
+        "type": "image",
+        "src": "data/img/fireMissile.png"
+    },
+    {
         "name": "map_tiles",
         "type": "image",
         "src": "data/img/map_tiles.png"
