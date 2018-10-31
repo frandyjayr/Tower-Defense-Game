@@ -107,8 +107,6 @@
 			this.towerMap[(this.pos.y + 64) / 32][(this.pos.x + 96) / 32] = 'X';
 			this.spawnChild.toggleTower();
 			this.spawnChild.buyTower();
-			console.log(this.pos.x / 32)
-			console.log(this.pos.y / 32)
 			game.data.lastPlacedTowerX = this.pos.x;
 			game.data.lastPlacedTowerY = this.pos.y;
 			me.game.world.removeChild(this);

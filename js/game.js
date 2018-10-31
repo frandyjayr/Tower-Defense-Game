@@ -7,7 +7,7 @@ var game = {
 		currentlySpawned: 0,
 		waveNumber: 1,
 		score: 0,
-		gold: 400,
+		gold: 800,
 		startingGold: 100,
 		startingHealth: 10,
 
@@ -16,9 +16,9 @@ var game = {
 		towerFireCost: 150,
 		towerWaterCost: 200,
 		
-		airMissileDamage: 5,
+		airMissileDamage: 8,
 		EarthMissileDamage: 20,
-		FireMissileDamage: 8,
+		FireMissileDamage: 4,
 		WaterMissileDamage: 1,
 		
 		airMissileSpawnTime: 0.5,
@@ -26,8 +26,8 @@ var game = {
 		fireMissileSpawnTime: 1,
 		waterMissileSpawnTime: 1.5,
 		
-		enemyAirGoldWorth: 20,
-		enemyEarthGoldWorth: 50,
+		enemyAirGoldWorth: 10,
+		enemyEarthGoldWorth: 30,
 		enemyFireGoldWorth: 50,
 		enemyWaterGoldWorth: 30,		
 		

@@ -59,7 +59,6 @@ game.TowerManager = me.Container.extend({
 			setTimeout(function() {
 				that.insufficientFunds = false;
 			}, 500)
-				//this.insufficientFunds = false;
 		}
 		
 	}
