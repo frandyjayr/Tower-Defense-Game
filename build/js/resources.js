@@ -25,19 +25,9 @@ game.resources = [
         "src": "data/img/buttonTowerWater.png"
     },
     {
-        "name": "enemyAir",
-        "type": "image",
-        "src": "data/img/enemyAir.png"
-    },
-    {
         "name": "enemyEarth_old",
         "type": "image",
         "src": "data/img/enemyEarth_old.png"
-    },
-    {
-        "name": "enemyEarth",
-        "type": "image",
-        "src": "data/img/enemyEarth.png"
     },
     {
         "name": "enemyFire",
@@ -45,14 +35,19 @@ game.resources = [
         "src": "data/img/enemyFire.png"
     },
     {
+        "name": "enemyPlane",
+        "type": "image",
+        "src": "data/img/enemyPlane.png"
+    },
+    {
+        "name": "enemyTank",
+        "type": "image",
+        "src": "data/img/enemyTank.png"
+    },
+    {
         "name": "enemyWater",
         "type": "image",
         "src": "data/img/enemyWater.png"
-    },
-    {
-        "name": "fireMissile",
-        "type": "image",
-        "src": "data/img/fireMissile.png"
     },
     {
         "name": "map_tiles",

@@ -31420,21 +31420,6 @@ var game = {
 		earthMissileSpawnTime: 5,
 		fireMissileSpawnTime: 1,
 		waterMissileSpawnTime: 1.5,
-		
-		enemyAirGoldWorth: 10,
-		enemyEarthGoldWorth: 30,
-		enemyFireGoldWorth: 50,
-		enemyWaterGoldWorth: 30,		
-		
-		enemyAirVelocity: 150,
-		enemyEarthVelocity: 150,
-		enemyFireVelocity: 150,
-		enemyWaterVelocity: 150,		
-		
-		enemyAirHealth: 20,
-		enemyEarthHealth: 50,
-		enemyFireHealth: 50,
-		enemyWaterHealth: 30,
 
 		gameScreenStartPosX: 0,
 		gameScreenStartPosY: 0,
@@ -31445,8 +31430,8 @@ var game = {
 		utilityScreenEndPosX: 736,
 		utilityScreenEndPosY: 448,
 		
-		lastPlacedTowerX: 0,
-		lastPlacedTowerY: 0,
+		lastPlacedTowerX: 96,
+		lastPlacedTowerY: 96,
 		
 		gameDifficulty: 'EASY',
 		waveStart: false,
@@ -31528,19 +31513,9 @@ game.resources = [
         "src": "data/img/buttonTowerEarth.png"
     },
     {
-        "name": "buttonTowerFire_old",
-        "type": "image",
-        "src": "data/img/buttonTowerFire_old.png"
-    },
-    {
         "name": "buttonTowerFire",
         "type": "image",
         "src": "data/img/buttonTowerFire.png"
-    },
-    {
-        "name": "buttonTowerWater_old",
-        "type": "image",
-        "src": "data/img/buttonTowerWater_old.png"
     },
     {
         "name": "buttonTowerWater",
@@ -31548,19 +31523,9 @@ game.resources = [
         "src": "data/img/buttonTowerWater.png"
     },
     {
-        "name": "enemyAir_old",
+        "name": "enemyEarth_old",
         "type": "image",
-        "src": "data/img/enemyAir_old.png"
-    },
-    {
-        "name": "enemyAir",
-        "type": "image",
-        "src": "data/img/enemyAir.png"
-    },
-    {
-        "name": "enemyEarth",
-        "type": "image",
-        "src": "data/img/enemyEarth.png"
+        "src": "data/img/enemyEarth_old.png"
     },
     {
         "name": "enemyFire",
@@ -31568,14 +31533,19 @@ game.resources = [
         "src": "data/img/enemyFire.png"
     },
     {
+        "name": "enemyPlane",
+        "type": "image",
+        "src": "data/img/enemyPlane.png"
+    },
+    {
+        "name": "enemyTank",
+        "type": "image",
+        "src": "data/img/enemyTank.png"
+    },
+    {
         "name": "enemyWater",
         "type": "image",
         "src": "data/img/enemyWater.png"
-    },
-    {
-        "name": "fireMissile",
-        "type": "image",
-        "src": "data/img/fireMissile.png"
     },
     {
         "name": "map_tiles",
@@ -31608,19 +31578,9 @@ game.resources = [
         "src": "data/img/towerEarth.png"
     },
     {
-        "name": "towerFire_old",
-        "type": "image",
-        "src": "data/img/towerFire_old.png"
-    },
-    {
         "name": "towerFire",
         "type": "image",
         "src": "data/img/towerFire.png"
-    },
-    {
-        "name": "towerWater_old",
-        "type": "image",
-        "src": "data/img/towerWater_old.png"
     },
     {
         "name": "towerWater",
@@ -31633,19 +31593,14 @@ game.resources = [
         "src": "data/map/easy_map.tmx"
     },
     {
-        "name": "sample",
+        "name": "medium_map",
         "type": "tmx",
-        "src": "data/map/sample.tmx"
+        "src": "data/map/medium_map.tmx"
     },
     {
         "name": "map_tiles",
         "type": "tsx",
         "src": "data/map/map_tiles.tsx"
-    },
-    {
-        "name": "towerDefense_tilesheet",
-        "type": "tsx",
-        "src": "data/map/towerDefense_tilesheet.tsx"
     },
     {
         "name": "PressStart2P",
@@ -31701,7 +31656,14 @@ game.Enemy = me.Entity.extend({
       	}]);	
 	  	this.regularImage = settings.image
 		this.AOEImage;
-	  	this.path = game.mapEasy
+		
+		if (game.data.gameDifficulty === 'EASY') {
+			this.path = game.mapEasy;	
+		} else if (game.data.gameDifficulty === 'MEDIUM') {
+			this.path = game.mapMedium;
+		} else if (game.data.gameDifficulty === 'HARD') {
+			this.path = game.mapHard;
+		}
 	  
 		this.body.vel.x = 0;
 		this.body.vel.y = 0;
@@ -32269,40 +32231,40 @@ game.HUD.ScoreItem = me.Renderable.extend({
 		this.renderButtons(renderer);
   	}
 });
-game.enemyAir = {
-	image: "enemyAir",
+game.enemyPlane = {
+	image: "enemyPlane",
 	type: "AIR",
-	velocity: game.data.enemyAirVelocity,
-	health: game.data.enemyAirHealth,
-	goldWorth: game.data.towerAirCost,
-	scoreWorth: game.data.enemyAirGoldWorth
+	velocity: 150,
+	health: 20,
+	goldWorth: 3,
+	scoreWorth: 5
 }
 
-game.enemyEarth = {
-	image: "enemyEarth",
+game.enemyTank = {
+	image: "enemyTank",
 	type: "EARTH",
-	velocity: game.data.enemyEarthVelocity,
-	health: game.data.enemyEarthHealth,
-	goldWorth: game.data.towerAirCost,
-	scoreWorth: game.data.enemyAirGoldWorth
+	velocity: 150,
+	health: 50,
+	goldWorth: 10,
+	scoreWorth: 15
 }
 
 game.enemyFire = {
 	image: "enemyFire",
 	type: "FIRE",
-	velocity: game.data.enemyFireVelocity,
-	health: game.data.enemyFireHealth,
-	goldWorth: game.data.towerAirCost,
-	scoreWorth: game.data.enemyAirGoldWorth
+	velocity: 150,
+	health: 30,
+	goldWorth: 5,
+	scoreWorth: 6
 }
 
 game.enemyWater = {
 	image: "enemyWater",
 	type: "WATER",
-	velocity: game.data.enemyWaterVelocity,
-	health: game.data.enemyWaterHealth,
-	goldWorth: game.data.towerAirCost,
-	scoreWorth: game.data.enemyAirGoldWorth
+	velocity: 150,
+	health: 30,
+	goldWorth: 4,
+	scoreWorth: 5
 }
 
 game.mapEasy = [
@@ -32323,32 +32285,213 @@ game.mapEasy = [
 ['G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'D', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G' ],
 ['G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'D', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G' ]
 	
-];
+]
+
+game.mapMedium = [
+
+['G', 'G', 'D', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G' ],
+['G', 'G', 'D', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G' ],
+['G', 'G', 'RD', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'DR', 'G', 'G' ],
+['G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'D', 'G', 'G' ],
+['G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'D', 'G', 'G' ],
+['G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'D', 'G', 'G' ],
+['G', 'G', 'G', 'DL', 'L', 'L', 'L', 'L', 'L', 'L', 'L', 'L', 'L', 'L', 'L', 'L', 'L', 'LD', 'G', 'G' ],
+['G', 'G', 'G', 'D', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G' ],
+['G', 'G', 'G', 'D', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G' ],
+['G', 'G', 'G', 'D', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G' ],
+['G', 'G', 'G', 'RD', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'DR', 'G', 'G', 'G', 'G', 'G', 'G' ],
+['G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'D', 'G', 'G', 'G', 'G', 'G', 'G' ],
+['G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'D', 'G', 'G', 'G', 'G', 'G', 'G' ],
+['G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'DL', 'L', 'L', 'L', 'LD', 'G', 'G', 'G', 'G', 'G', 'G' ],
+['G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'D', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G' ],
+
+]
 game.resources = [
-    { name: "enemyAir", type: "image", src: "data/img/enemyAir.png" },
-    { name: "enemyEarth", type: "image", src: "data/img/enemyEarth.png" },
-    { name: "enemyFire", type: "image", src: "data/img/enemyFire.png" },
-    { name: "enemyWater", type: "image", src: "data/img/enemyWater.png" },
-    { name: "AOEDamage", type: "image", src: "data/img/AOEDamage.png" },
-    { name: "fireMissile", type: "image", src: "data/img/fireMissile.png" },
-    { name: "ships", type: "image", src: "data/img/ships.png" },
+	// Towers
 	{ name: "towerAir", type: "image", src: "data/img/towerAir.png" },
 	{ name: "towerWater", type: "image", src: "data/img/towerWater.png" },
-    { name: "easy_map", type: "tmx", src: "data/map/easy_map.tmx" },
-	{ name: "map_tiles", type: "image", src: "data/img/map_tiles.png" },
-	{ name: "PressStart2P", type: "image", src: "data/fnt/PressStart2P.png" },
-	{ name: "PressStart2P", type: "binary", src: "data/fnt/PressStart2P.fnt" },
 	{ name: "buttonTowerAir", type: "image", src: "data/img/buttonTowerAir.png" },
 	{ name: "buttonTowerWater", type: "image", src: "data/img/buttonTowerWater.png" },
-	{ name: "TowerWaterSpawnBad", type: "image", src: "data/img/TowerWaterSpawnBad.png" },
+	
+	// Maps
+    { name: "easy_map", type: "tmx", src: "data/map/easy_map.tmx" },
+    { name: "medium_map", type: "tmx", src: "data/map/medium_map.tmx" },
+	{ name: "map_tiles", type: "image", src: "data/img/map_tiles.png" },
+	
+	// Fonts
+	{ name: "PressStart2P", type: "image", src: "data/fnt/PressStart2P.png" },
+	{ name: "PressStart2P", type: "binary", src: "data/fnt/PressStart2P.fnt" },
+	
+	// Screens
 	{ name: "title_screen", type: "image", src: "data/img/title_screen.png" },
-	{ name: "mainmenu", type: "audio", src: "data/sfx/mainmenu.mp3", channel : 1 }
+	{ name: "mainmenu", type: "audio", src: "data/sfx/mainmenu.mp3", channel : 1 },
+	
+	// Misc
+    { name: "ships", type: "image", src: "data/img/ships.png" },
+	
+	// Enemies
+    { name: "enemyPlane", type: "image", src: "data/img/enemyPlane.png" },
+    { name: "enemyTank", type: "image", src: "data/img/enemyTank.png" },
+    { name: "enemyFire", type: "image", src: "data/img/enemyFire.png" },
+    { name: "enemyWater", type: "image", src: "data/img/enemyWater.png" },
+
+	
+
+
+
+
+
+
+
+
 
 ];
 
 
 // Wave Easy Mode
 game.waveEasy = [
+	// wave 1
+	[
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyPlane), 2)}, 
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyPlane), 2)}, 
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyPlane), 2)}, 
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyPlane), 2)}, 
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyPlane), 2)}, 
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyPlane), 2)}, 
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyPlane), 2)}, 
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyPlane), 2)}, 
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyPlane), 2)}, 
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyPlane), 2)}
+	],
+	
+	// wave 2
+	[
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyTank), 2)},	
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyTank), 2)},	
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyTank), 2)},	
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyTank), 2)},	
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyTank), 2)},	
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyTank), 2)},	
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyTank), 2)},	
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyTank), 2)},	
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyTank), 2)},	
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyTank), 2)}	
+	],
+	
+	// wave 3
+	[
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyFire), 2)},	
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyFire), 2)},	
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyFire), 2)},		
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyFire), 2)},		
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyFire), 2)},		
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyFire), 2)},		
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyFire), 2)},		
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyFire), 2)},		
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyFire), 2)},		
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyFire), 2)},		
+	],
+	
+	// wave 4
+	[
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyWater), 2)},	
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyWater), 2)},	
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyWater), 2)},	
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyWater), 2)},	
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyWater), 2)},	
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyWater), 2)},	
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyWater), 2)},	
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyWater), 2)},	
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyWater), 2)},	
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyWater), 2)},	
+	],
+	
+	// wave 5
+	[
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyWater), 2)},	
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyWater), 2)},	
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyWater), 2)},	
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyWater), 2)},	
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyWater), 2)},	
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyWater), 2)},	
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyWater), 2)},	
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyWater), 2)},	
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyWater), 2)},	
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyWater), 2)},	
+	],
+	
+	// wave 6
+	[
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyWater), 2)},	
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyWater), 2)},	
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyWater), 2)},	
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyWater), 2)},	
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyWater), 2)},	
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyWater), 2)},	
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyWater), 2)},	
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyWater), 2)},	
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyWater), 2)},	
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyWater), 2)},	
+	],
+	
+	// wave 7
+	[
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyWater), 2)},	
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyWater), 2)},	
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyWater), 2)},	
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyWater), 2)},	
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyWater), 2)},	
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyWater), 2)},	
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyWater), 2)},	
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyWater), 2)},	
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyWater), 2)},	
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyWater), 2)},	
+	],
+	
+	// wave 8
+	[
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyWater), 2)},	
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyWater), 2)},	
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyWater), 2)},	
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyWater), 2)},	
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyWater), 2)},	
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyWater), 2)},	
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyWater), 2)},	
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyWater), 2)},	
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyWater), 2)},	
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyWater), 2)},	
+	],
+	
+	// wave 9
+	[
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyWater), 2)},	
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyWater), 2)},	
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyWater), 2)},	
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyWater), 2)},	
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyWater), 2)},	
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyWater), 2)},	
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyWater), 2)},	
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyWater), 2)},	
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyWater), 2)},	
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyWater), 2)},	
+	],
+	
+	// wave 10
+	[
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyWater), 2)},	
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyWater), 2)},	
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyWater), 2)},	
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyWater), 2)},	
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyWater), 2)},	
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyWater), 2)},	
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyWater), 2)},	
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyWater), 2)},	
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyWater), 2)},	
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyWater), 2)},	
+	]
+]
+
+game.waveMedium = [
 	// wave 1
 	[
 		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyAir), 2)}, 
@@ -32489,6 +32632,7 @@ game.waveEasy = [
 		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyWater), 2)},	
 	]
 ]
+
 game.PlayScreen = me.ScreenObject.extend({
     /**
      *  action to perform on state change
@@ -32648,29 +32792,32 @@ game.Missile = me.Entity.extend({
 		this.targetTemp = null;
 		this.alwaysUpdate = true;
 		
-		/*
+
         this.renderable = new (me.Renderable.extend({
             init : function () {
-                me.Renderable.prototype.init.apply(this, [0, 0, 7, 7]);
+                me.Renderable.prototype.init.apply(this, [0, 0, 8, 8]);
             },
             destroy : function () {},
             draw : function (renderer) {
                 var color = renderer.getColor();
-                renderer.setColor('#5EFF7E');
+                renderer.setColor(this.getColor());
                 renderer.fillRect(0, 0, this.width, this.height);
                 renderer.setColor(color);
-            }
-        }));*/
-		
-		this.renderable = new(me.Entity.extend({
-			init: function() {
-				me.Entity.prototype.init.apply(this, [0,0, {
-					image: "ships",
-					width: 16,
-					height: 16
-				}])
+            },
+			
+			getColor: function() {
+				if (missileType === "AIR") {
+					return '#ffffff';
+				} else if (missileType === "WATER") {
+					return '#0d70fd';
+				} else if (missileType === "FIRE") {
+					return '#de0202';
+				} else if (missileType === "EARTH") {
+					return '#6c3333';
+				}
 			}
-		}))
+        }));
+
 
 	},
 	
@@ -32777,13 +32924,13 @@ game.Missile = me.Entity.extend({
 		this.towerSpeed;
 		this.alreadyClicked = false;
 		this.lastPressedKey = null;
-		this.currentLocation = 'G';
+		this.map = this.getMap();
+		this.currentLocation = this.map[(this.pos.y + 64) / 32][(this.pos.x + 96) / 32];
 		this.movedLocation = false;
 		this.justSpawned = true;
 		this.newTowerLocation = null;
 		this.newLocation;
 		this.body.collisionType = me.collision.types.NPC_OBJECT;
-		this.map = this.getMap();
 		this.towerMap = game.data.towerMap;
 		this.chooseTowerType();
 
@@ -32810,6 +32957,9 @@ game.Missile = me.Entity.extend({
 			this.justSpawned = false;
 		} else if (this.justSpawned && this.currentLocation === 'G') {
 			this.setIndicatorColor(this.greenColor);
+			this.justSpawned = false;
+		} else if (this.justSpawned && this.currentLocation !== 'G') {
+			this.setIndicatorColor(this.redColor);
 			this.justSpawned = false;
 		}
 
@@ -32977,6 +33127,12 @@ game.Missile = me.Entity.extend({
 		if (game.data.gameDifficulty === 'EASY') {
 			return game.mapEasy;
 		}
+		else if (game.data.gameDifficulty === 'MEDIUM') {
+			return game.mapMedium;
+		}
+		else if (game.data.gameDifficulty === 'HARD') {
+			return game.mapHard;
+		}
 	}
 		
 });
@@ -33070,7 +33226,6 @@ game.Tower = me.Entity.extend({
 	update: function (dt) {
 		
 		me.Entity.prototype.update.apply(this, [dt]);
-		//console.log(this.z)
 		me.collision.check(this);			
 		return true;
   	},

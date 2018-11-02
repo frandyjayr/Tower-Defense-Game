@@ -19,7 +19,6 @@ game.Tower = me.Entity.extend({
 	update: function (dt) {
 		
 		this._super(me.Entity, "update", [dt]);
-		//console.log(this.z)
 		me.collision.check(this);			
 		return true;
   	},

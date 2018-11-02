@@ -7,8 +7,8 @@ var game = {
 		currentlySpawned: 0,
 		waveNumber: 1,
 		score: 0,
-		gold: 800,
-		startingGold: 100,
+		gold: 1000,
+		startingGold: 1000,
 		startingHealth: 10,
 
 		towerAirCost: 200,
@@ -25,21 +25,6 @@ var game = {
 		earthMissileSpawnTime: 5,
 		fireMissileSpawnTime: 1,
 		waterMissileSpawnTime: 1.5,
-		
-		enemyAirGoldWorth: 10,
-		enemyEarthGoldWorth: 30,
-		enemyFireGoldWorth: 50,
-		enemyWaterGoldWorth: 30,		
-		
-		enemyAirVelocity: 150,
-		enemyEarthVelocity: 150,
-		enemyFireVelocity: 150,
-		enemyWaterVelocity: 150,		
-		
-		enemyAirHealth: 20,
-		enemyEarthHealth: 50,
-		enemyFireHealth: 50,
-		enemyWaterHealth: 30,
 
 		gameScreenStartPosX: 0,
 		gameScreenStartPosY: 0,
@@ -57,6 +42,7 @@ var game = {
 		waveStart: false,
 		preRoundHasStarted: false,
 		towerButtonPressed: false,
+		menuOpened: false,
 		towerMap: null
     },
 
@@ -101,6 +87,7 @@ var game = {
 		me.pool.register("tower", game.Tower);					
 		
 		me.pool.register("spawnTower", game.SpawnTower);
+		me.pool.register("inGameMenu", game.inGameMenu);
 		
 
 

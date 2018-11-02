@@ -23,6 +23,8 @@ game.ButtonTower = me.GUI_Object.extend({
 		    game.data.preRoundHasStarted === false) {
 			game.data.preRoundHasStarted = true;
 		}
+		
+
       	return true;
    	},
 	

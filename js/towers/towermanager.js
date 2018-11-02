@@ -61,6 +61,10 @@ game.TowerManager = me.Container.extend({
 			}, 500)
 		}
 		
+	},
+	
+	onDestroyEvent: function() {
+		game.data.towerButtonPressed = false;
 	}
   
 });

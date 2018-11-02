@@ -2,30 +2,30 @@
 game.waveEasy = [
 	// wave 1
 	[
-		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyAir), 2)}, 
-		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyAir), 2)}, 
-		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyAir), 2)}, 
-		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyAir), 2)}, 
-		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyAir), 2)}, 
-		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyAir), 2)}, 
-		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyAir), 2)}, 
-		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyAir), 2)}, 
-		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyAir), 2)}, 
-		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyAir), 2)}
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyPlane), 2)}, 
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyPlane), 2)}, 
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyPlane), 2)}, 
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyPlane), 2)}, 
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyPlane), 2)}, 
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyPlane), 2)}, 
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyPlane), 2)}, 
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyPlane), 2)}, 
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyPlane), 2)}, 
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyPlane), 2)}
 	],
 	
 	// wave 2
 	[
-		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyEarth), 2)},	
-		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyEarth), 2)},	
-		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyEarth), 2)},	
-		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyEarth), 2)},	
-		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyEarth), 2)},	
-		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyEarth), 2)},	
-		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyEarth), 2)},	
-		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyEarth), 2)},	
-		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyEarth), 2)},	
-		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyEarth), 2)}	
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyTank), 2)},	
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyTank), 2)},	
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyTank), 2)},	
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyTank), 2)},	
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyTank), 2)},	
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyTank), 2)},	
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyTank), 2)},	
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyTank), 2)},	
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyTank), 2)},	
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyTank), 2)}	
 	],
 	
 	// wave 3
@@ -144,30 +144,30 @@ game.waveEasy = [
 game.waveMedium = [
 	// wave 1
 	[
-		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyAir), 2)}, 
-		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyAir), 2)}, 
-		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyAir), 2)}, 
-		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyAir), 2)}, 
-		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyAir), 2)}, 
-		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyAir), 2)}, 
-		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyAir), 2)}, 
-		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyAir), 2)}, 
-		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyAir), 2)}, 
-		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyAir), 2)}
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyPlane), 2)}, 
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyPlane), 2)}, 
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyPlane), 2)}, 
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyPlane), 2)}, 
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyPlane), 2)}, 
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyPlane), 2)}, 
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyPlane), 2)}, 
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyPlane), 2)}, 
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyPlane), 2)}, 
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyPlane), 2)}
 	],
 	
 	// wave 2
 	[
-		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyEarth), 2)},	
-		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyEarth), 2)},	
-		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyEarth), 2)},	
-		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyEarth), 2)},	
-		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyEarth), 2)},	
-		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyEarth), 2)},	
-		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyEarth), 2)},	
-		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyEarth), 2)},	
-		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyEarth), 2)},	
-		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyEarth), 2)}	
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyTank), 2)},	
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyTank), 2)},	
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyTank), 2)},	
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyTank), 2)},	
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyTank), 2)},	
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyTank), 2)},	
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyTank), 2)},	
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyTank), 2)},	
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyTank), 2)},	
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyTank), 2)}	
 	],
 	
 	// wave 3

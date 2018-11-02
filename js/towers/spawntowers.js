@@ -14,13 +14,13 @@
 		this.towerSpeed;
 		this.alreadyClicked = false;
 		this.lastPressedKey = null;
-		this.currentLocation = 'G';
+		this.map = this.getMap();
+		this.currentLocation = this.map[(this.pos.y + 64) / 32][(this.pos.x + 96) / 32];
 		this.movedLocation = false;
 		this.justSpawned = true;
 		this.newTowerLocation = null;
 		this.newLocation;
 		this.body.collisionType = me.collision.types.NPC_OBJECT;
-		this.map = this.getMap();
 		this.towerMap = game.data.towerMap;
 		this.chooseTowerType();
 
@@ -47,6 +47,9 @@
 			this.justSpawned = false;
 		} else if (this.justSpawned && this.currentLocation === 'G') {
 			this.setIndicatorColor(this.greenColor);
+			this.justSpawned = false;
+		} else if (this.justSpawned && this.currentLocation !== 'G') {
+			this.setIndicatorColor(this.redColor);
 			this.justSpawned = false;
 		}
 
