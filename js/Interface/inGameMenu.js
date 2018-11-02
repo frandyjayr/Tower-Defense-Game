@@ -51,8 +51,9 @@ game.inGameMenu = me.Container.extend({
 		if (me.input.isKeyPressed("M")) {
 			game.data.menuOpened = true;
 			this.unbindGameKeys();
-		} else if (me.input.isKeyPressed("exit")) {	
+		} else if (me.input.isKeyPressed("exit") || me.input.isKeyPressed("em")) {	
 			game.data.menuOpened = false;
+			this.rebindGameKeys();
 		}		
 	},
 	
@@ -126,6 +127,7 @@ game.inGameMenu = me.Container.extend({
 		me.input.unbindKey(me.input.KEY.E);
 		me.input.unbindKey(me.input.KEY.R);
 		me.input.unbindKey(me.input.KEY.P);
+		me.input.unbindKey(me.input.KEY.M);
 		me.input.unbindKey(me.input.KEY.LEFT);
 		me.input.unbindKey(me.input.KEY.RIGHT);
 		me.input.unbindKey(me.input.KEY.UP);
@@ -134,6 +136,7 @@ game.inGameMenu = me.Container.extend({
 		me.input.bindKey(me.input.KEY.ENTER, "confirm");		
 		me.input.bindKey(me.input.KEY.UP, "u");		
 		me.input.bindKey(me.input.KEY.DOWN, "d");			
+		me.input.bindKey(me.input.KEY.M, "em");			
 	},
 	
 	rebindGameKeys: function() {
@@ -141,6 +144,7 @@ game.inGameMenu = me.Container.extend({
 		me.input.unbindKey(me.input.KEY.ENTER);
 		me.input.unbindKey(me.input.KEY.UP);
 		me.input.unbindKey(me.input.KEY.DOWN);
+		me.input.unbindKey(me.input.KEY.M);
 		me.input.bindKey(me.input.KEY.ENTER, "enter");	
 		me.input.bindKey(me.input.KEY.ESC, "esc");	
 		me.input.bindKey(me.input.KEY.Q, "Q");	
@@ -148,6 +152,7 @@ game.inGameMenu = me.Container.extend({
 		me.input.bindKey(me.input.KEY.E, "E");	
 		me.input.bindKey(me.input.KEY.R, "R");	
 		me.input.bindKey(me.input.KEY.P, "P");	
+		me.input.bindKey(me.input.KEY.M, "M");	
 		me.input.bindKey(me.input.KEY.LEFT, "left");	
 		me.input.bindKey(me.input.KEY.RIGHT, "right");	
 		me.input.bindKey(me.input.KEY.UP, "up");	

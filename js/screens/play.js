@@ -50,6 +50,10 @@ game.PlayScreen = me.ScreenObject.extend({
 		game.data.waveNumber = 1;
 		game.data.score = 0;
 		game.data.health = game.data.startingHealth;
+		game.data.waveStart = false;
+		game.data.preRoundHasStarted = false;
+		game.data.currentlySpawned = 0;  		  
+		game.data.towerButtonPressed = false;
 		
 	},
 	
