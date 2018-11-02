@@ -10,57 +10,77 @@ game.Enemy = me.Entity.extend({
             width : 32,
           	height : 32
       	}]);	
+		// Instantiate movement and position variables
+		this.angle = 0;	
+		this.body.vel.x = 0;
+		this.body.vel.y = 0;		
+		this.constantVelocity = settings.velocity;
+		this.currentMove = 'D'	
+		this.currentX = 2;
+		this.currentY = 0;		
+		this.gameVelocity = settings.velocity;
+		this.path;
+		this.getPath();
+		
+		// Instantiate enemy properties
+		this.enemyHealth = settings.health;
+    	this.goldWorth = settings.goldWorth;		
+		this.maxHealth = settings.health;
+    	this.scoreWorth = settings.scoreWorth;
+		
+		// Instantiate time variables
+		this.currentTime = 0;		
+		this.timeOut;	
+		
+		// Instantiate booleans
+		this.alive = true;
+		this.AOEActive = false;
+		this.rotationReady = true;
+		this.slowActive = false;
+		
+		// Instantiate misc variables
 	  	this.regularImage = settings.image
 		this.AOEImage;
+		this.size = 32;
+		this.rotationValue = 0.20;
+		this.AOERange = 70;
+		this.body.collisionType = me.collision.types.ENEMY_OBJECT;
 		
+	},
+	
+	/*
+	 * The update function updates all necessary components to the
+	 * corresponding class. It is automatically called by the melonJS
+	 * engine and is updated per frame.
+	 */
+	update: function (dt) {
+    	this._super(me.Entity, "update", [dt]);
+		this.moveUnit(dt);
+
+		return true;	
+  	},
+	
+	/*
+	 * The getPath function returns the corresponding map path found
+	 * in the maps.js file based on the game difficulty chosen at the
+	 * beginning of the game.
+	 */	
+	getPath: function() {
 		if (game.data.gameDifficulty === 'EASY') {
 			this.path = game.mapEasy;	
 		} else if (game.data.gameDifficulty === 'MEDIUM') {
 			this.path = game.mapMedium;
 		} else if (game.data.gameDifficulty === 'HARD') {
 			this.path = game.mapHard;
-		}
-	  
-		this.body.vel.x = 0;
-		this.body.vel.y = 0;
-		this.gameVelocity = settings.velocity;
-		this.constantVelocity = settings.velocity;
-		this.size = 32;
-		this.enemyHealth = settings.health;
-		this.maxHealth = settings.health;
-		this.timeOut;
-
-		this.currentMove = 'D'
-		this.currentX = 2;
-		this.currentY = 0;
-		this.currentTime = 0;
-    	this.goldWorth = settings.goldWorth;
-    	this.scoreWorth = settings.scoreWorth;
-		this.angle = 0;
-		this.rotationReady = true;
-		this.rotationValue = 0.20;
-		this.AOERange = 70;
-
-		this.body.collisionType = me.collision.types.ENEMY_OBJECT;
-		this.alive = true;
-		this.AOEActive = false;
-		this.slowActive = false;
-		
-},
+		}		
+	},
 	
-	update: function (dt) {
-    	this._super(me.Entity, "update", [dt]);
-		this.moveUnit(dt);
-		
-		if (this.AOEActive) {
-			if (typeof this.effect != 'undefined') {
-				this.effect.updatePosition(this.pos.x, this.pos.y);				
-			}
-
-		}	
-		return true;	
-  	}, 
-	
+	/*
+	 * The moveUnit function moves the enemy through the map based on
+	 * the map returned from the getPath function. It uses char values
+	 * to determine which direction the enemy entity should move. It
+	 * takes a dt (or change in time) parameter.
+	 */		
 	moveUnit: function(dt) {
 		if (this.currentMove === 'L') {
 			this.rotationReady = true;
@@ -178,14 +198,23 @@ game.Enemy = me.Entity.extend({
 		this.currentMove = this.path[this.currentY][this.currentX]; 		
 	},
 	
+	/*
+	 * updateData updates the data when the enemy dies such as the game
+	 * score, total gold, how many enemies are left in the current wave,
+	 * and the alive status of this enemy.
+	 */		
 	updateData: function() {
 		this.alive = false;
-		game.data.score += this.scoreWorth;	//add score to player
-		game.data.gold += this.goldWorth; // add gold to player
-		me.game.world.removeChild(this); // remove the enemy from board
-		game.data.currentlySpawned--; // update currentlyspawned variable
+		game.data.score += this.scoreWorth;	
+		game.data.gold += this.goldWorth; 
+		me.game.world.removeChild(this); 
+		game.data.currentlySpawned--;
 	},
 	
+	/*
+	 * The rotateCorner function rotates the enemy while it turns corners in
+	 * the map. It takes in 2 parameters of radians and the change in time.
+	 */		
 	rotateCorner: function(radians, dt) {	
 		if (this.angle <= 1.5 && this.rotationReady) {
 			this.angle += Math.abs(radians);
@@ -196,6 +225,12 @@ game.Enemy = me.Entity.extend({
 		}
 	},
 	
+	/*
+	 * The activateWaterMissile function activates the slowing effect of a water
+	 * missile if this specific enemy is hit with a water missile. The speed is
+	 * regained after an arbitrary amount of time, however the function is re-
+	 * applied if hit again with another water missile.
+	 */		
 	activateWaterMissile: function() {
 		if (this.slowActive) {
 			clearTimeout(this.timeOut);
@@ -208,7 +243,14 @@ game.Enemy = me.Entity.extend({
 			that.regainSpeed();
 		}, 3000);
 	},
-	
+
+	/*
+	 * The activateFireMissile is used to activate the AOE effect of the frie
+	 * missile. It pulls a list of all of the possible entities existing in
+	 * the current frame and filters only those that are of collisionType 
+	 * "ENEMY_OBJECT". It then aplies the AOE effect to those enemies that
+	 * are within an arbitrary distance to this enemy.
+	 */	
 	activateFireMissile: function() {
 		var entity = me.collision.quadTree.retrieve(this);
 		for (var i = 0; i < entity.length; i++) {
@@ -224,6 +266,12 @@ game.Enemy = me.Entity.extend({
 		}
 	},
 
+	/*
+	 * The inAOERange function returns a boolean of whether or not the passed entity is
+	 * within an arbitrary range of this enemy. This is used to determine which enemies
+	 * are close enough to this enem to receive the AOE damage effect. It takes in one
+	 * entity parameter.
+	 */	
 	inAOERange(entity) {
 		if ((entity.pos.x <= this.pos.x + this.AOERange && entity.pos.x >= this.pos.x && 	    
 			 entity.pos.y >= this.pos.y - this.AOERange && entity.pos.y <= this.pos.y) || (entity.pos.x >= this.pos.x - this.AOERange && entity.pos.x <= this.pos.x && entity.pos.y >= this.pos.y - this.AOERange && entity.pos.y <= this.pos.y) || (entity.pos.x <= this.pos.x + this.AOERange && entity.pos.x >= this.pos.x && entity.pos.y <= this.pos.y + this.AOERange && entity.pos.y >= this.pos.y) ||  (entity.pos.x >= this.pos.x - this.AOERange && entity.pos.x <= this.pos.x && entity.pos.y <= this.pos.y + this.AOERange && entity.pos.y >= this.pos.y)) {
@@ -231,12 +279,22 @@ game.Enemy = me.Entity.extend({
 		}
 		return false;
 	},
-	
+
+	/*
+	 * The applyAOEDamage function applies AOE damage when called. It is used in 
+	 * conjunction with the activateFireMissile function to apply the AOE damage
+	 * to the enemies that are within range of the fire missile AOE.
+	 */	
 	applyAOEDamage: function() {
 		this.enemyHealth -= game.data.FireMissileDamage;
 		this.checkIfDead();
 	},
-	
+
+	/*
+	 * The applyAOEEffect applies the visual effect of the AOE damage. It will cause
+	 * the enemy entity that calls this function to have a transparent red square
+	 * appear on top of the enemy animation to signify AOE damage was taken.
+	 */	
 	applyAOEEffect: function() {
 
 		if (this.enemyHealth > 0) {
@@ -247,7 +305,12 @@ game.Enemy = me.Entity.extend({
 			}, 180)			
 		}
 	},
-	
+
+	/*
+	 * The draw function is a built in function from the MelonJS framework/engine
+	 * that will be automatically called. It renders all necessary entities or
+	 * UI content.
+	 */	
 	draw: function(renderer) {
 		this._super(me.Entity, "draw", [renderer]);
 		if (this.AOEActive) {
@@ -262,17 +325,34 @@ game.Enemy = me.Entity.extend({
 		this.drawHealthBar(renderer);
 	},
 	
+	/*
+	 * The regainSpeed function returns the enemies game velocity back to the
+	 * original velocity that is started with when spawned. This is used in
+	 * conjunction with the activeWaterMissile function to return the speed
+	 * lost from the water missile effect.
+	 */	
 	regainSpeed: function() {
 		this.gameVelocity = this.constantVelocity;	
 	},
-	
+
+	/*
+	 * The checkIfDead function checks if the entity has more then 0 health. If
+	 * not, the game data is updated to update general game data such as the new
+	 * score, the amount of gold, etc.
+	 */	
 	checkIfDead: function() {
 		if (this.enemyHealth <= 0 && this.alive) // is enemy out of hp?
 		{
 			this.updateData(); //update data to get rid of enemy
 		}		
 	},
-	
+
+	/*
+	 * The drawHealthBar function renders the health bar of the specific entity by
+	 * drawing two rectangles over each other. The base rectangle remains a constant
+	 * arbitrary length while the green bar drawn over the base varies with size
+	 * depending on how much health is remaining.
+	 */	
 	drawHealthBar: function(renderer) {
 		renderer.setColor("rgba(0,0,0,1)");
 		renderer.fillRect(-16, -25, 32, 5);
@@ -282,7 +362,12 @@ game.Enemy = me.Entity.extend({
 		renderer.setColor("rgba(124,252,1)");
 		renderer.fillRect(-16, -25, remainingHealth, 5);
 	},
-	
+
+	/*
+	 * The onCollision function tracks collisions that occur with enemy units and ensures 
+	 * appropriate damage is deducted from the enemy health based on what tyype of missile
+	 * hits this entity.
+	 */	
 	onCollision: function (res, other) {
 		var projectile_damage = 0; // acts as both a bool val for whether a collision was detected and the damage val to subtract from unit HP
 		if (other.body.collisionType === game.collisionTypes.MissileAir) {

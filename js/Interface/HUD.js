@@ -52,11 +52,21 @@ game.HUD.ScoreItem = me.Renderable.extend({
 		this.font.resize(0.5);	
   	},
 
-  /**
-   * update function
-   */
+	/*
+	 * The update function updates all necessary components to the
+	 * corresponding class. It is automatically called by the melonJS
+	 * engine and is updated per frame.
+	 */
 	update : function (dt) {
-		// we don't do anything fancy here, so just
+		this.updateUI();
+		return false;
+  	},
+
+	/*
+	 * The updateUI function updates the UI of the health and gold only
+	 * if the health or gold is different from the last frame.
+	 */
+	updateUI: function() {
 		// return true if the score has been updated
 		if (this.health !== game.data.health) {
 		 	 this.health = game.data.health;
@@ -65,18 +75,24 @@ game.HUD.ScoreItem = me.Renderable.extend({
 		if (this.gold !== game.data.gold) {
 			this.gold = game.data.gold;
 			return true;
-		}
-		
-		return false;
-  	},
-	
+		}		
+	},
+
+	/*
+	 * The renderGold function renders and updates the user's amount of gold
+	 * they have in the game.
+	 */
 	renderGold: function(renderer) {
 		// Render gold
 		this.font.resize(0.5);
 		this.font.draw(renderer, "Gold: ", me.game.viewport.width + this.pos.x - 62, me.game.viewport.height + this.pos.y - 96); 
 		this.font.draw(renderer, game.data.gold, me.game.viewport.width + this.pos.x + 5, me.game.viewport.height + this.pos.y - 96); 			
 	},
-	
+
+	/*
+	 * The renderScore function renders and updates the user's total game score
+	 * they have in the game
+	 */
 	renderScore: function(renderer) {
 		// Render score
 		this.font.resize(0.5);
@@ -84,6 +100,10 @@ game.HUD.ScoreItem = me.Renderable.extend({
 		this.font.draw(renderer, game.data.score, me.game.viewport.width + this.pos.x + 5, me.game.viewport.height + this.pos.y - 64); 			
 	},
 
+	/*
+	 * The renderLives function renders and updates the number of lives the user has
+	 * in the game.
+	 */
 	renderLives: function(renderer) {
 		// Render user lives
 		this.font.resize(0.5);
@@ -91,6 +111,10 @@ game.HUD.ScoreItem = me.Renderable.extend({
 		this.font.draw(renderer, game.data.health, me.game.viewport.width + this.pos.x - 10, me.game.viewport.height + this.pos.y - 32);
 	},
 	
+	/*
+	 * The renderWaveNumber function renders the current wave number out of 10 that the
+	 * user is on in the current game.
+	 */
 	renderWaveNumber: function(renderer) {
 		// Render current wave number
 		this.font.resize(0.5);
@@ -98,6 +122,11 @@ game.HUD.ScoreItem = me.Renderable.extend({
 		this.font.draw(renderer, game.data.waveNumber + "/10", me.game.viewport.width + this.pos.x, me.game.viewport.height + this.pos.y); 		
 	},
 	
+	/*
+	 * The renderWaveIntro function renders the display message at the beginning of
+	 * the game to remind users to start placing towers and to press "P" to start the
+	 * game
+	 */
 	renderWaveIntro: function(renderer) {
 		// Render Wave Number
 		if (game.data.waveStart === false && game.data.preRoundHasStarted === false) {
@@ -109,6 +138,10 @@ game.HUD.ScoreItem = me.Renderable.extend({
 		}		
 	},
 	
+	/*
+	 * The renderButtons functions renders the towers on the sidebar to show the users
+	 * what buttons spawn what towers.
+	 */
 	renderButtons: function(renderer) {
 		// Render Q
 		this.font.resize(1);
@@ -126,9 +159,12 @@ game.HUD.ScoreItem = me.Renderable.extend({
 		this.font.resize(1);
 		this.font.draw(renderer, "R", game.data.utilityScreenStartPosX + 75, game.data.utilityScreenStartPosY + 250); 
 	},
-  /**
-   * draw the score
-   */
+	
+	/*
+	 * The draw function is a built in function from the MelonJS framework/engine
+	 * that will be automatically called. It renders all necessary entities or
+	 * UI content.
+	 */	
 	draw : function (renderer) {
 		this.renderGold(renderer);
 		this.renderScore(renderer);

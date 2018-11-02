@@ -6,6 +6,7 @@ game.ButtonTower = me.GUI_Object.extend({
     	settings.image = this.towerImage;
       	settings.framewidth = 32;
       	settings.frameheight = 32;
+		
       	// super constructor
       	this._super(me.GUI_Object, "init", [x, y, settings]);
       	// define the object z order
@@ -14,20 +15,33 @@ game.ButtonTower = me.GUI_Object.extend({
 		this.anchorPoint.set(0,0);
    	},
 
-   	// output something in the console
-   	// when the object is clicked
+	/*
+	 * The update function updates all necessary components to the
+	 * corresponding class. It is automatically called by the melonJS
+	 * engine and is updated per frame.
+	 */	
    	update: function (time)
    	{
+		this.checkIfClicked();
+      	return true;
+   	},
+	
+	/*
+	 * The checkIfClicked function checks if the user clicks any of
+	 * the tower buttons. If so, it activates preRoundMode.
+	 */		
+	checkIfClicked: function() {
 		if (me.input.isKeyPressed("Q") || me.input.isKeyPressed("W") ||
 		    me.input.isKeyPressed("E") || me.input.isKeyPressed("R") && 
 		    game.data.preRoundHasStarted === false) {
 			game.data.preRoundHasStarted = true;
-		}
-		
+		}		
+	},
 
-      	return true;
-   	},
-	
+	/*
+	 * The setTowerImage function takes in the towerType parameters to 
+	 * determine which tower to render on screen.
+	 */	
 	setTowerImage: function(towerType) {
 		if (towerType === 'AIR') {
 			this.towerImage = "buttonTowerAir";

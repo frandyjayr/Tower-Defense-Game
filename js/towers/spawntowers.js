@@ -34,6 +34,11 @@
 		me.game.world.addChild(this.spawnChild, 1);
 	},
 
+	/*
+	 * The update function updates all necessary components to the
+	 * corresponding class. It is automatically called by the melonJS
+	 * engine and is updated per frame.
+	 */	
 	update : function(time) {
 
 		this.changeIndicator();
