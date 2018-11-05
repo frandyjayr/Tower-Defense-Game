@@ -25,9 +25,9 @@ game.resources = [
         "src": "data/img/buttonTowerWater.png"
     },
     {
-        "name": "enemyEarth_old",
+        "name": "endGem",
         "type": "image",
-        "src": "data/img/enemyEarth_old.png"
+        "src": "data/img/endGem.png"
     },
     {
         "name": "enemyFire",
@@ -53,11 +53,6 @@ game.resources = [
         "name": "map_tiles",
         "type": "image",
         "src": "data/img/map_tiles.png"
-    },
-    {
-        "name": "ships",
-        "type": "image",
-        "src": "data/img/ships.png"
     },
     {
         "name": "title_screen",
@@ -93,6 +88,11 @@ game.resources = [
         "name": "easy_map",
         "type": "tmx",
         "src": "data/map/easy_map.tmx"
+    },
+    {
+        "name": "hard_map",
+        "type": "tmx",
+        "src": "data/map/hard_map.tmx"
     },
     {
         "name": "medium_map",

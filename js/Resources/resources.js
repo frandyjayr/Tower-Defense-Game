@@ -19,7 +19,7 @@ game.resources = [
 	{ name: "mainmenu", type: "audio", src: "data/sfx/mainmenu.mp3", channel : 1 },
 	
 	// Misc
-    { name: "ships", type: "image", src: "data/img/ships.png" },
+    { name: "endGem", type: "image", src: "data/img/endGem.png" },
 	
 	// Enemies
     { name: "enemyPlane", type: "image", src: "data/img/enemyPlane.png" },
