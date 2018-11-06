@@ -8,20 +8,21 @@ game.collisionTypes = { // define types of collision based off missile
 //Air Missile
 game.Missile = me.Entity.extend({
 		
-	init : function (x, y, missileType) {
+	init : function (x, y, settings) {
         this._super(me.Entity, "init", [x, y,  {width: 7, height: 7} ]);
-        this.setMissileType(missileType);
+		this.missileType;
+        this.setMissileType(settings.elementType);
         this.body.setVelocity(0, 0);
 		this.speed = 0.45;
 		this.newDistance = 0;
+		this.missileDamage = settings.missileDamage;
 		this.missileID = 1; // implement missleID's to track what missiles are hitting enemies
 		this.target;	
 		this.targetTemp = null;
 		this.alwaysUpdate = true;
-		
 
         this.renderable = new (me.Renderable.extend({
-            init : function () {
+            init : function (missileType) {
                 this._super(me.Renderable, "init", [0, 0, 8, 8]);
             },
             destroy : function () {},
@@ -33,17 +34,17 @@ game.Missile = me.Entity.extend({
             },
 			
 			getColor: function() {
-				if (missileType === "AIR") {
+				if (settings.elementType === "AIR") {
 					return '#ffffff';
-				} else if (missileType === "WATER") {
+				} else if (settings.elementType === "WATER") {
 					return '#0d70fd';
-				} else if (missileType === "FIRE") {
+				} else if (settings.elementType === "FIRE") {
 					return '#de0202';
-				} else if (missileType === "EARTH") {
+				} else if (settings.elementType === "EARTH") {
 					return '#6c3333';
 				}
 			}
-        }));
+        }))(this.missileType);
 
 
 	},
@@ -71,16 +72,23 @@ game.Missile = me.Entity.extend({
 	setMissileType: function(missileType) {
 		if (missileType === 'AIR') {
         	this.body.collisionType = game.collisionTypes.MissileAir;
+			this.missileType = 'AIR';
 		} else if (missileType === 'WATER') {
 			this.body.collisionType = game.collisionTypes.MissileWater;
+			this.missileType = 'WATER';
 		} else if (missileType === 'EARTH') {
 			this.body.collisionType = game.collisionTypes.MissileEarth;
+			this.missileType = 'EARTH';
 		} else if (missileType === 'FIRE') {
 			this.body.collisionType = game.collisionTypes.MissileFire;
+			this.missileType = 'FIRE';
 		}
 	},
 	
-
+	getMissileDamage: function() {
+		return this.missileDamage;	
+	},
+	
 	/*
 	 * The update function updates all necessary components to the
 	 * corresponding class. It is automatically called by the melonJS
@@ -164,6 +172,32 @@ game.Missile = me.Entity.extend({
 		if (this.pos.x + this.height >= game.data.gameScreenEndPosX) {
 			me.game.world.removeChild(this);
 		}		
+	},
+	
+	onCollision: function(res, other) {
+		var projectile_damage = 0; // acts as both a bool val for whether a collision was detected and the damage val to subtract from unit HP
+		if (other.body.collisionType === me.collision.types.ENEMY_OBJECT) {
+			if (this.body.collisionType === game.collisionTypes.MissileAir) {
+				// Leave empty for future upgrade abilities
+			} else if (this.body.collisionType === game.collisionTypes.MissileWater) {
+				other.activateWaterMissile();
+			} else if (this.body.collisionType === game.collisionTypes.MissileFire) {
+				other.activateFireMissile();
+			} else if (this.body.collisionType === game.collisionTypes.MissileEarth) {	
+				// Leave empty for future upgrade abilities
+			}
+			projectile_damage = this.missileDamage;
+		} 
+		
+		if (projectile_damage > 0)
+		{
+			this.body.setCollisionMask(me.collision.types.NO_OBJECT);
+			other.damageEnemy(projectile_damage);
+			this.enemyHealth = this.enemyHealth - projectile_damage; // ENEMY HEALTH subtracted by X for every hit. we need to try and track what projectile is hitting what creature
+			me.game.world.removeChild(this); // removes missile
+
+		}
+		return false;	
 	}
 });
 

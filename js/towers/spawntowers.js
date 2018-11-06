@@ -27,8 +27,11 @@
 		this.renderable;
 		this.setIndicatorColor(this.greenColor);
 		
+		this.upgradableTowerInfo;
+		this.onUpgradableTile;
 		this.greenColor = '#006400';
 		this.redColor = '#FF0000'
+		this.yellowColor = '#FFFF33'
 		this.spawnChild = new game.Tower(game.data.lastPlacedTowerX, game.data.lastPlacedTowerY, settings);
 		this.spawnChild.collisionType = me.collision.types.PLAYER_OBJECT;
 		me.game.world.addChild(this.spawnChild, 1);
@@ -47,27 +50,47 @@
 	},
 
 	changeIndicator: function() {
-		if (this.justSpawned && this.towerMap[(this.pos.y + 64) / 32][(this.pos.x + 96) / 32] === 'X') {
+		var entity = this.getOverlappingTower();
+
+		if (this.justSpawned && this.towerMap[(this.pos.y + 64) / 32][(this.pos.x + 96) / 32] === 'X' && typeof entity !== null && entity.elementType === this.elementType) {
+			this.setIndicatorColor(this.yellowColor);
+			this.justSpawned = false;
+			this.onUpgradableTile = true;
+			this.upgradableTowerInfo = this.getOverlappingTower().getTowerInfo();
+		} else if (this.justSpawned && this.towerMap[(this.pos.y + 64) / 32][(this.pos.x + 96) / 32] === 'X') {
 			this.setIndicatorColor(this.redColor)
 			this.justSpawned = false;
+			this.onUpgradableTile = false;
 		} else if (this.justSpawned && this.currentLocation === 'G') {
 			this.setIndicatorColor(this.greenColor);
 			this.justSpawned = false;
+			this.onUpgradableTile = false;
 		} else if (this.justSpawned && this.currentLocation !== 'G') {
 			this.setIndicatorColor(this.redColor);
 			this.justSpawned = false;
+			this.onUpgradableTile = false;
 		}
 
+		
 		if (this.movedLocation) {
-
-			if (this.newLocation !== 'G' || this.newTowerLocation === 'X') {
+			
+			 if (/*this.currentLocation === 'G' &&*/ this.newLocation === 'G' && 			this.newTowerLocation === 'X' && entity.elementType === this.elementType){
+				 console.log(entity)
+				 console.log(this)
+				this.setIndicatorColor(this.yellowColor);
+				this.onUpgradableTile = true;
+				this.upgradableTowerInfo = this.getOverlappingTower().getTowerInfo();
+			}else if (this.newLocation !== 'G' || this.newTowerLocation === 'X') {
 				this.setIndicatorColor(this.redColor);
+				this.onUpgradableTile = false;
 			} else if (this.currentLocation === 'G' && this.newLocation === 'G' && 			this.newTowerLocation === 'O'){
 				this.setIndicatorColor(this.greenColor);
+				this.onUpgradableTile = false;
 			}else if (this.currentLocation === this.newLocation){
 				// do nothing
 			} else if (this.currentLocation !== 'G' && this.newLocation === 'G') {
 				this.setIndicatorColor(this.greenColor);
+				this.onUpgradableTile = false;
 			} 
 			this.currentLocation = this.newLocation;
 			this.movedLocation = false;
@@ -118,7 +141,15 @@
 			game.data.lastPlacedTowerX = this.pos.x;
 			game.data.lastPlacedTowerY = this.pos.y;
 			me.game.world.removeChild(this);
-		}  else if (me.input.isKeyPressed("enter") && this.currentLocation !== 'G') {
+			// ADDED THIS ELSE IF STATEMENT BELOW
+		} else if (me.input.isKeyPressed("enter") && this.currentLocation === 'G' && this.towerMap[(this.pos.y + 64) / 32][(this.pos.x + 96) / 32] === 'X') {
+			var entity = this.getOverlappingTower();
+				if (this.sameTower(entity)) {
+					entity.upgradeTower();
+					me.game.world.removeChild(this);
+				}
+
+		} else if (me.input.isKeyPressed("enter") && this.currentLocation !== 'G') {
 			game.data.towerButtonPressed = true;
 		}
 
@@ -132,20 +163,51 @@
 			this.alreadyClicked = false;
 		}			
 	},
+	
+	getOverlappingTower: function() {
+		var entity = me.collision.quadTree.retrieve(this);
+		for (var i = 0; i < entity.length; i++) {
+			if (entity[i].collisionType === me.collision.types.PLAYER_OBJECT && entity[i] !== this && entity[i] !== this.spawnChild && this.sameTower(entity[i])) {
+				return entity[i];
+			}
+		}
+		
+		return false;
+	},
+	 
+	sameTower: function(entity) {
+		if (this.elementType === entity.elementType && this.pos.y === entity.pos.y && this.pos.x === entity.pos.x) {
+			return true;
+		}
+		return false;
+	},
 
 	draw: function(renderer) {
 		this._super(me.Entity, "draw", [renderer]);	
 
-		this.font.resize(0.5);
-		this.font.draw(renderer, "Cost: ", -100, -75);
-		this.font.draw(renderer, this.towerCost, -38, - 75);
+		if (this.onUpgradableTile) {
 
-		this.font.draw(renderer, "Damage: ", -100, -55);
-		this.font.draw(renderer, this.towerDamage, -18, -55);
+			this.font.resize(0.5);
+			this.font.draw(renderer, "Cost: ", -100, -75);
+			this.font.draw(renderer, (this.upgradableTowerInfo.towerCost + 100), -38, - 75);
+
+			this.font.draw(renderer, "Damage: ", -100, -55);
+			this.font.draw(renderer, this.upgradableTowerInfo.missileDamage + "-> " + (this.upgradableTowerInfo.missileDamage + 2), -18, -55);
+
+			this.font.draw(renderer, "Speed: ", -100, -35);
+			this.font.draw(renderer, (1 / this.upgradableTowerInfo.spawnTime).toFixed(2) + "-> " + (1 / (this.upgradableTowerInfo.spawnTime - 0.2)).toFixed(2), -28, -35);			
+		} else {
+			this.font.resize(0.5);
+			this.font.draw(renderer, "Cost: ", -100, -75);
+			this.font.draw(renderer, this.towerCost, -38, - 75);
+
+			this.font.draw(renderer, "Damage: ", -100, -55);
+			this.font.draw(renderer, this.towerDamage, -18, -55);
 
 
-		this.font.draw(renderer, "Speed: ", -100, -35);
-		this.font.draw(renderer, this.towerSpeed , -28, -35);
+			this.font.draw(renderer, "Speed: ", -100, -35);
+			this.font.draw(renderer, this.towerSpeed.toFixed(2) , -28, -35);
+		}
 		
 		if (this.elementType === "FIRE") {
 			this.font.draw(renderer, "Special Ability", -100, 35);
@@ -162,19 +224,19 @@
 		if (this.elementType === "AIR") {
 			this.towerCost = game.data.towerAirCost;
 			this.towerDamage = game.data.airMissileDamage;
-			this.towerSpeed = "Very Fast";
+			this.towerSpeed = 1 / game.data.airMissileSpawnTime;
 		} else if (this.elementType === "EARTH") {
 			this.towerCost = game.data.towerEarthCost;
 			this.towerDamage = game.data.EarthMissileDamage;
-			this.towerSpeed = "Very Slow"
+			this.towerSpeed = 1 / game.data.earthMissileSpawnTime
 		} else if (this.elementType === "FIRE") {
 			this.towerCost = game.data.towerFireCost;			
 			this.towerDamage = game.data.FireMissileDamage;
-			this.towerSpeed = "Medium"
+			this.towerSpeed = 1 / game.data.fireMissileSpawnTime
 		} else if (this.elementType === "WATER") {
 			this.towerCost = game.data.towerWaterCost;			
 			this.towerDamage = game.data.WaterMissileDamage;
-			this.towerSpeed = "Medium"
+			this.towerSpeed = 1 / game.data.waterMissileSpawnTime
 		}
 	},
 	setIndicatorColor: function(colorCode) {

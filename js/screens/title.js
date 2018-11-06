@@ -48,12 +48,12 @@ game.titlescreen = me.ScreenObject.extend({
 						game.data.gameDifficulty = 'EASY'
 					}
 				} else if (me.input.isKeyPressed("left")) {
-					if (game.data.gameDifficultyDifficulty === 'EASY') {
+					if (game.data.gameDifficulty === 'EASY') {
 						game.data.gameDifficulty = 'HARD'; 			
 					} else if (game.data.gameDifficulty === 'MEDIUM') {
 						game.data.gameDifficulty = 'EASY'
 					} else if (game.data.gameDifficulty === 'HARD') {
-						game.data.gameDifficulty = 'HARD'
+						game.data.gameDifficulty = 'MEDIUM'
 					}
 				}		
 			}
