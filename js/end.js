@@ -1,7 +1,7 @@
 game.End = me.Entity.extend({
 	init: function (x, y) {
     	this._super(me.Entity, "init", [x, y, {
-        	image : "ships",
+        	image : "endGem",
             width : 32,
           	height : 32
       	}]);
