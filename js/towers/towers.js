@@ -9,11 +9,16 @@ game.Tower = me.Entity.extend({
 		this.currentTime = me.timer.getTime() / 1000;
 		this.spawnTime;
 		this.newMissile;
+		this.missileDamage;
 		this.towerOn = false;
+		this.upgradeComplete;
 		this.purchaseComplete;
 		this.elementType = settings.missileType;
 		this.towerCost;
 		this.chooseTowerType();
+		this.towerLevel = 1;
+		
+		console.log(settings.missileType)
 	},
 	
 	update: function (dt) {
@@ -36,31 +41,63 @@ game.Tower = me.Entity.extend({
 		}
 	},
 	
+	upgradeTower: function() {
+		if (this.spawnTime - 0.2 > 0.2) {
+			this.spawnTime -= 0.2;
+			this.missileDamage += 2;
+			this.towerLevel++;
+			game.data.gold -= 100;
+			this.upgradeComplete = true;
+		}
+
+	},
+	
+	getTowerInfo: function() {
+		var towerInfo = {
+			level: this.towerLevel,
+			elementType: this.elementType,
+			towerCost: this.towerCost,
+			spawnTime: this.spawnTime,
+			missileDamage: this.missileDamage
+		}
+		return towerInfo;
+	},
+	
 	chooseTowerType: function() {
 		if (this.elementType === "AIR") {
 			this.towerCost = game.data.towerAirCost;
 			this.spawnTime = game.data.airMissileSpawnTime;
+			this.missileDamage = game.data.airMissileDamage;
 		} else if (this.elementType === "EARTH") {
 			this.towerCost = game.data.towerEarthCost;
 			this.spawnTime = game.data.earthMissileSpawnTime;
+			this.missileDamage = game.data.EarthMissileDamage
 		} else if (this.elementType === "FIRE") {
 			this.towerCost = game.data.towerFireCost;
 			this.spawnTime = game.data.fireMissileSpawnTime;
+			this.missileDamage = game.data.FireMissileDamage
 		} else if (this.elementType === "WATER") {
 			this.towerCost = game.data.towerWaterCost;
 			this.spawnTime = game.data.waterMissileSpawnTime;
+			this.missileDamage = game.data.WaterMissileDamage;
 		}
+		console.log(this.towerCost)
+
 	},
 
 	spawnMissile: function(other) {
+		var settings = {
+			elementType: this.elementType, 
+			missileDamage: this.missileDamage	
+		}
 		if (this.elementType === 'AIR') {
-			this.newMissile = new game.Missile(this.pos.x + (3 * 32) + 32 / 2, this.pos.y + (2 * 32) + 32 / 3, this.elementType);
+			this.newMissile = new game.Missile(this.pos.x + (3 * 32) + 32 / 2, this.pos.y + (2 * 32) + 32 / 3, settings);
 		} else if (this.elementType === 'EARTH') {
-			this.newMissile = new game.Missile(this.pos.x + (3 * 32) + 32 / 2, this.pos.y + (2 * 32) + 32 / 3, this.elementType);			
+			this.newMissile = new game.Missile(this.pos.x + (3 * 32) + 32 / 2, this.pos.y + (2 * 32) + 32 / 3, settings);			
 		} else if (this.elementType === 'FIRE') {
-			this.newMissile = new game.Missile(this.pos.x + (3 * 32) + 32 / 2, this.pos.y + (2 * 32) + 32 / 3, this.elementType);			
+			this.newMissile = new game.Missile(this.pos.x + (3 * 32) + 32 / 2, this.pos.y + (2 * 32) + 32 / 3, settings);			
 		} else if (this.elementType === 'WATER') {
-			this.newMissile = new game.Missile(this.pos.x + (3 * 32) + 32 / 2, this.pos.y + (2 * 32) + 32 / 3, this.elementType);			
+			this.newMissile = new game.Missile(this.pos.x + (3 * 32) + 32 / 2, this.pos.y + (2 * 32) + 32 / 3, settings);			
 		}   
 		this.newMissile.getTarget(other);
 		me.game.world.addChild(this.newMissile, 2);	
@@ -79,7 +116,21 @@ game.Tower = me.Entity.extend({
 			new me.Tween(this.font).to({ alpha: 0.0 }, 1000) // time in milliseconds
 			.onComplete(function () {
 				that.purchaseComplete = false;
+				that.font.alpha = 1;
 			}).start();			
+		} else if (this.upgradeComplete) {
+			console.log("upgrade")
+			this.pos.z = 0;
+			this.font.pos.z = 6
+			this.font.resize(0.5)
+        	this.font.draw(renderer, "-" + "100" + " gold", -50, -32);
+			
+			var that = this;
+			new me.Tween(this.font).to({ alpha: 0.0 }, 1000) // time in milliseconds
+			.onComplete(function () {
+				that.upgradeComplete = false;
+				that.font.alpha = 1;
+			}).start();				
 		}
 		
 	},

@@ -245,7 +245,7 @@ game.Enemy = me.Entity.extend({
 	},
 
 	/*
-	 * The activateFireMissile is used to activate the AOE effect of the frie
+	 * The activateFireMissile is used to activate the AOE effect of the fire
 	 * missile. It pulls a list of all of the possible entities existing in
 	 * the current frame and filters only those that are of collisionType 
 	 * "ENEMY_OBJECT". It then aplies the AOE effect to those enemies that
@@ -257,6 +257,7 @@ game.Enemy = me.Entity.extend({
 			if (typeof entity[i].body !== "undefined" && entity[i].body.collisionType === me.collision.types.ENEMY_OBJECT) {
 				if (this.inAOERange(entity[i])) {
 					if(entity[i] !== this) {
+
 						entity[i].applyAOEDamage();
 						entity[i].applyAOEEffect();
 						this.applyAOEEffect();						
@@ -347,6 +348,11 @@ game.Enemy = me.Entity.extend({
 		}		
 	},
 
+	damageEnemy: function(damage) {
+		this.enemyHealth -= damage;	
+		this.checkIfDead();
+	},
+	
 	/*
 	 * The drawHealthBar function renders the health bar of the specific entity by
 	 * drawing two rectangles over each other. The base rectangle remains a constant
@@ -363,35 +369,13 @@ game.Enemy = me.Entity.extend({
 		renderer.fillRect(-16, -25, remainingHealth, 5);
 	},
 
+	
 	/*
 	 * The onCollision function tracks collisions that occur with enemy units and ensures 
 	 * appropriate damage is deducted from the enemy health based on what tyype of missile
 	 * hits this entity.
 	 */	
 	onCollision: function (res, other) {
-		var projectile_damage = 0; // acts as both a bool val for whether a collision was detected and the damage val to subtract from unit HP
-		if (other.body.collisionType === game.collisionTypes.MissileAir) {
-			projectile_damage = game.data.airMissileDamage;	
-		} 
-		if (other.body.collisionType === game.collisionTypes.MissileWater) {
-			this.activateWaterMissile();
-			projectile_damage = game.data.WaterMissileDamage;	
-		}
-		if (other.body.collisionType === game.collisionTypes.MissileFire) {
-			this.activateFireMissile();
-			projectile_damage = game.data.FireMissileDamage;	
-		}
-		if (other.body.collisionType === game.collisionTypes.MissileEarth) {
-			projectile_damage = game.data.EarthMissileDamage;	
-		}
-		
-		if (projectile_damage > 0)
-		{
-			other.body.setCollisionMask(me.collision.types.NO_OBJECT);
-			this.enemyHealth = this.enemyHealth - projectile_damage; // ENEMY HEALTH subtracted by X for every hit. we need to try and track what projectile is hitting what creature
-			me.game.world.removeChild(other); // removes missile
-			this.checkIfDead();
-		}
 		return false;
 	}
 });
