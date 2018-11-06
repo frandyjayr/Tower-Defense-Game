@@ -121,7 +121,7 @@ game.Enemy = me.Entity.extend({
 			if (this.pos.x >= this.currentX * this.size + this.size) {
 				this.currentX++;
 			}
-			//this.renderable.currentTransform.rotate(-0.159);
+			//this.renderable.currentTransform.rotate(-90 * Math.PI / 180);
 			this.rotateCorner(-1 * this.rotationValue, dt);
 		} 
 		else if (this.currentMove === 'UR') {
@@ -131,7 +131,7 @@ game.Enemy = me.Entity.extend({
 			if (this.pos.y <= this.currentY * this.size - this.size) {
 				this.currentY--;
 			}
-			//this.renderable.currentTransform.rotate(-0.143);
+			//this.renderable.currentTransform.rotate(0);
 			this.rotateCorner(-1 * this.rotationValue, dt);
 
 		}
