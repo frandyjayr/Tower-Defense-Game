@@ -85,6 +85,11 @@ game.Missile = me.Entity.extend({
 		}
 	},
 	
+	/*
+	 * The getMissileDamage function simply returns the missile damage that this
+	 * current missile is doing. This is used in tower.js and spawntower.js in order
+	 * to output the appropriate amount of tower damage for upgrading purposes.
+	 */		
 	getMissileDamage: function() {
 		return this.missileDamage;	
 	},

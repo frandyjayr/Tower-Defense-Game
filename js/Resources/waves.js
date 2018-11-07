@@ -11,21 +11,22 @@ game.waveEasy = [
 		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyPlane), 2)}, 
 		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyPlane), 2)}, 
 		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyPlane), 2)}, 
-		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyPlane), 2)}
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyPlane), 2)},
+		// Speed for the wave
+		0.3
 	],
 	
 	// wave 2
-	[
+	[	
 		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyTank), 2)},	
 		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyTank), 2)},	
 		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyTank), 2)},	
 		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyTank), 2)},	
 		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyTank), 2)},	
 		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyTank), 2)},	
-		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyTank), 2)},	
-		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyTank), 2)},	
-		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyTank), 2)},	
-		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyTank), 2)}	
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyTank), 2)},
+		// Speed for the wave
+		0.7
 	],
 	
 	// wave 3
@@ -39,7 +40,9 @@ game.waveEasy = [
 		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyFire), 2)},		
 		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyFire), 2)},		
 		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyFire), 2)},		
-		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyFire), 2)},		
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyFire), 2)},	
+		// Speed for the wave
+		0.3
 	],
 	
 	// wave 4
@@ -54,6 +57,8 @@ game.waveEasy = [
 		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyWater), 2)},	
 		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyWater), 2)},	
 		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyWater), 2)},	
+		// Speed for the wave
+		0.3
 	],
 	
 	// wave 5
@@ -68,6 +73,8 @@ game.waveEasy = [
 		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyWater), 2)},	
 		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyWater), 2)},	
 		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyWater), 2)},	
+		// Speed for the wave
+		0.3
 	],
 	
 	// wave 6
@@ -82,6 +89,8 @@ game.waveEasy = [
 		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyWater), 2)},	
 		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyWater), 2)},	
 		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyWater), 2)},	
+		// Speed for the wave
+		0.3
 	],
 	
 	// wave 7
@@ -96,6 +105,8 @@ game.waveEasy = [
 		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyWater), 2)},	
 		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyWater), 2)},	
 		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyWater), 2)},	
+		// Speed for the wave
+		0.3
 	],
 	
 	// wave 8
@@ -110,6 +121,8 @@ game.waveEasy = [
 		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyWater), 2)},	
 		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyWater), 2)},	
 		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyWater), 2)},	
+		// Speed for the wave
+		0.3
 	],
 	
 	// wave 9
@@ -124,6 +137,8 @@ game.waveEasy = [
 		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyWater), 2)},	
 		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyWater), 2)},	
 		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyWater), 2)},	
+		// Speed for the wave
+		0.3
 	],
 	
 	// wave 10
@@ -138,6 +153,8 @@ game.waveEasy = [
 		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyWater), 2)},	
 		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyWater), 2)},	
 		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyWater), 2)},	
+		// Speed for the wave
+		0.3
 	]
 ]
 
@@ -153,7 +170,9 @@ game.waveMedium = [
 		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyPlane), 2)}, 
 		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyPlane), 2)}, 
 		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyPlane), 2)}, 
-		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyPlane), 2)}
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyPlane), 2)},
+		// Speed for the wave
+		0.3
 	],
 	
 	// wave 2
@@ -167,7 +186,9 @@ game.waveMedium = [
 		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyTank), 2)},	
 		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyTank), 2)},	
 		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyTank), 2)},	
-		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyTank), 2)}	
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyTank), 2)},	
+		// Speed for the wave
+		0.3
 	],
 	
 	// wave 3
@@ -181,7 +202,9 @@ game.waveMedium = [
 		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyFire), 2)},		
 		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyFire), 2)},		
 		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyFire), 2)},		
-		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyFire), 2)},		
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyFire), 2)},	
+		// Speed for the wave
+		0.3
 	],
 	
 	// wave 4
@@ -196,6 +219,8 @@ game.waveMedium = [
 		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyWater), 2)},	
 		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyWater), 2)},	
 		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyWater), 2)},	
+		// Speed for the wave
+		0.3
 	],
 	
 	// wave 5
@@ -210,6 +235,8 @@ game.waveMedium = [
 		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyWater), 2)},	
 		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyWater), 2)},	
 		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyWater), 2)},	
+		// Speed for the wave
+		0.3
 	],
 	
 	// wave 6
@@ -224,6 +251,8 @@ game.waveMedium = [
 		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyWater), 2)},	
 		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyWater), 2)},	
 		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyWater), 2)},	
+		// Speed for the wave
+		0.3
 	],
 	
 	// wave 7
@@ -238,6 +267,8 @@ game.waveMedium = [
 		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyWater), 2)},	
 		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyWater), 2)},	
 		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyWater), 2)},	
+		// Speed for the wave
+		0.3
 	],
 	
 	// wave 8
@@ -251,7 +282,9 @@ game.waveMedium = [
 		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyWater), 2)},	
 		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyWater), 2)},	
 		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyWater), 2)},	
-		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyWater), 2)},	
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyWater), 2)},
+		// Speed for the wave
+		0.3
 	],
 	
 	// wave 9
@@ -266,6 +299,8 @@ game.waveMedium = [
 		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyWater), 2)},	
 		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyWater), 2)},	
 		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyWater), 2)},	
+		// Speed for the wave
+		0.3
 	],
 	
 	// wave 10
@@ -280,6 +315,8 @@ game.waveMedium = [
 		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyWater), 2)},	
 		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyWater), 2)},	
 		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyWater), 2)},	
+		// Speed for the wave
+		0.3
 	]
 ]
 
@@ -295,7 +332,10 @@ game.waveHard = [
 		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyPlane), 2)}, 
 		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyPlane), 2)}, 
 		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyPlane), 2)}, 
-		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyPlane), 2)}
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyPlane), 2)},
+		// Speed for the wave
+		0.3		
+	
 	],
 	
 	// wave 2
@@ -309,7 +349,9 @@ game.waveHard = [
 		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyTank), 2)},	
 		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyTank), 2)},	
 		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyTank), 2)},	
-		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyTank), 2)}	
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyTank), 2)},
+		// Speed for the wave
+		0.3
 	],
 	
 	// wave 3
@@ -323,7 +365,9 @@ game.waveHard = [
 		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyFire), 2)},		
 		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyFire), 2)},		
 		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyFire), 2)},		
-		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyFire), 2)},		
+		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyFire), 2)},
+		// Speed for the wave
+		0.3
 	],
 	
 	// wave 4
@@ -338,6 +382,8 @@ game.waveHard = [
 		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyWater), 2)},	
 		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyWater), 2)},	
 		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyWater), 2)},	
+		// Speed for the wave
+		0.3
 	],
 	
 	// wave 5
@@ -352,6 +398,8 @@ game.waveHard = [
 		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyWater), 2)},	
 		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyWater), 2)},	
 		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyWater), 2)},	
+		// Speed for the wave
+		0.3
 	],
 	
 	// wave 6
@@ -366,6 +414,8 @@ game.waveHard = [
 		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyWater), 2)},	
 		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyWater), 2)},	
 		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyWater), 2)},	
+		// Speed for the wave
+		0.3
 	],
 	
 	// wave 7
@@ -380,6 +430,8 @@ game.waveHard = [
 		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyWater), 2)},	
 		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyWater), 2)},	
 		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyWater), 2)},	
+		// Speed for the wave
+		0.3
 	],
 	
 	// wave 8
@@ -394,6 +446,8 @@ game.waveHard = [
 		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyWater), 2)},	
 		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyWater), 2)},	
 		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyWater), 2)},	
+		// Speed for the wave
+		0.3
 	],
 	
 	// wave 9
@@ -408,6 +462,8 @@ game.waveHard = [
 		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyWater), 2)},	
 		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyWater), 2)},	
 		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyWater), 2)},	
+		// Speed for the wave
+		0.3
 	],
 	
 	// wave 10
@@ -422,5 +478,7 @@ game.waveHard = [
 		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyWater), 2)},	
 		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyWater), 2)},	
 		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyWater), 2)},	
+		// Speed for the wave
+		0.3
 	]
 ]

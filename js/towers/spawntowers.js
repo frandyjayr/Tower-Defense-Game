@@ -74,9 +74,7 @@
 		
 		if (this.movedLocation) {
 			
-			 if (/*this.currentLocation === 'G' &&*/ this.newLocation === 'G' && 			this.newTowerLocation === 'X' && entity.elementType === this.elementType){
-				 console.log(entity)
-				 console.log(this)
+			 if (this.newLocation === 'G' && this.newTowerLocation === 'X' && entity.elementType === this.elementType){
 				this.setIndicatorColor(this.yellowColor);
 				this.onUpgradableTile = true;
 				this.upgradableTowerInfo = this.getOverlappingTower().getTowerInfo();
@@ -141,7 +139,6 @@
 			game.data.lastPlacedTowerX = this.pos.x;
 			game.data.lastPlacedTowerY = this.pos.y;
 			me.game.world.removeChild(this);
-			// ADDED THIS ELSE IF STATEMENT BELOW
 		} else if (me.input.isKeyPressed("enter") && this.currentLocation === 'G' && this.towerMap[(this.pos.y + 64) / 32][(this.pos.x + 96) / 32] === 'X') {
 			var entity = this.getOverlappingTower();
 				if (this.sameTower(entity)) {
@@ -187,15 +184,18 @@
 
 		if (this.onUpgradableTile) {
 
-			this.font.resize(0.5);
+			this.font.resize(0.45);
 			this.font.draw(renderer, "Cost: ", -100, -75);
 			this.font.draw(renderer, (this.upgradableTowerInfo.towerCost + 100), -38, - 75);
 
-			this.font.draw(renderer, "Damage: ", -100, -55);
-			this.font.draw(renderer, this.upgradableTowerInfo.missileDamage + "-> " + (this.upgradableTowerInfo.missileDamage + 2), -18, -55);
+			this.font.draw(renderer, "Damage: ", -100, -60);
+			this.font.draw(renderer, this.upgradableTowerInfo.missileDamage + "-> " + (this.upgradableTowerInfo.missileDamage + 2), -18, -60);
 
-			this.font.draw(renderer, "Speed: ", -100, -35);
-			this.font.draw(renderer, (1 / this.upgradableTowerInfo.spawnTime).toFixed(2) + "-> " + (1 / (this.upgradableTowerInfo.spawnTime - 0.2)).toFixed(2), -28, -35);			
+			this.font.draw(renderer, "Speed: ", -100, -45);
+			this.font.draw(renderer, (1 / this.upgradableTowerInfo.spawnTime).toFixed(2) + "-> " + (1 / (this.upgradableTowerInfo.spawnTime - 0.2)).toFixed(2), -28, -45);		
+			
+			this.font.draw(renderer, "Tower Level: ", -103, -30);
+			this.font.draw(renderer, this.upgradableTowerInfo.level + "-> " + (this.upgradableTowerInfo.level + 1), 25, -30);
 		} else {
 			this.font.resize(0.5);
 			this.font.draw(renderer, "Cost: ", -100, -75);

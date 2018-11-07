@@ -4,7 +4,7 @@ game.waveManagerEasy = me.Container.extend({
 		
 		// Instantiate numerical data
 		this.numberSpawned = 0;
-		this.spawnTime = 0.3;
+		this.spawnTime;
 		
 		// Instantiate fonts
 		this.font = new me.BitmapFont(me.loader.getBinary('PressStart2P')); 
@@ -88,7 +88,9 @@ game.waveManagerEasy = me.Container.extend({
 	preRoundPreparation: function() {
 		if (me.input.isKeyPressed("P") && game.data.currentlySpawned === 0 && 		  game.data.towerButtonPressed === false) {
 			console.log("Wave Begin");
-			this.maxSpawn = this.wave[game.data.waveNumber - 1].length;
+			this.maxSpawn = this.wave[game.data.waveNumber - 1].length - 1;
+			this.spawnTime = this.wave[game.data.waveNumber - 1][this.wave[game.data.waveNumber - 1].length - 1];
+			console.log(this.spawnTime)
 	 		this.numberSpawned = 0;
 			game.data.waveStart = true;
 			game.data.preRoundHasStarted = false;
@@ -104,7 +106,6 @@ game.waveManagerEasy = me.Container.extend({
 	getWaveByDifficulty: function() {
 		if (game.data.gameDifficulty === 'EASY') {
 			this.wave = game.waveEasy;	
-			console.log(this.wave);
 		} else if (game.data.gameDifficulty === 'MEDIUM') {
 			this.wave = game.waveMedium;
 		} else if (game.data.gameDifficulty === 'HARD') {
