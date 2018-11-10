@@ -29,6 +29,7 @@
 		
 		this.upgradableTowerInfo;
 		this.onUpgradableTile;
+		this.finalLevel;
 		this.greenColor = '#006400';
 		this.redColor = '#FF0000'
 		this.yellowColor = '#FFFF33'
@@ -44,7 +45,12 @@
 	 */	
 	update : function(time) {
 
-		this.changeIndicator();
+
+		if (this.elementType === 'FINALUPGRADE'){
+			this.changeFinalUpgradeIndicator();	
+		} else{
+			this.changeIndicator();
+		}
 		this.moveSpawnTower();
 		return false;
 	},
@@ -52,48 +58,162 @@
 	changeIndicator: function() {
 		var entity = this.getOverlappingTower();
 
-		if (this.justSpawned && this.towerMap[(this.pos.y + 64) / 32][(this.pos.x + 96) / 32] === 'X' && typeof entity !== null && entity.elementType === this.elementType) {
+		if (this.justSpawned && this.towerMap[(this.pos.y + 64) / 32][(this.pos.x + 96) / 32] === 'X' && typeof entity !== null && this.elementType === 'FINALUPGRADE' && entity.towerLevel === 4){
+			this.setIndicatorColor(this.greenColor);
+			this.onUpgradableTile = true;
+			this.finalLevel = false;
+			this.upgradableTowerInfo = this.getOverlappingTower().getTowerInfo(); 
+		
+		}else if (this.justSpawned && this.towerMap[(this.pos.y + 64) / 32][(this.pos.x + 96) / 32] === 'X' && typeof entity !== null && entity.elementType === this.elementType && entity.towerLevel === 4) {
+			this.setIndicatorColor(this.redColor);
+			this.justSpawned = false;
+			this.onUpgradableTile = false;
+			this.finalLevel = true;
+			this.upgradableTowerInfo = this.getOverlappingTower().getTowerInfo();
+		
+		}else if (this.justSpawned && this.towerMap[(this.pos.y + 64) / 32][(this.pos.x + 96) / 32] === 'X' && typeof entity !== null && entity.elementType === this.elementType) {
 			this.setIndicatorColor(this.yellowColor);
 			this.justSpawned = false;
 			this.onUpgradableTile = true;
+			this.finalLevel = false;
 			this.upgradableTowerInfo = this.getOverlappingTower().getTowerInfo();
 		} else if (this.justSpawned && this.towerMap[(this.pos.y + 64) / 32][(this.pos.x + 96) / 32] === 'X') {
 			this.setIndicatorColor(this.redColor)
 			this.justSpawned = false;
+			this.finalLevel = false;
 			this.onUpgradableTile = false;
 		} else if (this.justSpawned && this.currentLocation === 'G') {
 			this.setIndicatorColor(this.greenColor);
 			this.justSpawned = false;
+			this.finalLevel = false;
 			this.onUpgradableTile = false;
 		} else if (this.justSpawned && this.currentLocation !== 'G') {
 			this.setIndicatorColor(this.redColor);
 			this.justSpawned = false;
+			this.finalLevel = false;
 			this.onUpgradableTile = false;
 		}
 
 		
 		if (this.movedLocation) {
 			
-			 if (this.newLocation === 'G' && this.newTowerLocation === 'X' && entity.elementType === this.elementType){
+			if (this.newLocation === 'G' && this.newTowerLocation === 'X' && this.elementType === 'FINALUPGRADE' && entity.towerLevel === 4){
+				this.setIndicatorColor(this.greenColor);
+				this.onUpgradableTile = true;
+				this.finalLevel = false;
+				this.upgradableTowerInfo = this.getOverlappingTower().getTowerInfo(); 
+			
+			}else if (this.newLocation === 'G' && this.newTowerLocation === 'X' && entity.elementType === this.elementType && entity.towerLevel === 4){
+				this.setIndicatorColor(this.redColor);
+				this.onUpgradableTile = false;
+				this.finalLevel = true;
+				this.upgradableTowerInfo = this.getOverlappingTower().getTowerInfo(); 
+			}else if (this.newLocation === 'G' && this.newTowerLocation === 'X' && entity.elementType === this.elementType){
 				this.setIndicatorColor(this.yellowColor);
 				this.onUpgradableTile = true;
+				this.finalLevel = false;
 				this.upgradableTowerInfo = this.getOverlappingTower().getTowerInfo();
 			}else if (this.newLocation !== 'G' || this.newTowerLocation === 'X') {
 				this.setIndicatorColor(this.redColor);
+				this.finalLevel = false;
 				this.onUpgradableTile = false;
 			} else if (this.currentLocation === 'G' && this.newLocation === 'G' && 			this.newTowerLocation === 'O'){
 				this.setIndicatorColor(this.greenColor);
+				this.finalLevel = false;
 				this.onUpgradableTile = false;
 			}else if (this.currentLocation === this.newLocation){
 				// do nothing
 			} else if (this.currentLocation !== 'G' && this.newLocation === 'G') {
 				this.setIndicatorColor(this.greenColor);
+				this.finalLevel = false;
 				this.onUpgradableTile = false;
 			} 
 			this.currentLocation = this.newLocation;
 			this.movedLocation = false;
 		}			
 	},
+
+	/**
+     * This is a separate function for the final upgrade tower. It does the same thing as the preceding function but 
+	 * needed to be separate from the previous function because its behavior is pretty different.
+     */
+	
+	changeFinalUpgradeIndicator: function() {
+		var entity = this.getOverlappingTower();
+
+		if (this.justSpawned && this.towerMap[(this.pos.y + 64) / 32][(this.pos.x + 96) / 32] === 'X' && typeof entity !== null && entity.towerLevel === 4){
+			this.setIndicatorColor(this.greenColor);
+			this.setOpacity(0.3); // I have to manually set the opacity here . I dont know why
+			this.justSpawned = false;
+			this.onUpgradableTile = true;
+			this.finalLevel = false;
+			this.upgradableTowerInfo = this.getOverlappingTower().getTowerInfo(); 
+		
+		}else if (this.justSpawned && this.towerMap[(this.pos.y + 64) / 32][(this.pos.x + 96) / 32] === 'X' && typeof entity !== null && entity.towerLevel > 4) {
+			this.setIndicatorColor(this.redColor);
+			this.justSpawned = false;
+			this.onUpgradableTile = false;
+			this.finalLevel = true;
+			this.upgradableTowerInfo = this.getOverlappingTower().getTowerInfo();
+
+		}else if (this.justSpawned && this.towerMap[(this.pos.y + 64) / 32][(this.pos.x + 96) / 32] === 'X' && typeof entity !== null && entity.towerLevel < 4) {
+			this.setIndicatorColor(this.redColor);
+			this.justSpawned = false;
+			this.onUpgradableTile = false;
+			this.finalLevel = false;
+			this.upgradableTowerInfo = this.getOverlappingTower().getTowerInfo();
+		
+		} else if (this.justSpawned && this.towerMap[(this.pos.y + 64) / 32][(this.pos.x + 96) / 32] === 'X') {
+			this.setIndicatorColor(this.redColor)
+			this.justSpawned = false;
+			this.finalLevel = false;
+			this.onUpgradableTile = false;
+		} else if (this.justSpawned && this.currentLocation !== 'G') {
+			this.setIndicatorColor(this.redColor);
+			this.justSpawned = false;
+			this.finalLevel = false;
+			this.onUpgradableTile = false;
+		}
+
+		
+		if (this.movedLocation) {
+			
+			if (this.newLocation === 'G' && this.newTowerLocation === 'X' && entity.towerLevel === 4){
+				this.setIndicatorColor(this.greenColor);
+				this.onUpgradableTile = true;
+				this.finalLevel = false;
+				this.upgradableTowerInfo = this.getOverlappingTower().getTowerInfo(); 		
+			}else if (this.newLocation === 'G' && this.newTowerLocation === 'X' && entity.towerLevel > 4){
+				this.setIndicatorColor(this.redColor);
+				this.onUpgradableTile = false;
+				this.finalLevel = true;
+				this.upgradableTowerInfo = this.getOverlappingTower().getTowerInfo(); 
+			}else if (this.newLocation === 'G' && this.newTowerLocation === 'X' && entity.towerLevel < 4){
+				this.setIndicatorColor(this.redColor);
+				this.onUpgradableTile = false;
+				this.finalLevel = false;
+				this.upgradableTowerInfo = this.getOverlappingTower().getTowerInfo();
+			}else if (this.newLocation !== 'G' || this.newTowerLocation === 'X') {
+				this.setIndicatorColor(this.redColor);
+				this.finalLevel = false;
+				this.onUpgradableTile = false;
+			} else if (this.currentLocation === 'G' && this.newLocation === 'G' && 			this.newTowerLocation === 'O'){
+				this.setIndicatorColor(this.redColor);
+				this.finalLevel = false;
+				this.onUpgradableTile = false;
+			}else if (this.currentLocation === this.newLocation){
+				// do nothing
+			} else if (this.currentLocation !== 'G' && this.newLocation === 'G') {
+				this.setIndicatorColor(this.redColor);
+				this.finalLevel = false;
+				this.onUpgradableTile = false;
+			} 
+			this.currentLocation = this.newLocation;
+			this.movedLocation = false;
+		}			
+	},
+
+
 
 
 	moveSpawnTower: function() {
@@ -142,7 +262,12 @@
 		} else if (me.input.isKeyPressed("enter") && this.currentLocation === 'G' && this.towerMap[(this.pos.y + 64) / 32][(this.pos.x + 96) / 32] === 'X') {
 			var entity = this.getOverlappingTower();
 				if (this.sameTower(entity)) {
-					entity.upgradeTower();
+					if (this.elementType === 'FINALUPGRADE'){
+						entity.upgradeTowerFinal();
+					}
+					else{
+						entity.upgradeTower();
+					}
 					me.game.world.removeChild(this);
 				}
 
@@ -173,7 +298,7 @@
 	},
 	 
 	sameTower: function(entity) {
-		if (this.elementType === entity.elementType && this.pos.y === entity.pos.y && this.pos.x === entity.pos.x) {
+		if (this.elementType === entity.elementType || this.elementType === 'FINALUPGRADE' && this.pos.y === entity.pos.y && this.pos.x === entity.pos.x) {
 			return true;
 		}
 		return false;
@@ -181,32 +306,121 @@
 
 	draw: function(renderer) {
 		this._super(me.Entity, "draw", [renderer]);	
+		// IF WE ARE USING FINAL UPGRADE ELEMENT.
+		// This is split up into four if statements so we can use individual upgrades instead of making it all linear. For instance, lvl 5 upgrade might increase 
+		// air tower damage by 3x but fire tower damage by 15x
+		if (this.onUpgradableTile && this.elementType === 'FINALUPGRADE'){
+			this.font.resize(0.45);
+			this.font.draw(renderer, "Cost: 1500", -100, -75);
+			if (this.upgradableTowerInfo.elementType === 'AIR'){
+				this.font.draw(renderer, "Damage: ", -100, -60);
+				this.font.draw(renderer, this.upgradableTowerInfo.missileDamage + "-> " + (this.upgradableTowerInfo.missileDamage + 4), -18, -60);
+				this.font.draw(renderer, "Speed: ", -100, -45);
+				this.font.draw(renderer, (1 / this.upgradableTowerInfo.spawnTime).toFixed(2) + "-> " + "MAX SPEED", -28, -45);
+				this.font.draw(renderer, "Tower Level: ", -103, -30);
+				this.font.draw(renderer, this.upgradableTowerInfo.level + "-> " + (this.upgradableTowerInfo.level + 1), 25, -30);
+			}else if (this.upgradableTowerInfo.elementType === 'WATER'){
+				this.font.draw(renderer, "Slow Duration: ", -100, -60);
+				this.font.draw(renderer, (this.upgradableTowerInfo.level + 5) + "-> " + "PERMANENT SLOW", 48, -60);
+				this.font.draw(renderer, "Speed: ", -100, -45);
+				this.font.draw(renderer, (1 / this.upgradableTowerInfo.spawnTime).toFixed(2) + "-> " + (1 / (this.upgradableTowerInfo.spawnTime - 0.2)).toFixed(2), -28, -45);
+				this.font.draw(renderer, "Tower Level: ", -103, -30);
+				this.font.draw(renderer, this.upgradableTowerInfo.level + "-> " + (this.upgradableTowerInfo.level + 1), 25, -30);
+			} else if (this.upgradableTowerInfo.elementType === 'EARTH'){
+				this.font.draw(renderer, "Damage: ", -100, -60);
+				this.font.draw(renderer, this.upgradableTowerInfo.missileDamage + "-> " + "MAX DAMAGE", -18, -60);
+				this.font.draw(renderer, "Speed: ", -100, -45);
+				this.font.draw(renderer, (1 / this.upgradableTowerInfo.spawnTime).toFixed(2) + "-> " + (1 / (this.upgradableTowerInfo.spawnTime - 0.2)).toFixed(2), -28, -45);
+				this.font.draw(renderer, "Tower Level: ", -103, -30);
+				this.font.draw(renderer, this.upgradableTowerInfo.level + "-> " + (this.upgradableTowerInfo.level + 1), 25, -30);
+			} else if (this.upgradableTowerInfo.elementType === 'FIRE'){
+				this.font.draw(renderer, "Damage: ", -100, -60);
+				this.font.draw(renderer, this.upgradableTowerInfo.missileDamage + "-> " + (this.upgradableTowerInfo.missileDamage + 2), -18, -60);
+				this.font.draw(renderer, "Speed: ", -100, -45);
+				this.font.draw(renderer, (1 / this.upgradableTowerInfo.spawnTime).toFixed(2) + "-> " + (1 / (this.upgradableTowerInfo.spawnTime - 0.2)).toFixed(2), -28, -45);
+				this.font.draw(renderer, "Tower Level: ", -103, -30);
+				this.font.draw(renderer, this.upgradableTowerInfo.level + "-> " + (this.upgradableTowerInfo.level + 1), 25, -30);
+			}		
+		}
+		
+		// Above pertains only to final upgrade stuff. The rest is below
 
-		if (this.onUpgradableTile) {
 
+
+		else if (this.onUpgradableTile) {
+			// added more if statements so we can customize linear increase values
 			this.font.resize(0.45);
 			this.font.draw(renderer, "Cost: ", -100, -75);
-			this.font.draw(renderer, (this.upgradableTowerInfo.towerCost + 100), -38, - 75);
-
-			this.font.draw(renderer, "Damage: ", -100, -60);
-			this.font.draw(renderer, this.upgradableTowerInfo.missileDamage + "-> " + (this.upgradableTowerInfo.missileDamage + 2), -18, -60);
-
-			this.font.draw(renderer, "Speed: ", -100, -45);
-			this.font.draw(renderer, (1 / this.upgradableTowerInfo.spawnTime).toFixed(2) + "-> " + (1 / (this.upgradableTowerInfo.spawnTime - 0.2)).toFixed(2), -28, -45);		
+			this.font.draw(renderer, (this.upgradableTowerInfo.towerCost), -38, - 75);
+			if (this.upgradableTowerInfo.elementType === 'AIR'){
+				this.font.draw(renderer, "Damage: ", -100, -60);
+				this.font.draw(renderer, this.upgradableTowerInfo.missileDamage + "-> " + (this.upgradableTowerInfo.missileDamage + game.data.airUpgradeDamage), -18, -60);
+				this.font.draw(renderer, "Speed: ", -100, -45);
+				this.font.draw(renderer, (1 / this.upgradableTowerInfo.spawnTime).toFixed(2) + "-> " + (1 / (this.upgradableTowerInfo.spawnTime - game.data.airTowerSpawnTimeReduction)).toFixed(2), -28, -45);
+				this.font.draw(renderer, "Tower Level: ", -103, -30);
+				this.font.draw(renderer, this.upgradableTowerInfo.level + "-> " + (this.upgradableTowerInfo.level + 1), 25, -30);
+			}else if (this.upgradableTowerInfo.elementType === 'WATER'){
+				this.font.draw(renderer, "Slow Duration: ", -100, -60);
+				this.font.draw(renderer, (this.upgradableTowerInfo.level + 5) + "-> " + (this.upgradableTowerInfo.level + 6), 48, -60);
+				this.font.draw(renderer, "Speed: ", -100, -45);
+				this.font.draw(renderer, (1 / this.upgradableTowerInfo.spawnTime).toFixed(2) + "-> " + (1 / (this.upgradableTowerInfo.spawnTime - game.data.waterTowerSpawnTimeReduction)).toFixed(2), -28, -45);
+				this.font.draw(renderer, "Tower Level: ", -103, -30);
+				this.font.draw(renderer, this.upgradableTowerInfo.level + "-> " + (this.upgradableTowerInfo.level + 1), 25, -30);
+			} else if (this.upgradableTowerInfo.elementType === 'EARTH'){
+				this.font.draw(renderer, "Damage: ", -100, -60);
+				this.font.draw(renderer, this.upgradableTowerInfo.missileDamage + "-> " + (this.upgradableTowerInfo.missileDamage + game.data.earthUpgradeDamage), -18, -60);
+				this.font.draw(renderer, "Speed: ", -100, -45);
+				this.font.draw(renderer, (1 / this.upgradableTowerInfo.spawnTime).toFixed(2) + "-> " + (1 / (this.upgradableTowerInfo.spawnTime - game.data.earthTowerSpawnTimeReduction)).toFixed(2), -28, -45);
+				this.font.draw(renderer, "Tower Level: ", -103, -30);
+				this.font.draw(renderer, this.upgradableTowerInfo.level + "-> " + (this.upgradableTowerInfo.level + 1), 25, -30);
+			} else if (this.upgradableTowerInfo.elementType === 'FIRE'){
+				this.font.draw(renderer, "Damage: ", -100, -60);
+				this.font.draw(renderer, this.upgradableTowerInfo.missileDamage + "-> " + (this.upgradableTowerInfo.missileDamage + game.data.fireUpgradeDamage), -18, -60);
+				this.font.draw(renderer, "Speed: ", -100, -45);
+				this.font.draw(renderer, (1 / this.upgradableTowerInfo.spawnTime).toFixed(2) + "-> " + (1 / (this.upgradableTowerInfo.spawnTime - game.data.fireTowerSpawnTimeReduction)).toFixed(2), -28, -45);
+				this.font.draw(renderer, "Tower Level: ", -103, -30);
+				this.font.draw(renderer, this.upgradableTowerInfo.level + "-> " + (this.upgradableTowerInfo.level + 1), 25, -30);
+			}
+		} else if (this.finalLevel){
+			this.font.resize(0.45);
+			if (this.elementType === "WATER"){
+				this.font.draw(renderer, "Slow Duration: ", -100, -75);
+				this.font.draw(renderer, (this.upgradableTowerInfo.level + 5), 58, -75);
+			}
+			else{
+				this.font.draw(renderer, "Damage: ", -100, -75);
+				this.font.draw(renderer, this.upgradableTowerInfo.missileDamage, -38, -75);
+			}		
+			this.font.draw(renderer, "Speed: ", -100, -60);
+			this.font.draw(renderer, this.upgradableTowerInfo.spawnTime.toFixed(2), -18, -60);		
 			
-			this.font.draw(renderer, "Tower Level: ", -103, -30);
-			this.font.draw(renderer, this.upgradableTowerInfo.level + "-> " + (this.upgradableTowerInfo.level + 1), 25, -30);
+			this.font.draw(renderer, "Tower Level: Max", -100, -30);
 		} else {
 			this.font.resize(0.5);
-			this.font.draw(renderer, "Cost: ", -100, -75);
-			this.font.draw(renderer, this.towerCost, -38, - 75);
+			if (this.elementType === "FINALUPGRADE")
+			{
+				this.font.draw(renderer, "Select a level 4", -100, -75);
+				this.font.draw(renderer, "Tower to upgrade", -100, -55);
+			}
+			else{
+				this.font.draw(renderer, "Cost: ", -100, -75);
+				this.font.draw(renderer, this.towerCost, -38, - 75);
 
-			this.font.draw(renderer, "Damage: ", -100, -55);
-			this.font.draw(renderer, this.towerDamage, -18, -55);
+				if (this.elementType === "WATER"){
+					this.font.draw(renderer, "Slow Duration: ", -100, -55);
+					this.font.draw(renderer, 5, 58, -55);
+				}
+				else{
+					this.font.draw(renderer, "Damage: ", -100, -55);
+					this.font.draw(renderer, this.towerDamage, -18, -55);
+				}		
+				
 
 
-			this.font.draw(renderer, "Speed: ", -100, -35);
-			this.font.draw(renderer, this.towerSpeed.toFixed(2) , -28, -35);
+				this.font.draw(renderer, "Speed: ", -100, -35);
+				this.font.draw(renderer, this.towerSpeed.toFixed(2) , -28, -35);
+			}
+			
 		}
 		
 		if (this.elementType === "FIRE") {
@@ -237,6 +451,10 @@
 			this.towerCost = game.data.towerWaterCost;			
 			this.towerDamage = game.data.WaterMissileDamage;
 			this.towerSpeed = 1 / game.data.waterMissileSpawnTime
+		} else if (this.elementType === "FINALUPGRADE") {
+			this.towerCost = game.data.finalUpgradeCost;			
+			this.towerDamage = "1000";
+			this.towerSpeed = 1000
 		}
 	},
 	setIndicatorColor: function(colorCode) {

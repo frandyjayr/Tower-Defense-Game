@@ -19,6 +19,7 @@ game.Enemy = me.Entity.extend({
 		this.currentX = 2;
 		this.currentY = 0;		
 		this.gameVelocity = settings.velocity;
+		this.slowVelocity = (settings.velocity / 2);
 		this.path;
 		this.getPath();
 		
@@ -43,7 +44,7 @@ game.Enemy = me.Entity.extend({
 		this.AOEImage;
 		this.size = 32;
 		this.rotationValue = 0.20;
-		this.AOERange = 70;
+		this.AOERange = 100;
 		this.body.collisionType = me.collision.types.ENEMY_OBJECT;
 		
 	},
@@ -229,19 +230,49 @@ game.Enemy = me.Entity.extend({
 	 * The activateWaterMissile function activates the slowing effect of a water
 	 * missile if this specific enemy is hit with a water missile. The speed is
 	 * regained after an arbitrary amount of time, however the function is re-
-	 * applied if hit again with another water missile.
+	 * applied if hit again with another water missile. 
+	 * 
+	 * Luke - I have modified this function so that the length of the slow is now dependent on the level of the tower.
+	 * Level 5 towers will have permanent slow
 	 */		
-	activateWaterMissile: function() {
+	activateWaterMissile: function(callingTowerLevel) {
 		if (this.slowActive) {
 			clearTimeout(this.timeOut);
 		}
-		this.gameVelocity = 50;
+		this.gameVelocity = this.slowVelocity;
 		this.slowActive = true;
-		var that = this;
-		this.timeOut = setTimeout(function() {
+		var levelVar = callingTowerLevel;
+		if (levelVar === 5){
+			var entity = me.collision.quadTree.retrieve(this);
+			for (var i = 0; i < entity.length; i++) {
+				if (typeof entity[i].body !== "undefined" && entity[i].body.collisionType === me.collision.types.ENEMY_OBJECT) {
+					if (this.inAOERange(entity[i])) { // this uses AOE code form the fire missiles. Pretty much copy pasted, created a new aoecolddamage function to apply the effect.
+						if(entity[i] !== this) {
+							if (entity[i].slowActive) {
+								clearTimeout(entity[i].timeOut);
+							}
+							entity[i].applyAOEColdDamage();
+												
+						}
+					}
+				}
+					
+			}
+
+			var that = this;
+			this.timeOut = setTimeout(function() {
+				that.slowActive = false;
+				that.regainSpeed();
+				}, 2000 + (levelVar * 1000));
+		}
+		else{
+			var that = this;
+			this.timeOut = setTimeout(function() {
 			that.slowActive = false;
 			that.regainSpeed();
-		}, 3000);
+			}, 2000 + (levelVar * 1000));
+		}
+		
 	},
 
 	/*
@@ -251,14 +282,14 @@ game.Enemy = me.Entity.extend({
 	 * "ENEMY_OBJECT". It then aplies the AOE effect to those enemies that
 	 * are within an arbitrary distance to this enemy.
 	 */	
-	activateFireMissile: function() {
+	activateFireMissile: function(callingTowerLevel) {
 		var entity = me.collision.quadTree.retrieve(this);
 		for (var i = 0; i < entity.length; i++) {
 			if (typeof entity[i].body !== "undefined" && entity[i].body.collisionType === me.collision.types.ENEMY_OBJECT) {
 				if (this.inAOERange(entity[i])) {
 					if(entity[i] !== this) {
 
-						entity[i].applyAOEDamage();
+						entity[i].applyAOEDamage(callingTowerLevel);
 						entity[i].applyAOEEffect();
 						this.applyAOEEffect();						
 					}
@@ -286,8 +317,9 @@ game.Enemy = me.Entity.extend({
 	 * conjunction with the activateFireMissile function to apply the AOE damage
 	 * to the enemies that are within range of the fire missile AOE.
 	 */	
-	applyAOEDamage: function() {
-		this.enemyHealth -= game.data.FireMissileDamage;
+	applyAOEDamage: function(callingTowerLevel) {
+		damage = game.data.FireMissileDamage + (game.data.fireUpgradeDamage * (callingTowerLevel-1));
+		this.enemyHealth -= damage;
 		this.checkIfDead();
 	},
 
@@ -296,6 +328,25 @@ game.Enemy = me.Entity.extend({
 	 * the enemy entity that calls this function to have a transparent red square
 	 * appear on top of the enemy animation to signify AOE damage was taken.
 	 */	
+
+
+	applyAOEColdDamage: function() {
+		this.enemyHealth -= game.data.WaterMissileDamage;
+		if (this.slowActive) {
+			clearTimeout(this.timeOut);
+		}
+		this.gameVelocity = this.slowVelocity;
+		this.slowActive = true;
+		this.checkIfDead();
+		var that = this;
+		this.timeOut = setTimeout(function() {
+		that.slowActive = false;
+		that.regainSpeed();
+		}, 2000 + (5 * 1000));
+		
+	},
+
+
 	applyAOEEffect: function() {
 
 		if (this.enemyHealth > 0) {
@@ -306,6 +357,20 @@ game.Enemy = me.Entity.extend({
 			}, 180)			
 		}
 	},
+
+	applyColdAOEEffect: function() {
+
+		if (this.enemyHealth > 0) {
+			
+			var that = this;
+			setTimeout(function() {
+				
+				that.slowActive = false;
+				that.regainSpeed();
+				}, 2000 + (5 * 1000));
+		}
+	},
+
 
 	/*
 	 * The draw function is a built in function from the MelonJS framework/engine

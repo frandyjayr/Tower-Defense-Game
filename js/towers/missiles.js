@@ -20,6 +20,7 @@ game.Missile = me.Entity.extend({
 		this.target;	
 		this.targetTemp = null;
 		this.alwaysUpdate = true;
+		this.callingTowersLevel = settings.callingTowersLevel; // variable to check what the level of the tower is thats creating the missile
 
         this.renderable = new (me.Renderable.extend({
             init : function (missileType) {
@@ -57,6 +58,15 @@ game.Missile = me.Entity.extend({
 	 */
 	getTarget: function(target) {
 		if (this.targetTemp === null) {
+			this.targetTemp = target;
+			this.target = target;
+		} else if (this.targetTemp === target) {
+			this.target = target;
+		}
+	},
+
+	getWaterTarget: function(target) {
+		if (this.targetTemp === null || this.targetTemp.slowActive === true) {
 			this.targetTemp = target;
 			this.target = target;
 		} else if (this.targetTemp === target) {
@@ -185,9 +195,10 @@ game.Missile = me.Entity.extend({
 			if (this.body.collisionType === game.collisionTypes.MissileAir) {
 				// Leave empty for future upgrade abilities
 			} else if (this.body.collisionType === game.collisionTypes.MissileWater) {
-				other.activateWaterMissile();
+				console.log("callingtowers level in missiles.js is: " + this.callingTowersLevel);
+				other.activateWaterMissile(this.callingTowersLevel);
 			} else if (this.body.collisionType === game.collisionTypes.MissileFire) {
-				other.activateFireMissile();
+				other.activateFireMissile(this.callingTowersLevel);
 			} else if (this.body.collisionType === game.collisionTypes.MissileEarth) {	
 				// Leave empty for future upgrade abilities
 			}

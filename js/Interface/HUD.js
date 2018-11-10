@@ -21,6 +21,7 @@ game.HUD.Container = me.Container.extend({
 		me.game.world.addChild(me.pool.pull("buttonTower", game.data.utilityScreenStartPosX + 96, game.data.utilityScreenStartPosY + 96, "WATER"), 4);
 		me.game.world.addChild(me.pool.pull("buttonTower", game.data.utilityScreenStartPosX + 96, game.data.utilityScreenStartPosY + 160, "FIRE"), 4);
 		me.game.world.addChild(me.pool.pull("buttonTower", game.data.utilityScreenStartPosX + 96, game.data.utilityScreenStartPosY + 225, "EARTH"), 4);
+		me.game.world.addChild(me.pool.pull("buttonTower", game.data.utilityScreenStartPosX + 96, game.data.utilityScreenStartPosY + 290, "EARTH"), 4);
 
 		
 		// add our child score object
@@ -157,7 +158,11 @@ game.HUD.ScoreItem = me.Renderable.extend({
 		
 		// Render R
 		this.font.resize(1);
-		this.font.draw(renderer, "R", game.data.utilityScreenStartPosX + 75, game.data.utilityScreenStartPosY + 250); 
+		this.font.draw(renderer, "R", game.data.utilityScreenStartPosX + 75, game.data.utilityScreenStartPosY + 250);
+		
+		// Render T
+		this.font.resize(1);
+		this.font.draw(renderer, "T", game.data.utilityScreenStartPosX + 75, game.data.utilityScreenStartPosY + 315); 
 	},
 	
 	/*

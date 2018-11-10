@@ -23,7 +23,8 @@ game.PlayScreen = me.ScreenObject.extend({
         me.input.unbindKey(me.input.KEY.Q);
         me.input.unbindKey(me.input.KEY.W);
         me.input.unbindKey(me.input.KEY.E);
-        me.input.unbindKey(me.input.KEY.R);
+		me.input.unbindKey(me.input.KEY.R);
+		me.input.unbindKey(me.input.KEY.T);
         me.input.unbindKey(me.input.KEY.ESC);
         me.input.unbindKey(me.input.KEY.ENTER);
         me.input.unbindKey(me.input.KEY.P);
@@ -66,6 +67,7 @@ game.PlayScreen = me.ScreenObject.extend({
 		me.input.bindKey(me.input.KEY.W, "W");
 		me.input.bindKey(me.input.KEY.E, "E");
 		me.input.bindKey(me.input.KEY.R, "R");
+		me.input.bindKey(me.input.KEY.T, "T");
 		me.input.bindKey(me.input.KEY.ESC, "esc");
 		me.input.bindKey(me.input.KEY.ENTER, "enter");
 		me.input.bindKey(me.input.KEY.P, "P");

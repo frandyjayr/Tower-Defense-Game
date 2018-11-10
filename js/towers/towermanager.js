@@ -30,7 +30,12 @@ game.TowerManager = me.Container.extend({
 			this.tower = new game.SpawnTower(game.data.lastPlacedTowerX, game.data.lastPlacedTowerY, {image: "towerEarth", width: 224, height: 160, missileType: "EARTH"});
 			me.game.world.addChild(this.tower, 5);
 			this.spawnTowerActive = true;
-      		game.data.towerButtonPressed = true;
+			  game.data.towerButtonPressed = true;
+		} else if (me.input.isKeyPressed("T") && this.spawnTowerActive === false && game.data.waveStart ===	false && game.data.gold >= game.data.finalUpgradeCost && game.data.towerButtonPressed === false) {
+			this.tower = new game.SpawnTower(game.data.lastPlacedTowerX, game.data.lastPlacedTowerY, {image: "towerEarth", width: 224, height: 160, missileType: "FINALUPGRADE"});
+			me.game.world.addChild(this.tower, 5);
+			this.spawnTowerActive = true;
+			game.data.towerButtonPressed = true;
 		}else if (me.input.isKeyPressed("esc") || me.input.isKeyPressed("enter")) {
 			this.spawnTowerActive = false;
 			game.data.towerButtonPressed = false;
@@ -40,7 +45,8 @@ game.TowerManager = me.Container.extend({
 		if ((me.input.isKeyPressed("Q") && game.data.gold < game.data.towerAirCost) ||
 		   	(me.input.isKeyPressed("R") && game.data.gold < game.data.towerEarthCost) ||
 		    (me.input.isKeyPressed("E") && game.data.gold < game.data.towerFireCost) ||
-		    (me.input.isKeyPressed("W") && game.data.gold < game.data.towerWaterCost)) {
+			(me.input.isKeyPressed("W") && game.data.gold < game.data.towerWaterCost) ||
+			(me.input.isKeyPressed("t") && game.data.gold < game.data.finalUpgradeCost)) {
 				this.insufficientFunds = true;
 
 		}
