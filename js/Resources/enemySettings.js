@@ -16,6 +16,24 @@ game.enemyTank = {
 	scoreWorth: 15
 }
 
+game.enemyMissile = {
+	image: "enemyMissile",
+	type: "FIRE",
+	velocity: 65,
+	health: 30,
+	goldWorth: 30,
+	scoreWorth: 5
+}
+
+game.enemySoldier = {
+	image: "enemySoldier",
+	type: "Water",
+	velocity: 50,
+	health: 10,
+	goldWorth: 5,
+	scoreWorth: 6
+}
+
 game.wave3Enemy = {
 	image: "enemyFire",
 	type: "FIRE",
