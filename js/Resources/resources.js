@@ -24,8 +24,8 @@ game.resources = [
 	// Enemies
     { name: "enemyPlane", type: "image", src: "data/img/enemyPlane.png" },
     { name: "enemyTank", type: "image", src: "data/img/enemyTank.png" },
-    { name: "enemyFire", type: "image", src: "data/img/enemyFire.png" },
-    { name: "enemyWater", type: "image", src: "data/img/enemyWater.png" },
+    { name: "enemyMissile", type: "image", src: "data/img/enemyMissile.png" },
+    { name: "enemySoldier", type: "image", src: "data/img/enemySoldier.png" },
 
 	
 

@@ -30,9 +30,9 @@ game.resources = [
         "src": "data/img/endGem.png"
     },
     {
-        "name": "enemyFire",
+        "name": "enemyMissile",
         "type": "image",
-        "src": "data/img/enemyFire.png"
+        "src": "data/img/enemyMissile.png"
     },
     {
         "name": "enemyPlane",
@@ -40,14 +40,14 @@ game.resources = [
         "src": "data/img/enemyPlane.png"
     },
     {
+        "name": "enemySoldier",
+        "type": "image",
+        "src": "data/img/enemySoldier.png"
+    },
+    {
         "name": "enemyTank",
         "type": "image",
         "src": "data/img/enemyTank.png"
-    },
-    {
-        "name": "enemyWater",
-        "type": "image",
-        "src": "data/img/enemyWater.png"
     },
     {
         "name": "map_tiles",
