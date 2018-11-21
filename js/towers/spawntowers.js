@@ -9,6 +9,8 @@
 		//this.anchorPoint.set(0.075,0.1);
 		this.font = new me.BitmapFont(me.loader.getBinary('PressStart2P'), me.loader.getImage('PressStart2P'));
 		this.elementType = settings.missileType;
+		this.speedUpgrade;
+		this.damageUpgrade;
 		this.towerCost;
 		this.towerDamage;
 		this.towerSpeed;
@@ -31,7 +33,7 @@
 		this.onUpgradableTile;
 		this.greenColor = '#006400';
 		this.redColor = '#FF0000'
-		this.yellowColor = '#FFFF33'
+		this.yellowColor = '#FFFF00'
 		this.spawnChild = new game.Tower(game.data.lastPlacedTowerX, game.data.lastPlacedTowerY, settings);
 		this.spawnChild.collisionType = me.collision.types.PLAYER_OBJECT;
 		me.game.world.addChild(this.spawnChild, 1);
@@ -189,10 +191,10 @@
 			this.font.draw(renderer, (this.upgradableTowerInfo.towerCost + 100), -38, - 75);
 
 			this.font.draw(renderer, "Damage: ", -100, -60);
-			this.font.draw(renderer, this.upgradableTowerInfo.missileDamage + "-> " + (this.upgradableTowerInfo.missileDamage + 2), -18, -60);
+			this.font.draw(renderer, this.upgradableTowerInfo.missileDamage + "-> " + (this.upgradableTowerInfo.missileDamage + this.damageUpgrade), -18, -60);
 
 			this.font.draw(renderer, "Speed: ", -100, -45);
-			this.font.draw(renderer, (1 / this.upgradableTowerInfo.spawnTime).toFixed(2) + "-> " + (1 / (this.upgradableTowerInfo.spawnTime - 0.2)).toFixed(2), -28, -45);		
+			this.font.draw(renderer, (1 / this.upgradableTowerInfo.spawnTime).toFixed(2) + "-> " + (1 / (this.upgradableTowerInfo.spawnTime - this.speedUpgrade)).toFixed(2), -28, -45);		
 			
 			this.font.draw(renderer, "Tower Level: ", -103, -30);
 			this.font.draw(renderer, this.upgradableTowerInfo.level + "-> " + (this.upgradableTowerInfo.level + 1), 25, -30);
@@ -218,25 +220,33 @@
 			this.font.draw(renderer, "- Slows Enemies", -100, 55);			
 		}
 
-	},	
+	},		 
 	 
 	chooseTowerType: function() {
 		if (this.elementType === "AIR") {
 			this.towerCost = game.data.towerAirCost;
 			this.towerDamage = game.data.airMissileDamage;
 			this.towerSpeed = 1 / game.data.airMissileSpawnTime;
+			this.speedUpgrade = game.data.airUpgradeMissileSpawnTime;
+			this.damageUpgrade = game.data.airUpgradeMissileDamage;
 		} else if (this.elementType === "EARTH") {
 			this.towerCost = game.data.towerEarthCost;
 			this.towerDamage = game.data.EarthMissileDamage;
 			this.towerSpeed = 1 / game.data.earthMissileSpawnTime
+			this.speedUpgrade = game.data.earthUpgradeMissileSpawnTime;
+			this.damageUpgrade = game.data.earthUpgradeMissileDamage;
 		} else if (this.elementType === "FIRE") {
 			this.towerCost = game.data.towerFireCost;			
 			this.towerDamage = game.data.FireMissileDamage;
 			this.towerSpeed = 1 / game.data.fireMissileSpawnTime
+			this.speedUpgrade = game.data.fireUpgradeMissileSpawnTime;
+			this.damageUpgrade = game.data.fireUpgradeMissileDamage;
 		} else if (this.elementType === "WATER") {
 			this.towerCost = game.data.towerWaterCost;			
 			this.towerDamage = game.data.WaterMissileDamage;
 			this.towerSpeed = 1 / game.data.waterMissileSpawnTime
+			this.speedUpgrade = game.data.waterUpgradeMissileSpawnTime;
+			this.damageUpgrade = game.data.waterUpgradeMissileDamage;
 		}
 	},
 	setIndicatorColor: function(colorCode) {

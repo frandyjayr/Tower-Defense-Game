@@ -42,15 +42,28 @@ game.Tower = me.Entity.extend({
 	},
 	
 	upgradeTower: function() {
-		if (this.spawnTime - 0.2 > 0.2) {
-			this.spawnTime -= 0.2;
-			this.missileDamage += 2;
-			this.towerLevel++;
+		if (this.elementType === 'AIR') {
+			this.spawnTime -= game.data.airUpgradeMissileSpawnTime;
+			this.missileDamage += game.data.airUpgradeMissileDamage;
 			game.data.gold -= 100;
-			this.upgradeComplete = true;
-		}
+		} else if (this.elementType === 'EARTH') {
+			this.spawnTime -= game.data.earthUpgradeMissileSpawnTime;
+			this.missileDamage += game.data.earthUpgradeMissileDamage;
+			game.data.gold -= 100;		
+		} else if (this.elementType === 'FIRE') {
+			this.spawnTime -= game.data.fireUpgradeMissileSpawnTime;
+			this.missileDamage += game.data.fireUpgradeMissileDamage;
 
-	},
+			game.data.gold -= 100;		
+		} else if (this.elementType === 'WATER') {
+			this.spawnTime -= game.data.waterUpgradeMissileSpawnTime;
+			this.missileDamage += game.data.waterUpgradeMissileDamage;
+			game.data.gold -= 100;					
+		}
+		this.towerLevel++;
+		this.upgradeComplete = true;
+	},		
+
 	
 	getTowerInfo: function() {
 		var towerInfo = {
@@ -123,10 +136,11 @@ game.Tower = me.Entity.extend({
 			this.pos.z = 0;
 			this.font.pos.z = 6
 			this.font.resize(0.5)
+			this.font.draw(renderer, "Tower Upgraded!", -80, - 50)
         	this.font.draw(renderer, "-" + "100" + " gold", -50, -32);
 			
 			var that = this;
-			new me.Tween(this.font).to({ alpha: 0.0 }, 1000) // time in milliseconds
+			new me.Tween(this.font).to({ alpha: 0.0 }, 1500) // time in milliseconds
 			.onComplete(function () {
 				that.upgradeComplete = false;
 				that.font.alpha = 1;

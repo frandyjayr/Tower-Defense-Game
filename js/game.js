@@ -25,7 +25,17 @@ var game = {
 		earthMissileSpawnTime: 5,
 		fireMissileSpawnTime: 1,
 		waterMissileSpawnTime: 1.5,
-
+		
+		airUpgradeMissileSpawnTime: 0.1,
+		earthUpgradeMissileSpawnTime: 0.5,
+		fireUpgradeMissileSpawnTime: 0.1,
+		waterUpgradeMissileSpawnTime: 0.2,
+		
+		airUpgradeMissileDamage: 3,
+		earthUpgradeMissileDamage: 5,
+		fireUpgradeMissileDamage: 2,
+		waterUpgradeMissileDamage: 1,
+		
 		gameScreenStartPosX: 0,
 		gameScreenStartPosY: 0,
 		gameScreenEndPosX: 608,
