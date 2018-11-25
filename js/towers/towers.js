@@ -101,7 +101,7 @@ game.Tower = me.Entity.extend({
 				this.upgradeComplete = true;
 			} else if (this.elementType === "FIRE"){
 				this.spawnTime -= 0.3;
-				this.missileDamage += 5;
+				this.missileDamage += 15;
 				this.towerLevel++;
 				game.data.gold -= game.data.finalUpgradeCost;
 				this.upgradeComplete = true;

@@ -335,7 +335,7 @@
 				this.font.draw(renderer, this.upgradableTowerInfo.level + "-> " + (this.upgradableTowerInfo.level + 1), 25, -30);
 			} else if (this.upgradableTowerInfo.elementType === 'FIRE'){
 				this.font.draw(renderer, "Damage: ", -100, -60);
-				this.font.draw(renderer, this.upgradableTowerInfo.missileDamage + "-> " + (this.upgradableTowerInfo.missileDamage + 2), -18, -60);
+				this.font.draw(renderer, this.upgradableTowerInfo.missileDamage + "-> " + (this.upgradableTowerInfo.missileDamage + 15), -18, -60);
 				this.font.draw(renderer, "Speed: ", -100, -45);
 				this.font.draw(renderer, (1 / this.upgradableTowerInfo.spawnTime).toFixed(2) + "-> " + (1 / (this.upgradableTowerInfo.spawnTime - 0.2)).toFixed(2), -28, -45);
 				this.font.draw(renderer, "Tower Level: ", -103, -30);

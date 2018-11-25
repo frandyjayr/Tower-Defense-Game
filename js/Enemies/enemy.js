@@ -260,10 +260,14 @@ game.Enemy = me.Entity.extend({
 			}
 
 			var that = this;
-			this.timeOut = setTimeout(function() {
-				that.slowActive = false;
-				that.regainSpeed();
-				}, 2000 + (levelVar * 1000));
+			
+			// Remove the slow only if the tower type is less than level 5
+			if (callingTowerLevel < 5) {
+				this.timeOut = setTimeout(function() {
+					that.slowActive = false;
+					that.regainSpeed();
+					}, 2000 + (levelVar * 1000));
+			}
 		}
 		else{
 			var that = this;
@@ -339,10 +343,12 @@ game.Enemy = me.Entity.extend({
 		this.slowActive = true;
 		this.checkIfDead();
 		var that = this;
+		
+		/*
 		this.timeOut = setTimeout(function() {
 		that.slowActive = false;
 		that.regainSpeed();
-		}, 2000 + (5 * 1000));
+		}, 2000 + (5 * 1000));*/
 		
 	},
 

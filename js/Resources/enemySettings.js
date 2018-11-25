@@ -35,7 +35,7 @@ game.enemySoldier = {
 }
 
 game.wave3Enemy = {
-	image: "enemyFire",
+	image: "enemyPlane",
 	type: "FIRE",
 	velocity: 100,
 	health: 10,
