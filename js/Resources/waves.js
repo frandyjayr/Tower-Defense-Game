@@ -25,7 +25,7 @@ game.waveEasy = [
 		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.enemyTank), 2)},	
 
 		// Spawn time per enemy
-		1.5
+		2
 	],
 	
 	// wave 3. 30 units. Very fast and very low hp
