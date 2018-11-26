@@ -51,6 +51,8 @@ game.ButtonTower = me.GUI_Object.extend({
 			this.towerImage = "buttonTowerFire";
 		} else if (towerType === 'EARTH') {
 			this.towerImage = "buttonTowerEarth";
+		} else if (towerType === 'UPGRADE') {
+			this.towerImage = "buttonTowerUpgrade";
 		}
 	}
 	
