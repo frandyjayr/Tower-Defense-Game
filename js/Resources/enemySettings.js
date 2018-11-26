@@ -1,14 +1,14 @@
-game.enemyPlane = {
-	image: "enemyPlane",
-	type: "AIR",
+game.wave1Enemy = {
+	image: "enemySoldier",
+	type: "WATER",
 	velocity: 80,
 	health: 30,
 	goldWorth: 40,
 	scoreWorth: 5
 }
 
-game.enemyTank = {
-	image: "enemyTank",
+game.wave2Enemy = {
+	image: "enemyJeep",
 	type: "EARTH",
 	velocity: 45,
 	health: 350,
@@ -16,31 +16,13 @@ game.enemyTank = {
 	scoreWorth: 15
 }
 
-game.enemyMissile = {
-	image: "enemyMissile",
-	type: "FIRE",
+game.wave3Enemy = {
+	image: "enemyHovercraft",
+	type: "WATER",
 	velocity: 65,
 	health: 30,
 	goldWorth: 30,
 	scoreWorth: 5
-}
-
-game.enemySoldier = {
-	image: "enemySoldier",
-	type: "Water",
-	velocity: 50,
-	health: 10,
-	goldWorth: 5,
-	scoreWorth: 6
-}
-
-game.wave3Enemy = {
-	image: "enemyPlane",
-	type: "FIRE",
-	velocity: 100,
-	health: 10,
-	goldWorth: 5,
-	scoreWorth: 6
 }
 
 game.wave4Enemy = {
@@ -53,10 +35,55 @@ game.wave4Enemy = {
 }
 
 game.wave5Enemy = {
-	image: "enemyPlane",
+	image: "enemyBoss1",
 	type: "AIR",
 	velocity: 90,
 	health: 1000,
 	goldWorth: 1000,
 	scoreWorth: 10
+}
+
+game.wave6Enemy = {
+	image: "enemyFlamethrower",
+	type: "FIRE",
+	velocity: 50,
+	health: 10,
+	goldWorth: 5,
+	scoreWorth: 6
+}
+
+game.wave7Enemy = {
+	image: "enemyMissile",
+	type: "FIRE",
+	velocity: 50,
+	health: 10,
+	goldWorth: 5,
+	scoreWorth: 6
+}
+
+game.wave8Enemy = {
+	image: "enemyPlane",
+	type: "Water",
+	velocity: 50,
+	health: 10,
+	goldWorth: 5,
+	scoreWorth: 6
+}
+
+game.wave9Enemy = {
+	image: "enemyTank",
+	type: "EARTH",
+	velocity: 50,
+	health: 10,
+	goldWorth: 5,
+	scoreWorth: 6
+}
+
+game.wave10Enemy = {
+	image: "enemyBoss2",
+	type: "EARTH",
+	velocity: 50,
+	health: 10,
+	goldWorth: 5,
+	scoreWorth: 6
 }

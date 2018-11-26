@@ -30,6 +30,31 @@ game.resources = [
         "src": "data/img/endGem.png"
     },
     {
+        "name": "enemyBoss1",
+        "type": "image",
+        "src": "data/img/enemyBoss1.png"
+    },
+    {
+        "name": "enemyBoss2",
+        "type": "image",
+        "src": "data/img/enemyBoss2.png"
+    },
+    {
+        "name": "enemyFlamethrower",
+        "type": "image",
+        "src": "data/img/enemyFlamethrower.png"
+    },
+    {
+        "name": "enemyHovercraft",
+        "type": "image",
+        "src": "data/img/enemyHovercraft.png"
+    },
+    {
+        "name": "enemyJeep",
+        "type": "image",
+        "src": "data/img/enemyJeep.png"
+    },
+    {
         "name": "enemyMissile",
         "type": "image",
         "src": "data/img/enemyMissile.png"
@@ -78,6 +103,11 @@ game.resources = [
         "name": "towerFire",
         "type": "image",
         "src": "data/img/towerFire.png"
+    },
+    {
+        "name": "towerUpgrade",
+        "type": "image",
+        "src": "data/img/towerUpgrade.png"
     },
     {
         "name": "towerWater",
