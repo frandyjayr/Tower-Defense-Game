@@ -189,7 +189,6 @@ game.Tower = me.Entity.extend({
 				that.font.alpha = 1;
 			}).start();			
 		} else if (this.upgradeComplete) {
-			console.log("upgrade")
 			this.pos.z = 0;
 			this.font.pos.z = 6
 			this.font.resize(0.5)

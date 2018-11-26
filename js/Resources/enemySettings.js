@@ -1,4 +1,4 @@
-game.enemyPlane = {
+game.wave1Enemy = {
 	image: "enemyPlane",
 	type: "AIR",
 	velocity: 80,
@@ -7,11 +7,11 @@ game.enemyPlane = {
 	scoreWorth: 5
 }
 
-game.enemyTank = {
+game.wave2Enemy = {
 	image: "enemyTank",
 	type: "EARTH",
 	velocity: 45,
-	health: 350,
+	health: 150,
 	goldWorth: 100,
 	scoreWorth: 15
 }
