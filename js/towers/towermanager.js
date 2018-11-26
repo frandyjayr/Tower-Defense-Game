@@ -32,7 +32,7 @@ game.TowerManager = me.Container.extend({
 			this.spawnTowerActive = true;
 			game.data.towerButtonPressed = true;
 		} else if (me.input.isKeyPressed("T") && this.spawnTowerActive === false && game.data.waveStart ===	false && game.data.gold >= game.data.finalUpgradeCost && game.data.towerButtonPressed === false) {
-			this.tower = new game.SpawnTower(game.data.lastPlacedTowerX, game.data.lastPlacedTowerY, {image: "towerEarth", width: 224, height: 160, missileType: "FINALUPGRADE"});
+			this.tower = new game.SpawnTower(game.data.lastPlacedTowerX, game.data.lastPlacedTowerY, {image: "towerUpgrade", width: 224, height: 160, missileType: "FINALUPGRADE"});
 			me.game.world.addChild(this.tower, 5);
 			this.spawnTowerActive = true;
 			game.data.towerButtonPressed = true;

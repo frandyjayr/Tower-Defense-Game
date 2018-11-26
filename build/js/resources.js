@@ -20,6 +20,11 @@ game.resources = [
         "src": "data/img/buttonTowerFire.png"
     },
     {
+        "name": "buttonTowerUpgrade",
+        "type": "image",
+        "src": "data/img/buttonTowerUpgrade.png"
+    },
+    {
         "name": "buttonTowerWater",
         "type": "image",
         "src": "data/img/buttonTowerWater.png"
