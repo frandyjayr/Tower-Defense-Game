@@ -11,7 +11,7 @@ game.wave2Enemy = {
 	image: "enemyJeep",
 	type: "EARTH",
 	velocity: 45,
-	health: 350,
+	health: 150,
 	goldWorth: 100,
 	scoreWorth: 15
 }

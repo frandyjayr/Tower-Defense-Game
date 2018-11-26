@@ -57,7 +57,6 @@
 
 	changeIndicator: function() {
 		var entity = this.getOverlappingTower();
-
 		if (this.justSpawned && this.towerMap[(this.pos.y + 64) / 32][(this.pos.x + 96) / 32] === 'X' && typeof entity !== null && this.elementType === 'FINALUPGRADE' && entity.towerLevel === 4){
 			this.setIndicatorColor(this.greenColor);
 			this.onUpgradableTile = true;
@@ -71,7 +70,10 @@
 			this.finalLevel = true;
 			this.upgradableTowerInfo = this.getOverlappingTower().getTowerInfo();
 		
-		}else if (this.justSpawned && this.towerMap[(this.pos.y + 64) / 32][(this.pos.x + 96) / 32] === 'X' && typeof entity !== null && entity.elementType === this.elementType) {
+		}else if (this.justSpawned && this.towerMap[(this.pos.y + 64) / 32][(this.pos.x + 96) / 32] === 'X' && typeof entity !== null && entity.elementType === this.elementType && entity.towerLevel < 5) {
+			console.log("entity: " + entity.elementType)
+			console.log("this" + this.elementType)
+			console.log("turn yellow here")
 			this.setIndicatorColor(this.yellowColor);
 			this.justSpawned = false;
 			this.onUpgradableTile = true;
@@ -108,7 +110,8 @@
 				this.onUpgradableTile = false;
 				this.finalLevel = true;
 				this.upgradableTowerInfo = this.getOverlappingTower().getTowerInfo(); 
-			}else if (this.newLocation === 'G' && this.newTowerLocation === 'X' && entity.elementType === this.elementType){
+			}else if (this.newLocation === 'G' && this.newTowerLocation === 'X' && entity.elementType === this.elementType && entity.towerLevel < 5){
+				console.log(entity === this)
 				this.setIndicatorColor(this.yellowColor);
 				this.onUpgradableTile = true;
 				this.finalLevel = false;
@@ -268,6 +271,8 @@
 					else{
 						entity.upgradeTower();
 					}
+					game.data.lastPlacedTowerX = this.pos.x;
+					game.data.lastPlacedTowerY = this.pos.y;
 					me.game.world.removeChild(this);
 				}
 
@@ -293,12 +298,12 @@
 				return entity[i];
 			}
 		}
-		
+		game.data.towerButtonPressed = true;
 		return false;
 	},
 	 
 	sameTower: function(entity) {
-		if (this.elementType === entity.elementType || this.elementType === 'FINALUPGRADE' && this.pos.y === entity.pos.y && this.pos.x === entity.pos.x) {
+		if ((this.elementType === entity.elementType || this.elementType === 'FINALUPGRADE') && this.pos.y === entity.pos.y && this.pos.x === entity.pos.x) {
 			return true;
 		}
 		return false;
