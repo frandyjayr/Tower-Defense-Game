@@ -28,7 +28,7 @@ game.PlayScreen = me.ScreenObject.extend({
         me.input.unbindKey(me.input.KEY.ESC);
         me.input.unbindKey(me.input.KEY.ENTER);
         me.input.unbindKey(me.input.KEY.P);
-        me.input.unbindKey(me.input.KEY.M);	
+        me.input.unbindKey(me.input.KEY.M);
 		me.game.world.removeChild(this.HUD);
     },
 	
@@ -71,7 +71,7 @@ game.PlayScreen = me.ScreenObject.extend({
 		me.input.bindKey(me.input.KEY.ESC, "esc");
 		me.input.bindKey(me.input.KEY.ENTER, "enter");
 		me.input.bindKey(me.input.KEY.P, "P");
-		me.input.bindKey(me.input.KEY.M, "M");		
+		me.input.bindKey(me.input.KEY.M, "M");
 	},
 	
 	addEntities: function() {

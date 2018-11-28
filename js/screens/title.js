@@ -3,7 +3,6 @@ game.titlescreen = me.ScreenObject.extend({
      *  action to perform on state change
      */
     onResetEvent: function() {
-        console.log("gotem");
         var backgroundImage = new me.Sprite(0, 0, {image: me.loader.getImage('title_screen'),});
         backgroundImage.anchorPoint.set(0, 0);
         backgroundImage.scale(me.game.viewport.width / backgroundImage.width, me.game.viewport.height / backgroundImage.height);
