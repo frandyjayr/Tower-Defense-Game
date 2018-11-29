@@ -82,7 +82,7 @@ game.Tower = me.Entity.extend({
 			if (this.elementType === "AIR"){
 				console.log("towerlevel was: " + this.towerLevel);
 				this.spawnTime = 0.1;
-				this.missileDamage += 4;
+				this.missileDamage += 10;
 				this.towerLevel++;
 				game.data.gold -= game.data.finalUpgradeCost;
 				this.upgradeComplete = true;
@@ -94,16 +94,17 @@ game.Tower = me.Entity.extend({
 				game.data.gold -= game.data.finalUpgradeCost;
 				this.upgradeComplete = true;
 			} else if (this.elementType === "EARTH"){
-				this.spawnTime -= 0.4;
+				this.spawnTime -= -0.5;
 				this.missileDamage += 150;
 				this.towerLevel++;
 				game.data.gold -= game.data.finalUpgradeCost;
 				this.upgradeComplete = true;
 			} else if (this.elementType === "FIRE"){
 				this.spawnTime -= 0.3;
-				this.missileDamage += 15;
+				this.missileDamage += 40;
 				this.towerLevel++;
 				game.data.gold -= game.data.finalUpgradeCost;
+				console.log("towerlevel now is: " + this.towerLevel);
 				this.upgradeComplete = true;
 			}
 			
@@ -192,7 +193,7 @@ game.Tower = me.Entity.extend({
 			this.pos.z = 0;
 			this.font.pos.z = 6
 			this.font.resize(0.5)
-        	this.font.draw(renderer, "-" + "100" + " gold", -50, -32);
+        	this.font.draw(renderer, "-" + "200" + " gold", -50, -32);
 			
 			var that = this;
 			new me.Tween(this.font).to({ alpha: 0.0 }, 1000) // time in milliseconds

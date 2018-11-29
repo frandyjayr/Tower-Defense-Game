@@ -345,6 +345,8 @@
 				this.font.draw(renderer, (1 / this.upgradableTowerInfo.spawnTime).toFixed(2) + "-> " + (1 / (this.upgradableTowerInfo.spawnTime - 0.2)).toFixed(2), -28, -45);
 				this.font.draw(renderer, "Tower Level: ", -103, -30);
 				this.font.draw(renderer, this.upgradableTowerInfo.level + "-> " + (this.upgradableTowerInfo.level + 1), 25, -30);
+				this.font.draw(renderer, "Additional Effect:", -100, -15);
+				this.font.draw(renderer, "Permanent burn damage", -100, 0);
 			}		
 		}
 		

@@ -36,6 +36,7 @@ game.Enemy = me.Entity.extend({
 		// Instantiate booleans
 		this.alive = true;
 		this.AOEActive = false;
+		this.fireActive = false;
 		this.rotationReady = true;
 		this.slowActive = false;
 		
@@ -295,7 +296,9 @@ game.Enemy = me.Entity.extend({
 
 						entity[i].applyAOEDamage(callingTowerLevel);
 						entity[i].applyAOEEffect();
-						this.applyAOEEffect();						
+						//entity[i].applyFireAOEEffect();
+						this.applyAOEDamage(callingTowerLevel);
+						this.applyAOEEffect();				
 					}
 				}
 			}
@@ -321,10 +324,32 @@ game.Enemy = me.Entity.extend({
 	 * conjunction with the activateFireMissile function to apply the AOE damage
 	 * to the enemies that are within range of the fire missile AOE.
 	 */	
+
+	
+
 	applyAOEDamage: function(callingTowerLevel) {
 		damage = game.data.FireMissileDamage + (game.data.fireUpgradeDamage * (callingTowerLevel-1));
 		this.enemyHealth -= damage;
 		this.checkIfDead();
+		var that = this;
+		
+
+
+		
+		if (that.enemyHealth >= 0 && callingTowerLevel === 5){
+			that.fireActive = true;
+			var burnDmg = setInterval(function () {
+				that.enemyHealth -= 20;
+				console.log("fireeffect. enemy healthis:", that.enemyHealth);	
+				if (that.enemyHealth <= 0)
+				{
+					that.checkIfDead();
+					clearInterval(burnDmg);
+					
+					
+				}	
+			}, 1000);
+		}
 	},
 
 	/*
@@ -378,6 +403,9 @@ game.Enemy = me.Entity.extend({
 	},
 
 
+	
+
+
 	/*
 	 * The draw function is a built in function from the MelonJS framework/engine
 	 * that will be automatically called. It renders all necessary entities or
@@ -391,6 +419,10 @@ game.Enemy = me.Entity.extend({
 		}
 		if (this.slowActive) {
 			renderer.setColor("rgba(0, 0, 255, 0.5)");
+			renderer.fillRect(-16, -16, this.width, this.height);
+		}
+		if (this.fireActive) {
+			renderer.setColor("rgba(255, 0, 0, 0.5)");
 			renderer.fillRect(-16, -16, this.width, this.height);
 		}
 
