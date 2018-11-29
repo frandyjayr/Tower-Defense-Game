@@ -131,11 +131,24 @@ game.HUD.ScoreItem = me.Renderable.extend({
 	renderWaveIntro: function(renderer) {
 		// Render Wave Number
 		if (game.data.waveStart === false && game.data.preRoundHasStarted === false) {
-			this.font.resize(1.5);
-			this.font.draw(renderer, "Wave " + game.data.waveNumber, me.game.viewport.width / 2 + 50, me.game.viewport.height / 2);
-			this.font.resize(0.6);
-			this.font.draw(renderer, "Prepare Your Towers and Then" , me.game.viewport.width / 2 + 130, me.game.viewport.height / 2 + 35);			
-			this.font.draw(renderer, "Press 'P' to Start Wave " + game.data.waveNumber, me.game.viewport.width / 2 + 110, me.game.viewport.height / 2 + 55);			
+			if (game.data.waveNumber === 11) {
+				me.input.unbindKey(me.input.KEY.Q);
+				me.input.unbindKey(me.input.KEY.W);
+				me.input.unbindKey(me.input.KEY.E);
+				me.input.unbindKey(me.input.KEY.R);
+				me.input.unbindKey(me.input.KEY.P);
+				this.font.resize(1);
+				this.font.draw(renderer, "Congratulations! You Win!", me.game.viewport.width / 2 + 200, me.game.viewport.height / 2);
+				this.font.resize(0.6);
+				this.font.draw(renderer, "Press M and Select Menu to Restart" , me.game.viewport.width / 2 + 150, me.game.viewport.height / 2 + 35);
+			}
+			else {
+				this.font.resize(1.5);
+				this.font.draw(renderer, "Wave " + game.data.waveNumber, me.game.viewport.width / 2 + 50, me.game.viewport.height / 2);
+				this.font.resize(0.6);
+				this.font.draw(renderer, "Prepare Your Towers and Then" , me.game.viewport.width / 2 + 130, me.game.viewport.height / 2 + 35);			
+				this.font.draw(renderer, "Press 'P' to Start Wave " + game.data.waveNumber, me.game.viewport.width / 2 + 110, me.game.viewport.height / 2 + 55);
+			}
 		}		
 	},
 	
