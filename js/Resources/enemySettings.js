@@ -161,8 +161,9 @@ game.mwave8Enemy = {
 	scoreWorth: 6
 }
 
-game.mwave9Enemy = {
-	image: "enemyAPC",
+
+game.wave9Enemy = {
+	image: "enemyApc",
 	type: "EARTH",
 	velocity: 220,
 	health: 1200,
@@ -243,7 +244,7 @@ game.hwave7Enemy = {
 }
 
 game.hwave8Enemy = {
-	image: "enemyPlane",
+	image: "enemyApc",
 	type: "Water",
 	velocity: 120,
 	health: 300,
