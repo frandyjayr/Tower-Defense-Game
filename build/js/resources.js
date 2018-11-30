@@ -35,9 +35,9 @@ game.resources = [
         "src": "data/img/endGem.png"
     },
     {
-        "name": "enemyApc",
+        "name": "enemyAPC",
         "type": "image",
-        "src": "data/img/enemyApc.png"
+        "src": "data/img/enemyAPC.png"
     },
     {
         "name": "enemyBoss1",
