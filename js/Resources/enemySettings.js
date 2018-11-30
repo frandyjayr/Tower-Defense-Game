@@ -71,7 +71,7 @@ game.wave8Enemy = {
 }
 
 game.wave9Enemy = {
-	image: "enemyAPC",
+	image: "enemyAPC",//this one
 	type: "EARTH",
 	velocity: 220,
 	health: 1200,

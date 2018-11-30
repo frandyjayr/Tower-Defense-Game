@@ -58,7 +58,7 @@ game.Enemy = me.Entity.extend({
 	update: function (dt) {
     	this._super(me.Entity, "update", [dt]);
 		this.moveUnit(dt);
-
+		
 		return true;	
   	},
 	

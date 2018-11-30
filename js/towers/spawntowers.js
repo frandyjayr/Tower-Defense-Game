@@ -326,7 +326,7 @@
 				this.font.draw(renderer, this.upgradableTowerInfo.level + "-> " + (this.upgradableTowerInfo.level + 1), 25, -30);
 			}else if (this.upgradableTowerInfo.elementType === 'WATER'){
 				this.font.draw(renderer, "Slow Duration: ", -100, -60);
-				this.font.draw(renderer, (this.upgradableTowerInfo.level + 5) + "-> " + "PERMANENT SLOW", 48, -60);
+				this.font.draw(renderer, (this.upgradableTowerInfo.level + 5) + "-> " + "PERMANENT AOE SLOW", 48, -60);
 				this.font.draw(renderer, "Speed: ", -100, -45);
 				this.font.draw(renderer, (1 / this.upgradableTowerInfo.spawnTime).toFixed(2) + "-> " + (1 / (this.upgradableTowerInfo.spawnTime - 0.2)).toFixed(2), -28, -45);
 				this.font.draw(renderer, "Tower Level: ", -103, -30);
