@@ -1,40 +1,41 @@
-game.wave1Enemy = {
+/******** EASY ENEMY WAVES *********/
+game.ewave1Enemy = {
 	image: "enemySoldier",
 	type: "WATER",
 	velocity: 80,
 	health: 30,
-	goldWorth: 40,
+	goldWorth: 45,
 	scoreWorth: 5
 }
 
-game.wave2Enemy = {
+game.ewave2Enemy = {
 	image: "enemyJeep",
 	type: "EARTH",
 	velocity: 45,
 	health: 150,
-	goldWorth: 100,
+	goldWorth: 105,
 	scoreWorth: 15
 }
 
-game.wave3Enemy = {
+game.ewave3Enemy = {
 	image: "enemyHovercraft",
 	type: "WATER",
 	velocity: 65,
 	health: 30,
-	goldWorth: 10,
+	goldWorth: 15,
 	scoreWorth: 5
 }
 
-game.wave4Enemy = {
+game.ewave4Enemy = {
 	image: "enemyPlane",
 	type: "AIR",
 	velocity: 220,
 	health: 200,
-	goldWorth: 80,
+	goldWorth: 85,
 	scoreWorth: 10
 }
 
-game.wave5Enemy = {
+game.ewave5Enemy = {
 	image: "enemyBoss1",
 	type: "AIR",
 	velocity: 90,
@@ -43,7 +44,97 @@ game.wave5Enemy = {
 	scoreWorth: 10
 }
 
-game.wave6Enemy = {
+game.ewave6Enemy = {
+	image: "enemyFlamethrower",
+	type: "FIRE",
+	velocity: 50,
+	health: 300,
+	goldWorth: 155,
+	scoreWorth: 6
+}
+
+game.ewave7Enemy = {
+	image: "enemyMissile",
+	type: "FIRE",
+	velocity: 50,
+	health: 2000,
+	goldWorth: 305,
+	scoreWorth: 6
+}
+
+game.ewave8Enemy = {
+	image: "enemyPlane",
+	type: "Water",
+	velocity: 120,
+	health: 400,
+	goldWorth: 35,
+	scoreWorth: 6
+}
+
+game.ewave9Enemy = {
+	image: "enemyAPC",
+	type: "EARTH",
+	velocity: 220,
+	health: 1200,
+	goldWorth: 505,
+	scoreWorth: 6
+}
+
+game.ewave10Enemy = {
+	image: "enemyBoss2",
+	type: "EARTH",
+	velocity: 75,
+	health: 18000,
+	goldWorth: 5,
+	scoreWorth: 6
+}
+/******** MEDIUM ENEMY WAVES *********/
+game.mwave1Enemy = {
+	image: "enemySoldier",
+	type: "WATER",
+	velocity: 80,
+	health: 30,
+	goldWorth: 40,
+	scoreWorth: 5
+}
+
+game.mwave2Enemy = {
+	image: "enemyJeep",
+	type: "EARTH",
+	velocity: 45,
+	health: 150,
+	goldWorth: 100,
+	scoreWorth: 15
+}
+
+game.mwave3Enemy = {
+	image: "enemyHovercraft",
+	type: "WATER",
+	velocity: 65,
+	health: 30,
+	goldWorth: 10,
+	scoreWorth: 5
+}
+
+game.mwave4Enemy = {
+	image: "enemyPlane",
+	type: "AIR",
+	velocity: 220,
+	health: 200,
+	goldWorth: 80,
+	scoreWorth: 10
+}
+
+game.mwave5Enemy = {
+	image: "enemyBoss1",
+	type: "AIR",
+	velocity: 90,
+	health: 1000,
+	goldWorth: 1000,
+	scoreWorth: 10
+}
+
+game.mwave6Enemy = {
 	image: "enemyFlamethrower",
 	type: "FIRE",
 	velocity: 50,
@@ -52,7 +143,7 @@ game.wave6Enemy = {
 	scoreWorth: 6
 }
 
-game.wave7Enemy = {
+game.mwave7Enemy = {
 	image: "enemyMissile",
 	type: "FIRE",
 	velocity: 50,
@@ -61,7 +152,7 @@ game.wave7Enemy = {
 	scoreWorth: 6
 }
 
-game.wave8Enemy = {
+game.mwave8Enemy = {
 	image: "enemyPlane",
 	type: "Water",
 	velocity: 120,
@@ -70,8 +161,9 @@ game.wave8Enemy = {
 	scoreWorth: 6
 }
 
+
 game.wave9Enemy = {
-	image: "enemyApc",//this one
+	image: "enemyApc",
 	type: "EARTH",
 	velocity: 220,
 	health: 1200,
@@ -79,7 +171,7 @@ game.wave9Enemy = {
 	scoreWorth: 6
 }
 
-game.wave10Enemy = {
+game.mwave10Enemy = {
 	image: "enemyBoss2",
 	type: "EARTH",
 	velocity: 75,
@@ -87,7 +179,7 @@ game.wave10Enemy = {
 	goldWorth: 5,
 	scoreWorth: 6
 }
-
+/******** HARD ENEMY WAVES *********/
 game.hwave1Enemy = {
 	image: "enemySoldier",
 	type: "WATER",
