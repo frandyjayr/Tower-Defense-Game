@@ -17,8 +17,6 @@ game.Tower = me.Entity.extend({
 		this.towerCost;
 		this.chooseTowerType();
 		this.towerLevel = 1;
-		
-		console.log(settings.missileType)
 	},
 	
 	update: function (dt) {
@@ -45,16 +43,13 @@ game.Tower = me.Entity.extend({
 		
 		if (this.towerLevel < 4) {
 			if (this.elementType === "AIR"){
-				console.log("towerlevel was: " + this.towerLevel);
 				this.spawnTime -= game.data.airTowerSpawnTimeReduction;
 				this.missileDamage += game.data.airUpgradeDamage;
 				this.towerLevel++;
 				game.data.gold -= game.data.towerAirCost;
 				this.upgradeComplete = true;
-				console.log("towerlevel now is: " + this.towerLevel);
 			} else if (this.elementType === "WATER"){
 				this.spawnTime -= game.data.waterTowerSpawnTimeReduction;
-				//this.missileDamage += 2;
 				this.towerLevel++;
 				game.data.gold -= game.data.towerWaterCost;
 				this.upgradeComplete = true;
@@ -80,16 +75,13 @@ game.Tower = me.Entity.extend({
 	upgradeTowerFinal: function() {
 		if (this.towerLevel < 5) {
 			if (this.elementType === "AIR"){
-				console.log("towerlevel was: " + this.towerLevel);
 				this.spawnTime = 0.1;
 				this.missileDamage += 10;
 				this.towerLevel++;
 				game.data.gold -= game.data.finalUpgradeCost;
 				this.upgradeComplete = true;
-				console.log("towerlevel now is: " + this.towerLevel);
 			} else if (this.elementType === "WATER"){
 				this.spawnTime -= 0.2;
-				//this.missileDamage += 2;
 				this.towerLevel++;
 				game.data.gold -= game.data.finalUpgradeCost;
 				this.upgradeComplete = true;
@@ -104,7 +96,6 @@ game.Tower = me.Entity.extend({
 				this.missileDamage += 40;
 				this.towerLevel++;
 				game.data.gold -= game.data.finalUpgradeCost;
-				console.log("towerlevel now is: " + this.towerLevel);
 				this.upgradeComplete = true;
 			}
 			
@@ -143,10 +134,7 @@ game.Tower = me.Entity.extend({
 			this.missileDamage = game.data.WaterMissileDamage;
 		}else if (this.elementType === "FINALUPGRADE") {
 			this.towerCost = game.data.finalUpgradeCost;
-			//this.spawnTime = game.data.waterMissileSpawnTime;
-			//this.missileDamage = game.data.WaterMissileDamage;
 	}
-		console.log(this.towerCost)
 
 	},
 
@@ -193,7 +181,12 @@ game.Tower = me.Entity.extend({
 			this.pos.z = 0;
 			this.font.pos.z = 6
 			this.font.resize(0.5)
-        	this.font.draw(renderer, "-" + "200" + " gold", -50, -32);
+			if (this.towerLevel === 5) {
+	        	this.font.draw(renderer, "-" + "1000" + " gold", -50, -32);			
+			} else {
+				this.font.draw(renderer, "-" + "200" + " gold", -50, -32);
+			}
+
 			
 			var that = this;
 			new me.Tween(this.font).to({ alpha: 0.0 }, 1000) // time in milliseconds

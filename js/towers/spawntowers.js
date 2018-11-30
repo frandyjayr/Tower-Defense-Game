@@ -1,12 +1,10 @@
  game.SpawnTower = me.Entity.extend({
 	init : function(x, y, settings) {
-		// position, width, height
 		this._super(me.Entity, "init", [x, y, {
 			image: null,
 			width : 224,
 			height : 160										
 		}]);
-		//this.anchorPoint.set(0.075,0.1);
 		this.font = new me.BitmapFont(me.loader.getBinary('PressStart2P'), me.loader.getImage('PressStart2P'));
 		this.elementType = settings.missileType;
 		this.towerCost;
@@ -71,9 +69,6 @@
 			this.upgradableTowerInfo = this.getOverlappingTower().getTowerInfo();
 		
 		}else if (this.justSpawned && this.towerMap[(this.pos.y + 64) / 32][(this.pos.x + 96) / 32] === 'X' && typeof entity !== null && entity.elementType === this.elementType && entity.towerLevel < 5) {
-			console.log("entity: " + entity.elementType)
-			console.log("this" + this.elementType)
-			console.log("turn yellow here")
 			this.setIndicatorColor(this.yellowColor);
 			this.justSpawned = false;
 			this.onUpgradableTile = true;
@@ -111,7 +106,6 @@
 				this.finalLevel = true;
 				this.upgradableTowerInfo = this.getOverlappingTower().getTowerInfo(); 
 			}else if (this.newLocation === 'G' && this.newTowerLocation === 'X' && entity.elementType === this.elementType && entity.towerLevel < 5){
-				console.log(entity === this)
 				this.setIndicatorColor(this.yellowColor);
 				this.onUpgradableTile = true;
 				this.finalLevel = false;
@@ -265,10 +259,11 @@
 		} else if (me.input.isKeyPressed("enter") && this.currentLocation === 'G' && this.towerMap[(this.pos.y + 64) / 32][(this.pos.x + 96) / 32] === 'X') {
 			var entity = this.getOverlappingTower();
 				if (this.sameTower(entity)) {
-					if (this.elementType === 'FINALUPGRADE'){
+					if (this.elementType === 'FINALUPGRADE' && game.data.gold >= game.data.finalUpgradeCost){
 						entity.upgradeTowerFinal();
 					}
-					else{
+					else if (game.data.gold >= game.data.towerAirCost || game.data.gold >= game.data.towerFireCost || game.data.gold >= game.data.towerEarthCost ||
+					game.data.gold >= game.data.towerWaterCost){
 						entity.upgradeTower();
 					}
 					game.data.lastPlacedTowerX = this.pos.x;

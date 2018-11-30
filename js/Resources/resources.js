@@ -16,6 +16,7 @@ game.resources = [
 	
 	// Screens
 	{ name: "title_screen", type: "image", src: "data/img/title_screen.png" },
+	{ name: "title_screen", type: "image", src: "data/img/lose_screen.png" },
 	{ name: "mainmenu", type: "audio", src: "data/sfx/mainmenu.mp3", channel : 1 },
 	
 	// Misc

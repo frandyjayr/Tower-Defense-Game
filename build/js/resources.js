@@ -85,6 +85,11 @@ game.resources = [
         "src": "data/img/enemyTank.png"
     },
     {
+        "name": "lose_screen",
+        "type": "image",
+        "src": "data/img/lose_screen.png"
+    },
+    {
         "name": "map_tiles",
         "type": "image",
         "src": "data/img/map_tiles.png"

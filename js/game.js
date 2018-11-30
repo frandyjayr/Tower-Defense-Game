@@ -44,6 +44,7 @@ var game = {
 		utilityScreenStartPosX: 608,
 		utilityScreenStartPosY: 0,
 		utilityScreenEndPosX: 736,
+		
 		utilityScreenEndPosY: 448,
 		
 		lastPlacedTowerX: 0,

@@ -401,7 +401,7 @@ game.waveMedium = [
 		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.mwave10Enemy), 2)},
 		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.mwave10Enemy), 2)},
 		// Spawn time per enemy
-		0.3
+		0.6
 	]
 ]
 

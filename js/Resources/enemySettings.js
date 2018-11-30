@@ -162,7 +162,7 @@ game.mwave8Enemy = {
 }
 
 
-game.wave9Enemy = {
+game.mwave9Enemy = {
 	image: "enemyApc",
 	type: "EARTH",
 	velocity: 220,

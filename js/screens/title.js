@@ -15,12 +15,8 @@ game.titlescreen = me.ScreenObject.extend({
                 this._super(me.Renderable, 'init', [0, 0, me.game.viewport.width, me.game.viewport.height]);
 
                 this.font = new me.BitmapFont(me.loader.getBinary('PressStart2P'), me.loader.getImage('PressStart2P'));
-                //this.font.lineWidth = "2";
-                //this.font.textAlign = "center";
-                //this.font.setOpacity (1);
-                this.title = "Welcome to Element Tower Defense!";
-                this.start = "Press Enter to Start";
-				this.difficulty = "Choose a difficulty level:"
+
+
                 
             },    
 
@@ -30,10 +26,13 @@ game.titlescreen = me.ScreenObject.extend({
             },
 
             draw : function (renderer) {
-                this.font.draw(renderer, this.title, 420, 500);
-                this.font.draw(renderer, this.start, 550, 540);
-                this.font.draw(renderer, this.difficulty, 460, 600);
-                this.font.draw(renderer, "< " + game.data.gameDifficulty + " >", 640, 630);
+                this.font.draw(renderer, "< ", 655, 640);
+				if (game.data.gameDifficulty === 'MEDIUM') {
+					this.font.draw(renderer, game.data.gameDifficulty, 700, 640);					
+				} else {
+                	this.font.draw(renderer, game.data.gameDifficulty, 720, 640);					
+				}
+                this.font.draw(renderer, " >", 830, 640);
             },
 	
 			changeDifficulty: function() {

@@ -119,6 +119,20 @@ game.inGameMenu = me.Container.extend({
 			this.font.draw(renderer, "MAIN MENU",  game.data.gameScreenEndPosX / 2 - 20, game.data.gameScreenEndPosY / 2 + 10);
 
 			this.font.draw(renderer, ">",  game.data.gameScreenEndPosX / 2 - 40, this.pointerPosition);
+
+			// PLACE THE HELP INSTRUCTIONS
+			renderer.setColor("#67542B");
+			renderer.fillRect(game.data.gameScreenEndPosX / 10 - 1.25, game.data.gameScreenEndPosY - 100 - 1.25, 550 + 2.5, 120 + 2.5);		
+
+			renderer.setColor("#c0ab58");
+			renderer.fillRect(game.data.gameScreenEndPosX / 10, game.data.gameScreenEndPosY - 100, 550, 120);			
+			
+			this.font.resize(0.45);
+			this.font.draw(renderer, "Use Q/W/E/R to select a tower while using arrow keys", me.game.viewport.width / 12, me.game.viewport.height - (me.game.viewport.height / 4));
+			this.font.draw(renderer, "to move around. Press 'ENTER' to place tower or 'ESC'", me.game.viewport.width / 12, me.game.viewport.height - (me.game.viewport.height / 4) + 20);
+			this.font.draw(renderer, "to cancel tower. Tower level 1 - 4 can be upgraded by", me.game.viewport.width / 12, me.game.viewport.height - (me.game.viewport.height / 4) + 40);
+			this.font.draw(renderer, "placing identical towers on top of itself. Use T button", me.game.viewport.width / 12, me.game.viewport.height - (me.game.viewport.height / 4) + 60);
+			this.font.draw(renderer, "to give a level 4 tower a final upgrade, similarly.", me.game.viewport.width / 12, me.game.viewport.height - (me.game.viewport.height / 4) + 80);	
 		}
 		
 	},

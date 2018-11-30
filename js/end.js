@@ -18,7 +18,6 @@ game.End = me.Entity.extend({
     	this._super(me.Entity, "update", [dt]);
 		me.collision.check(this);
 		if (game.data.health == 0 && me.state != "WIN") {
-			console.log(me.state);
 			me.state.change(me.state.END);
 		}
 		return true;

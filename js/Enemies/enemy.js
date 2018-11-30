@@ -209,8 +209,9 @@ game.Enemy = me.Entity.extend({
 		this.alive = false;
 		game.data.score += this.scoreWorth;	
 		game.data.gold += this.goldWorth; 
-		me.game.world.removeChild(this); 
 		game.data.currentlySpawned--;
+		me.game.world.removeChild(this); 
+
 	},
 	
 	/*
@@ -340,7 +341,6 @@ game.Enemy = me.Entity.extend({
 			that.fireActive = true;
 			var burnDmg = setInterval(function () {
 				that.enemyHealth -= 20;
-				console.log("fireeffect. enemy healthis:", that.enemyHealth);	
 				if (that.enemyHealth <= 0)
 				{
 					that.checkIfDead();
@@ -453,6 +453,7 @@ game.Enemy = me.Entity.extend({
 
 	damageEnemy: function(damage) {
 		this.enemyHealth -= damage;	
+		//
 		this.checkIfDead();
 	},
 	

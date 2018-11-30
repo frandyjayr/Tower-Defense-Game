@@ -86,8 +86,8 @@ game.HUD.ScoreItem = me.Renderable.extend({
 	renderGold: function(renderer) {
 		// Render gold
 		this.font.resize(0.5);
-		this.font.draw(renderer, "Gold: ", me.game.viewport.width + this.pos.x - 62, me.game.viewport.height + this.pos.y - 96); 
-		this.font.draw(renderer, game.data.gold, me.game.viewport.width + this.pos.x + 5, me.game.viewport.height + this.pos.y - 96); 			
+		this.font.draw(renderer, "Gold: ", me.game.viewport.width + this.pos.x - 62, me.game.viewport.height + this.pos.y - 84); 
+		this.font.draw(renderer, game.data.gold, me.game.viewport.width + this.pos.x + 5, me.game.viewport.height + this.pos.y - 84); 			
 	},
 
 	/*
@@ -97,8 +97,8 @@ game.HUD.ScoreItem = me.Renderable.extend({
 	renderScore: function(renderer) {
 		// Render score
 		this.font.resize(0.5);
-		this.font.draw(renderer, "Score: ", me.game.viewport.width + this.pos.x - 50, me.game.viewport.height + this.pos.y - 64); 
-		this.font.draw(renderer, game.data.score, me.game.viewport.width + this.pos.x + 5, me.game.viewport.height + this.pos.y - 64); 			
+		this.font.draw(renderer, "Score: ", me.game.viewport.width + this.pos.x - 50, me.game.viewport.height + this.pos.y - 56); 
+		this.font.draw(renderer, game.data.score, me.game.viewport.width + this.pos.x + 5, me.game.viewport.height + this.pos.y - 56); 			
 	},
 
 	/*
@@ -108,8 +108,8 @@ game.HUD.ScoreItem = me.Renderable.extend({
 	renderLives: function(renderer) {
 		// Render user lives
 		this.font.resize(0.5);
-    	this.font.draw(renderer, "Lives: ", me.game.viewport.width + this.pos.x - 52, me.game.viewport.height + this.pos.y - 32);
-		this.font.draw(renderer, game.data.health, me.game.viewport.width + this.pos.x - 10, me.game.viewport.height + this.pos.y - 32);
+    	this.font.draw(renderer, "Lives: ", me.game.viewport.width + this.pos.x - 52, me.game.viewport.height + this.pos.y - 28);
+		this.font.draw(renderer, game.data.health, me.game.viewport.width + this.pos.x - 10, me.game.viewport.height + this.pos.y - 28);
 	},
 	
 	/*
@@ -121,6 +121,15 @@ game.HUD.ScoreItem = me.Renderable.extend({
 		this.font.resize(0.5);
 		this.font.draw(renderer, "Wave: ", me.game.viewport.width + this.pos.x - 60, me.game.viewport.height + this.pos.y); 
 		this.font.draw(renderer, game.data.waveNumber + "/10", me.game.viewport.width + this.pos.x, me.game.viewport.height + this.pos.y); 		
+	},
+	
+	/*
+	 * The renderMenuText functions renders the indication on the screen to press M
+	 * to open the menu
+	 */
+	renderMenuText: function(renderer) {
+		this.font.resize(0.5);
+		this.font.draw(renderer, "Menu - M", me.game.viewport.width + this.pos.x - 20, me.game.viewport.height + this.pos.y - 120); 			
 	},
 	
 	/*
@@ -147,7 +156,10 @@ game.HUD.ScoreItem = me.Renderable.extend({
 				this.font.draw(renderer, "Wave " + game.data.waveNumber, me.game.viewport.width / 2 + 50, me.game.viewport.height / 2);
 				this.font.resize(0.6);
 				this.font.draw(renderer, "Prepare Your Towers and Then" , me.game.viewport.width / 2 + 130, me.game.viewport.height / 2 + 35);			
-				this.font.draw(renderer, "Press 'P' to Start Wave " + game.data.waveNumber, me.game.viewport.width / 2 + 110, me.game.viewport.height / 2 + 55);
+				this.font.draw(renderer, "Press 'P' to Start Wave or", me.game.viewport.width / 2 + 115, me.game.viewport.height / 2 + 55);
+				
+				this.font.resize(0.6)
+				this.font.draw(renderer, "'M' For Menu/Game Instructions", me.game.viewport.width / 2 + 140, me.game.viewport.height / 2 + 75);
 			}
 		}		
 	},
@@ -190,5 +202,6 @@ game.HUD.ScoreItem = me.Renderable.extend({
 		this.renderWaveNumber(renderer);
 		this.renderWaveIntro(renderer);
 		this.renderButtons(renderer);
+		this.renderMenuText(renderer);
   	}
 });

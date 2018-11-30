@@ -4,7 +4,7 @@ game.EndScreen = me.ScreenObject.extend({
      */
     onResetEvent: function() {
 
-        var backgroundImage = new me.Sprite(0, 0, {image: me.loader.getImage('title_screen'),});
+        var backgroundImage = new me.Sprite(0, 0, {image: me.loader.getImage('lose_screen'),});
         backgroundImage.anchorPoint.set(0, 0);
         backgroundImage.scale(me.game.viewport.width / backgroundImage.width, me.game.viewport.height / backgroundImage.height);
 
@@ -16,20 +16,8 @@ game.EndScreen = me.ScreenObject.extend({
                 this._super(me.Renderable, 'init', [0, 0, me.game.viewport.width, me.game.viewport.height]);
 
                 this.font = new me.BitmapFont(me.loader.getBinary('PressStart2P'), me.loader.getImage('PressStart2P'));
-                //this.font.lineWidth = "2";
-                //this.font.textAlign = "center";
-                //this.font.setOpacity (1);
-                this.title = "Game Over!";
-                this.end = "Press Enter to Return to Menu";
                 
             },    
-
-            draw : function (renderer) {
-                this.font.draw(renderer, this.title, 675, 450);
-                this.font.draw(renderer, this.end, 460, 540);
-            },
-
-
         })), 2);
 
 

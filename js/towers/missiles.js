@@ -195,7 +195,6 @@ game.Missile = me.Entity.extend({
 			if (this.body.collisionType === game.collisionTypes.MissileAir) {
 				// Leave empty for future upgrade abilities
 			} else if (this.body.collisionType === game.collisionTypes.MissileWater) {
-				console.log("callingtowers level in missiles.js is: " + this.callingTowersLevel);
 				other.activateWaterMissile(this.callingTowersLevel);
 			} else if (this.body.collisionType === game.collisionTypes.MissileFire) {
 				other.activateFireMissile(this.callingTowersLevel);
