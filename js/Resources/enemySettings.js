@@ -72,7 +72,7 @@ game.ewave8Enemy = {
 }
 
 game.ewave9Enemy = {
-	image: "enemyAPC",
+	image: "enemyApc",
 	type: "EARTH",
 	velocity: 220,
 	health: 1200,
