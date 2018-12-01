@@ -366,7 +366,7 @@
 		// air tower damage by 3x but fire tower damage by 15x
 		if (this.onUpgradableTile && this.elementType === 'FINALUPGRADE'){
 			this.font.resize(0.45);
-			this.font.draw(renderer, "Cost: 1500", -100, -75);
+			this.font.draw(renderer, "Cost: 1000", -100, -75);
 			if (this.upgradableTowerInfo.elementType === 'AIR'){
 				this.font.draw(renderer, "Damage: ", -100, -60);
 				this.font.draw(renderer, this.upgradableTowerInfo.missileDamage + "-> " + (this.upgradableTowerInfo.missileDamage + 4), -18, -60);
