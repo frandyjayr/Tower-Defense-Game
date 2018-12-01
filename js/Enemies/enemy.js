@@ -300,9 +300,19 @@ game.Enemy = me.Entity.extend({
 
 						entity[i].applyAOEDamage(callingTowerLevel);
 						entity[i].applyAOEEffect();
-						//entity[i].applyFireAOEEffect();
-						this.applyAOEDamage(callingTowerLevel);
-						this.applyAOEEffect();				
+						//entity[i].applyFireAOEEffect();			
+					}
+					else if (entity[i] === this) {
+						if (this.enemyHealth >= 0 && callingTowerLevel === 5){
+							this.fireActive = true;
+							this.burnDmg = setInterval(function () {
+								this.enemyHealth -= 20;
+								if (this.enemyHealth <= 0)
+								{
+									clearInterval(this.burnDmg);				
+								}	
+							}, 1000);
+						}
 					}
 				}
 			}
