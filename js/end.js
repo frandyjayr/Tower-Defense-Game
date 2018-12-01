@@ -37,7 +37,6 @@ game.End = me.Entity.extend({
 			other.deactivate();
 			//me.game.world.removeChild(other);
 			game.data.health--;
-			game.data.currentlySpawned--;
 			return false;
 		} 
 		return false;	
