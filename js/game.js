@@ -8,7 +8,7 @@ var game = {
 		waveNumber: 1,
 		score: 0,
 		gold: 400,
-		startingGold: 5600,
+		startingGold: 600,
 		startingHealth: 10,
 
 		towerAirCost: 200,
