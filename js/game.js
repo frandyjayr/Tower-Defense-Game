@@ -7,8 +7,8 @@ var game = {
 		currentlySpawned: 0,
 		waveNumber: 1,
 		score: 0,
-		gold: 4400,
-		startingGold: 5600,
+		gold: 600,
+		startingGold: 600,
 		startingHealth: 10,
 
 		towerAirCost: 200,
