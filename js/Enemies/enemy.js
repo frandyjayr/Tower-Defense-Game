@@ -309,7 +309,8 @@ game.Enemy = me.Entity.extend({
 								this.enemyHealth -= 20;
 								if (this.enemyHealth <= 0)
 								{
-									clearInterval(this.burnDmg);				
+									clearInterval(this.burnDmg);
+									this.checkIfDead();				
 								}	
 							}, 1000);
 						}
@@ -354,6 +355,7 @@ game.Enemy = me.Entity.extend({
 				if (that.enemyHealth <= 0)
 				{
 					clearInterval(this.burnDmg);				
+					that.checkIfDead();
 				}	
 			}, 1000);
 		}
