@@ -48,6 +48,8 @@ game.Enemy = me.Entity.extend({
 		this.AOERange = 100;
 		this.body.collisionType = me.collision.types.ENEMY_OBJECT;
 		
+		this.burnDmg;
+		
 	},
 	
 	/*
@@ -206,6 +208,7 @@ game.Enemy = me.Entity.extend({
 	 * and the alive status of this enemy.
 	 */		
 	updateData: function() {
+		clearInterval(this.burnDmg);
 		this.alive = false;
 		game.data.score += this.scoreWorth;	
 		game.data.gold += this.goldWorth; 
@@ -333,20 +336,14 @@ game.Enemy = me.Entity.extend({
 		this.enemyHealth -= damage;
 		this.checkIfDead();
 		var that = this;
-		
-
-
-		
+			
 		if (that.enemyHealth >= 0 && callingTowerLevel === 5){
 			that.fireActive = true;
-			var burnDmg = setInterval(function () {
+			this.burnDmg = setInterval(function () {
 				that.enemyHealth -= 20;
 				if (that.enemyHealth <= 0)
 				{
-					that.checkIfDead();
-					clearInterval(burnDmg);
-					
-					
+					clearInterval(this.burnDmg);				
 				}	
 			}, 1000);
 		}
@@ -481,6 +478,10 @@ game.Enemy = me.Entity.extend({
 	 */	
 	onCollision: function (res, other) {
 		return false;
+	},
+	
+	deactivate: function() {
+		this.updateData();
 	}
 });
 

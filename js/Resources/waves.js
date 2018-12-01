@@ -408,6 +408,7 @@ game.waveMedium = [
 game.waveHard = [
 	// wave 1. 10 units. Medium health, medium speed
 	[
+		
 		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.hwave1Enemy), 2)}, 
 		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.hwave1Enemy), 2)}, 
 		function() {me.game.world.addChild(me.pool.pull("enemy", 64, 0, game.hwave1Enemy), 2)}, 
