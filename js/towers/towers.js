@@ -24,6 +24,7 @@ game.Tower = me.Entity.extend({
 		this.towerCost;
 		this.chooseTowerType();
 		this.towerLevel = 1;
+		this.pos.z = 0;
 	},
 	
 	/*
@@ -243,7 +244,7 @@ game.Tower = me.Entity.extend({
 	 */
 	goldFadeEffectRegularTower(renderer) {
 		this.pos.z = 0;
-		this.font.pos.z = 6
+		this.font.pos.z = 99
 		this.font.resize(0.5)
 		this.font.draw(renderer, "-" + this.towerCost + " gold", -50, -32);
 
@@ -263,7 +264,7 @@ game.Tower = me.Entity.extend({
 	 */	
 	goldFadeEffectFinalTower(renderer) {
 		this.pos.z = 0;
-		this.font.pos.z = 6
+		this.font.pos.z = 99
 		this.font.resize(0.5)
 		if (this.towerLevel === 5) {
 			this.font.draw(renderer, "-" + "1000" + " gold", -50, -32);			

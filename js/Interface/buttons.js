@@ -31,9 +31,10 @@ game.ButtonTower = me.GUI_Object.extend({
 	 * the tower buttons. If so, it activates preRoundMode.
 	 */		
 	checkIfClicked: function() {
-		if (me.input.isKeyPressed("Q") || me.input.isKeyPressed("W") ||
+		if ((me.input.isKeyPressed("Q") || me.input.isKeyPressed("W") ||
 		    me.input.isKeyPressed("E") || me.input.isKeyPressed("R") ||
-			me.input.isKeyPressed("T") && game.data.preRoundHasStarted === false) {
+			me.input.isKeyPressed("T")) && game.data.preRoundHasStarted === false && 
+		    game.data.waveStart === false) {
 			game.data.preRoundHasStarted = true;
 		}		
 	},

@@ -503,7 +503,10 @@ game.Enemy = me.Entity.extend({
 	 * This is used for collisions that occur at the end of the map
 	 */
 	deactivate: function() {
-		this.updateData();
+		clearInterval(this.burnDmg);
+		this.alive = false;
+		game.data.currentlySpawned--;
+		me.game.world.removeChild(this); 
 	}
 });
 
