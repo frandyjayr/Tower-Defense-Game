@@ -29,7 +29,7 @@ game.ewave3Enemy = {
 game.ewave4Enemy = {
 	image: "enemyPlane",
 	type: "AIR",
-	velocity: 220,
+	velocity: 200,
 	health: 200,
 	goldWorth: 85,
 	scoreWorth: 10
@@ -74,7 +74,7 @@ game.ewave8Enemy = {
 game.ewave9Enemy = {
 	image: "enemyApc",
 	type: "EARTH",
-	velocity: 220,
+	velocity: 200,
 	health: 1200,
 	goldWorth: 505,
 	scoreWorth: 6
@@ -119,7 +119,7 @@ game.mwave3Enemy = {
 game.mwave4Enemy = {
 	image: "enemyPlane",
 	type: "AIR",
-	velocity: 220,
+	velocity: 200,
 	health: 200,
 	goldWorth: 80,
 	scoreWorth: 10
@@ -165,7 +165,7 @@ game.mwave8Enemy = {
 game.mwave9Enemy = {
 	image: "enemyApc",
 	type: "EARTH",
-	velocity: 220,
+	velocity: 200,
 	health: 1200,
 	goldWorth: 500,
 	scoreWorth: 6
@@ -210,7 +210,7 @@ game.hwave3Enemy = {
 game.hwave4Enemy = {
 	image: "enemyPlane",
 	type: "AIR",
-	velocity: 220,
+	velocity: 200,
 	health: 200,
 	goldWorth: 90,
 	scoreWorth: 10
@@ -255,7 +255,7 @@ game.hwave8Enemy = {
 game.hwave9Enemy = {
 	image: "enemyApc",
 	type: "EARTH",
-	velocity: 220,
+	velocity: 200,
 	health: 1200,
 	goldWorth: 550,
 	scoreWorth: 6
