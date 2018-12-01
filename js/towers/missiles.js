@@ -36,12 +36,16 @@ game.Missile = me.Entity.extend({
 			
 			getColor: function() {
 				if (settings.elementType === "AIR") {
+					// White
 					return '#ffffff';
 				} else if (settings.elementType === "WATER") {
+					// Blue
 					return '#0d70fd';
 				} else if (settings.elementType === "FIRE") {
+					// Red
 					return '#de0202';
 				} else if (settings.elementType === "EARTH") {
+					// Brown
 					return '#6c3333';
 				}
 			}
@@ -57,6 +61,7 @@ game.Missile = me.Entity.extend({
 	 * recently destoryed from another missile to prevent any runtime errors.
 	 */
 	getTarget: function(target) {
+		// Ensure the target isn't null so game doesn't crash
 		if (this.targetTemp === null) {
 			this.targetTemp = target;
 			this.target = target;
@@ -142,10 +147,9 @@ game.Missile = me.Entity.extend({
     update : function (time) {
     	this._super(me.Entity, "update", [time]);
 		
+		// These three calculate and move missile toward enemy targets
 		this.calculateDirection(this.target);
-		this.pos.x += this.body.vel.x * this.speed * time;
-		this.pos.y += this.body.vel.y * this.speed * time;
-
+		this.changeMissilePosition(time);
 		this.removeMissile();
 		
         this.body.update();
@@ -154,6 +158,16 @@ game.Missile = me.Entity.extend({
         return true;
     },
 
+	/*
+	 * The changeMissilePosition updates the position of the missiles
+	 * as its target enemy is moving. This is based on time, therefore
+	 * is framerate independent. 
+	 */
+	changeMissilePosition: function(time) {
+		this.pos.x += this.body.vel.x * this.speed * time;
+		this.pos.y += this.body.vel.y * this.speed * time;		
+	},
+	
 	/*
 	 * The removeIdleMissile function is used to remove target missiles whose
 	 * original target was already destroyed by another missile in the game

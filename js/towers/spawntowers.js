@@ -5,32 +5,45 @@
 			width : 224,
 			height : 160										
 		}]);
+		// Instantiate Font
 		this.font = new me.BitmapFont(me.loader.getBinary('PressStart2P'), me.loader.getImage('PressStart2P'));
+		
+		// Instantiate type
 		this.elementType = settings.missileType;
+		
+		// Instantiate map variables
+		this.map = this.getMap();
+		this.currentLocation = this.map[(this.pos.y + 64) / 32][(this.pos.x + 96) / 32];
+		this.towerMap = game.data.towerMap;
+		
+		// Instantiate location variables
+		this.newTowerLocation = null;
+		this.newLocation;
+
+		// Instantiate tower related variables		
+		this.body.collisionType = me.collision.types.NPC_OBJECT;
+		this.lastPressedKey = null;
+		this.upgradableTowerInfo;
+		this.finalLevel;
+		this.chooseTowerType();
+		this.renderable;		
 		this.towerCost;
 		this.towerDamage;
 		this.towerSpeed;
-		this.alreadyClicked = false;
-		this.lastPressedKey = null;
-		this.map = this.getMap();
-		this.currentLocation = this.map[(this.pos.y + 64) / 32][(this.pos.x + 96) / 32];
-		this.movedLocation = false;
-		this.justSpawned = true;
-		this.newTowerLocation = null;
-		this.newLocation;
-		this.body.collisionType = me.collision.types.NPC_OBJECT;
-		this.towerMap = game.data.towerMap;
-		this.chooseTowerType();
-
-		this.renderable;
-		this.setIndicatorColor(this.greenColor);
 		
-		this.upgradableTowerInfo;
+		// Instantiate boolean variables
+		this.movedLocation = false;
+		this.justSpawned = true;		
+		this.alreadyClicked = false;
 		this.onUpgradableTile;
-		this.finalLevel;
+		
+		// Instantiate color code variables
 		this.greenColor = '#006400';
 		this.redColor = '#FF0000'
 		this.yellowColor = '#FFFF33'
+		this.setIndicatorColor(this.greenColor);
+		
+		// Instatiate in game child tower variables 
 		this.spawnChild = new game.Tower(game.data.lastPlacedTowerX, game.data.lastPlacedTowerY, settings);
 		this.spawnChild.collisionType = me.collision.types.PLAYER_OBJECT;
 		me.game.world.addChild(this.spawnChild, 1);
@@ -53,8 +66,19 @@
 		return false;
 	},
 
+	/*
+	 * The changeIndicator function is used to change the transparent colored square
+	 * around the spawn tower. This colored square indicates the range of the tower.
+	 * The tower will attack anything within that transparent box range. In addition
+	 * The colors signify important information to the user. If the square is a 
+	 * transparent green, this means the tower can be placed. If the color is a
+	 * transparent yellow, this means that the tower can be upgraded. If the color is
+	 * a transparent red, this means that the tower cannot be placed there.
+	 */
 	changeIndicator: function() {
 		var entity = this.getOverlappingTower();
+		
+		// Deals with indicator color for towers that newly spawn only
 		if (this.justSpawned && this.towerMap[(this.pos.y + 64) / 32][(this.pos.x + 96) / 32] === 'X' && typeof entity !== null && this.elementType === 'FINALUPGRADE' && entity.towerLevel === 4){
 			this.setIndicatorColor(this.greenColor);
 			this.onUpgradableTile = true;
@@ -91,7 +115,7 @@
 			this.onUpgradableTile = false;
 		}
 
-		
+		// Deals with indicator color for towers that move around
 		if (this.movedLocation) {
 			
 			if (this.newLocation === 'G' && this.newTowerLocation === 'X' && this.elementType === 'FINALUPGRADE' && entity.towerLevel === 4){
@@ -131,13 +155,15 @@
 	},
 
 	/**
-     * This is a separate function for the final upgrade tower. It does the same thing as the preceding function but 
-	 * needed to be separate from the previous function because its behavior is pretty different.
+     * This is a separate function for the final upgrade tower. It does the same thing as the 
+	 * precedingfunction but needed to be separate from the previous function because its behavior 
+	 * is pretty different.
      */
 	
 	changeFinalUpgradeIndicator: function() {
 		var entity = this.getOverlappingTower();
-
+		
+		// Deals with indicator color for towers that newly spawn only
 		if (this.justSpawned && this.towerMap[(this.pos.y + 64) / 32][(this.pos.x + 96) / 32] === 'X' && typeof entity !== null && entity.towerLevel === 4){
 			this.setIndicatorColor(this.greenColor);
 			this.setOpacity(0.3); // I have to manually set the opacity here . I dont know why
@@ -172,7 +198,7 @@
 			this.onUpgradableTile = false;
 		}
 
-		
+		// Deals with indicator color for towers that move around		
 		if (this.movedLocation) {
 			
 			if (this.newLocation === 'G' && this.newTowerLocation === 'X' && entity.towerLevel === 4){
@@ -210,9 +236,14 @@
 		}			
 	},
 
-
-
-
+	/*
+	 * The moveSpawnTower function allows the user to move the spawned tower around the
+	 * board b using the arrow keys. Because each square is 32 x 32 pixels, once movement
+	 * will change the x and y location by only 32 based on which arrow key is pressed.
+	 * Changing the tower location also updates various boolean variables such as 
+	 * lastPressedKey, movedLocation, and more. Also, the position of the x and y gets
+	 * updated to account for the changed position.
+	 */
 	moveSpawnTower: function() {
 		if (me.input.isKeyPressed("left") && this.alreadyClicked === false && this.withinRange("left")) {
 			this.alreadyClicked = true;
@@ -221,7 +252,7 @@
 			this.lastPressedKey = "left";
 			this.movedLocation = true;
 			this.newLocation = this.map[(this.pos.y + 64) / 32][(this.pos.x + 96) / 32];
-			this.newTowerLocation = this.towerMap[(this.pos.y + 64) / 32][(this.pos.x + 96) / 32];
+			this.newTowerLocation = this.towerMap[(this.pos.y + 64) / 32][(this.pos.x + 96) / 32];	
 		} else if (me.input.isKeyPressed("right") && this.alreadyClicked === false && this.withinRange("right")) {
 			this.alreadyClicked = true;
 			this.pos.x += 32;
@@ -293,6 +324,13 @@
 		}			
 	},
 	
+	/*
+	 * The getOverlappingTower function is used to retrieve a tower that is
+	 * overlapping the current spawned tower. This is used for upgrade purposed
+	 * to ensure that the currently placed tower is the same as the spawn tower
+	 * that is overlapping it. If not, it returns false. If it is the same tower,
+	 * it returns true.
+	 */
 	getOverlappingTower: function() {
 		var entity = me.collision.quadTree.retrieve(this);
 		for (var i = 0; i < entity.length; i++) {
@@ -304,13 +342,23 @@
 		return false;
 	},
 	 
+	/* 
+	 * The sameTower function returns true or false if the passed entit is the 
+	 * same tower type. If the same, it returns true and if not it returns
+	 * false.
+	 */
 	sameTower: function(entity) {
 		if ((this.elementType === entity.elementType || this.elementType === 'FINALUPGRADE') && this.pos.y === entity.pos.y && this.pos.x === entity.pos.x) {
 			return true;
 		}
 		return false;
 	},
-
+	 
+	/*
+	 * The draw function is a built in function from the MelonJS framework/engine
+	 * that will be automatically called. It renders all necessary entities or
+	 * UI content.
+	 */	
 	draw: function(renderer) {
 		this._super(me.Entity, "draw", [renderer]);	
 		// IF WE ARE USING FINAL UPGRADE ELEMENT.
@@ -353,8 +401,6 @@
 		}
 		
 		// Above pertains only to final upgrade stuff. The rest is below
-
-
 
 		else if (this.onUpgradableTile) {
 			// added more if statements so we can customize linear increase values
@@ -431,7 +477,8 @@
 			}
 			
 		}
-		
+	
+		// Draw the special ability of non Final Towers
 		if (this.elementType === "FIRE") {
 			this.font.draw(renderer, "Special Ability", -100, 35);
 			this.font.draw(renderer, "- AOE Damage", -100, 55);
@@ -442,7 +489,12 @@
 		}
 
 	},	
-	 
+
+	/*
+	 * The chooseTowerType function is used to assign the type of tower
+	 * to be spawned. Based on the element type, the appropriate towerCost,
+	 * towerDamage, and towerSpeed is assigned.
+	 */
 	chooseTowerType: function() {
 		if (this.elementType === "AIR") {
 			this.towerCost = game.data.towerAirCost;
@@ -466,7 +518,14 @@
 			this.towerSpeed = 1000
 		}
 	},
+
+	/*
+	 * The setIndicatorColor function is used to quickly change the indicator
+	 * box color based on the color code passed. This box is transparent color.
+	 * In this specific update, only green, red, and yellow are used.
+	 */
 	setIndicatorColor: function(colorCode) {
+		// Create a renderable box based on the colorCode variable
 		this.renderable = new (me.Renderable.extend({
 			init : function () {
 				this._super(me.Renderable, "init", [0, 0, 224, 160]);
@@ -474,6 +533,7 @@
 			destroy : function () {},
 			draw : function (renderer) {
 				var color = renderer.getColor();
+				// Fill Rectangle color and make transparent
 				renderer.setColor(colorCode);
 				renderer.fillRect(0, 0, this.width, this.height);
 				renderer.setColor(color);
@@ -482,6 +542,12 @@
 		}));			
 	},
 
+	/*
+	 * The withinRange function is used to check if the movement the user mvoes
+	 * the current spawn tower is within the bounds of the given screen. If so,
+	 * the function returns true, else if outside the screen, the function will
+	 * return false.
+	 */
 	withinRange: function(direction) {
 		switch(direction) {
 			case "left":
@@ -507,6 +573,11 @@
 		return false;
 	},
 
+	/* 
+	 * The getMap function is used to retrieve the map for the game based on 
+	 * the difficuly the player chooses at the beginning of the game. The
+	 * function returns a map type.
+	 */
 	getMap: function() {
 		if (game.data.gameDifficulty === 'EASY') {
 			return game.mapEasy;

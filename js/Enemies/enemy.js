@@ -47,9 +47,7 @@ game.Enemy = me.Entity.extend({
 		this.rotationValue = 0.20;
 		this.AOERange = 100;
 		this.body.collisionType = me.collision.types.ENEMY_OBJECT;
-		
 		this.burnDmg;
-		
 	},
 	
 	/*
@@ -86,6 +84,7 @@ game.Enemy = me.Entity.extend({
 	 * takes a dt (or change in time) parameter.
 	 */		
 	moveUnit: function(dt) {
+		// Moves Left
 		if (this.currentMove === 'L') {
 			this.rotationReady = true;
 			this.body.vel.y = 0;
@@ -94,6 +93,7 @@ game.Enemy = me.Entity.extend({
 			if (this.pos.x <= this.currentX * this.size - this.size) {
 				this.currentX--;
 			}
+		// Moves Right	
 		} else if (this.currentMove === 'R') {
 			this.rotationReady = true;
 			this.body.vel.y = 0;
@@ -101,7 +101,8 @@ game.Enemy = me.Entity.extend({
 			this.pos.x += this.body.vel.x * dt / 1000;
 			if (this.pos.x >= this.currentX * this.size + this.size) {
 				this.currentX++;
-			}			
+			}	
+		// Moves Up	
 		} else if (this.currentMove === 'U') {
 			this.rotationReady = true;			
 			this.body.vel.x = 0;
@@ -109,7 +110,8 @@ game.Enemy = me.Entity.extend({
 			this.pos.y += this.body.vel.y * dt / 1000
 			if (this.pos.y <= this.currentY * this.size - this.size) {
 				this.currentY--;
-			}				
+			}	
+		// Moves Down	
 		} else if (this.currentMove === 'D') {
 			this.rotationReady = true;			
 			this.body.vel.x = 0;
@@ -117,7 +119,8 @@ game.Enemy = me.Entity.extend({
 			this.pos.y += this.body.vel.y * dt / 1000
 			if (this.pos.y >= this.currentY * this.size + this.size) {
 				this.currentY++;
-			}			
+			}	
+		// Moves Right Corner After Coming From Down
 		} else if (this.currentMove === 'RD') {
 			this.body.vel.y = 0;
 			this.body.vel.x = this.gameVelocity;
@@ -125,9 +128,9 @@ game.Enemy = me.Entity.extend({
 			if (this.pos.x >= this.currentX * this.size + this.size) {
 				this.currentX++;
 			}
-			//this.renderable.currentTransform.rotate(-90 * Math.PI / 180);
 			this.rotateCorner(-1 * this.rotationValue, dt);
-		} 
+		}
+		// Moves Up Corner After Coming From Right  
 		else if (this.currentMove === 'UR') {
 			this.body.vel.x = 0;
 			this.body.vel.y = this.gameVelocity * -1;
@@ -135,10 +138,9 @@ game.Enemy = me.Entity.extend({
 			if (this.pos.y <= this.currentY * this.size - this.size) {
 				this.currentY--;
 			}
-			//this.renderable.currentTransform.rotate(0);
 			this.rotateCorner(-1 * this.rotationValue, dt);
-
 		}
+		// Moves Right Corner After Coming From Up
 		else if (this.currentMove === 'RU') {
 			this.body.vel.y = 0;
 			this.body.vel.x = this.gameVelocity;
@@ -146,9 +148,9 @@ game.Enemy = me.Entity.extend({
 			if (this.pos.x >= this.currentX * this.size + this.size) {
 				this.currentX++;
 			}
-			//this.renderable.currentTransform.rotate(0.175);
 			this.rotateCorner(this.rotationValue, dt);
 		}
+		// Moves Down Corner After Coming From Right
 		else if (this.currentMove === 'DR') {
 			this.body.vel.x = 0;
 			this.body.vel.y = this.gameVelocity;
@@ -156,9 +158,9 @@ game.Enemy = me.Entity.extend({
 			if (this.pos.y >= this.currentY * this.size + this.size) {
 				this.currentY++;
 			}
-			//this.renderable.currentTransform.rotate(0.160);
 			this.rotateCorner(this.rotationValue, dt);
 		}
+		// Moves Left Corner After Coming From Down
 		else if (this.currentMove === 'LD') {
 			this.body.vel.y = 0;
 			this.body.vel.x = this.gameVelocity * -1;
@@ -166,9 +168,9 @@ game.Enemy = me.Entity.extend({
 			if (this.pos.x <= this.currentX * this.size - this.size) {
 				this.currentX--;
 			}
-			//this.renderable.currentTransform.rotate(0.140);
 			this.rotateCorner(this.rotationValue, dt);
 		}
+		// Moves Up Corner After Coming From Left
 		else if (this.currentMove === 'UL') {
 			this.body.vel.x = 0;
 			this.body.vel.y = this.gameVelocity * -1;
@@ -176,9 +178,9 @@ game.Enemy = me.Entity.extend({
 			if (this.pos.y <= this.currentY * this.size - this.size) {
 				this.currentY--;
 			}
-			//this.renderable.currentTransform.rotate(0.145);
 			this.rotateCorner(this.rotationValue, dt);
 		}
+		// Moves Left Corner After Coming From Up
 		else if (this.currentMove === 'LU') {
 			this.body.vel.y = 0;
 			this.body.vel.x = this.gameVelocity * -1;
@@ -186,9 +188,9 @@ game.Enemy = me.Entity.extend({
 			if (this.pos.x <= this.currentX * this.size - this.size) {
 				this.currentX--;
 			}
-			//this.renderable.currentTransform.rotate(-0.155);
 			this.rotateCorner(-1 * this.rotationValue, dt);
 		}
+		// Moves Down Corner After Coming From Left
 		else if (this.currentMove === 'DL') {
 			this.body.vel.x = 0;
 			this.body.vel.y = this.gameVelocity;
@@ -196,7 +198,6 @@ game.Enemy = me.Entity.extend({
 			if (this.pos.y >= this.currentY * this.size + this.size) {
 				this.currentY++;
 			}
-			//this.renderable.currentTransform.rotate(-0.145);
 			this.rotateCorner(-1 * this.rotationValue, dt);			
 		}
 		this.currentMove = this.path[this.currentY][this.currentX]; 		
@@ -248,8 +249,10 @@ game.Enemy = me.Entity.extend({
 		this.slowActive = true;
 		var levelVar = callingTowerLevel;
 		if (levelVar === 5){
+			// Get Nearby Enemies from this enemy
 			var entity = me.collision.quadTree.retrieve(this);
 			for (var i = 0; i < entity.length; i++) {
+				// Retrieve entities that are only of type ENEMY_OBJECT
 				if (typeof entity[i].body !== "undefined" && entity[i].body.collisionType === me.collision.types.ENEMY_OBJECT) {
 					if (this.inAOERange(entity[i])) { // this uses AOE code form the fire missiles. Pretty much copy pasted, created a new aoecolddamage function to apply the effect.
 						if(entity[i] !== this) {
@@ -292,15 +295,16 @@ game.Enemy = me.Entity.extend({
 	 * are within an arbitrary distance to this enemy.
 	 */	
 	activateFireMissile: function(callingTowerLevel) {
+		// Retrieve Entities nearby this enemy
 		var entity = me.collision.quadTree.retrieve(this);
 		for (var i = 0; i < entity.length; i++) {
+			// Retrieve entities that are only of type ENEMY_OBJECT
 			if (typeof entity[i].body !== "undefined" && entity[i].body.collisionType === me.collision.types.ENEMY_OBJECT) {
 				if (this.inAOERange(entity[i])) {
 					if(entity[i] !== this) {
 
 						entity[i].applyAOEDamage(callingTowerLevel);
-						entity[i].applyAOEEffect();
-						//entity[i].applyFireAOEEffect();			
+						entity[i].applyAOEEffect();			
 					}
 					else if (entity[i] === this) {
 						if (this.enemyHealth >= 0 && callingTowerLevel === 5){
@@ -339,9 +343,6 @@ game.Enemy = me.Entity.extend({
 	 * conjunction with the activateFireMissile function to apply the AOE damage
 	 * to the enemies that are within range of the fire missile AOE.
 	 */	
-
-	
-
 	applyAOEDamage: function(callingTowerLevel) {
 		damage = game.data.FireMissileDamage + (game.data.fireUpgradeDamage * (callingTowerLevel-1));
 		this.enemyHealth -= damage;
@@ -367,7 +368,6 @@ game.Enemy = me.Entity.extend({
 	 * appear on top of the enemy animation to signify AOE damage was taken.
 	 */	
 
-
 	applyAOEColdDamage: function() {
 		this.enemyHealth -= game.data.WaterMissileDamage;
 		if (this.slowActive) {
@@ -378,15 +378,14 @@ game.Enemy = me.Entity.extend({
 		this.checkIfDead();
 		var that = this;
 		
-		/*
-		this.timeOut = setTimeout(function() {
-		that.slowActive = false;
-		that.regainSpeed();
-		}, 2000 + (5 * 1000));*/
 		
 	},
 
-
+	/* 
+	 * The applAOEEffect turns on the AOEActive boolean to indicate that this enemy
+	 * should be taking AOE damage. it uses a setTimeout function to allow this to
+	 * happen only for an arbitrary amount of time.
+	 */
 	applyAOEEffect: function() {
 
 		if (this.enemyHealth > 0) {
@@ -398,6 +397,11 @@ game.Enemy = me.Entity.extend({
 		}
 	},
 
+	/* 
+	 * The applCodeAEOEffect is similar to that of the applyAOEEffect in that in 
+	 * indicates that this enem should turn on the cold AOE boolean to allow for
+	 * cold slowing effects to be active
+	 */
 	applyColdAOEEffect: function() {
 
 		if (this.enemyHealth > 0) {
@@ -410,10 +414,6 @@ game.Enemy = me.Entity.extend({
 				}, 2000 + (5 * 1000));
 		}
 	},
-
-
-	
-
 
 	/*
 	 * The draw function is a built in function from the MelonJS framework/engine
@@ -473,14 +473,17 @@ game.Enemy = me.Entity.extend({
 	 * depending on how much health is remaining.
 	 */	
 	drawHealthBar: function(renderer) {
+		// Draw black background
 		renderer.setColor("rgba(0,0,0,1)");
 		renderer.fillRect(-16, -25, 32, 5);
 		
+		// Green health bar overlay length dependent on ratio of health
 		var remainingHealth = (this.enemyHealth / this.maxHealth) * 32;
 		if (remainingHealth < 0) {
 			remainingHealth = 0;
 		}
 		
+		// Draw Green Health Bar
 		renderer.setColor("rgba(124,252,1)");
 		renderer.fillRect(-16, -25, remainingHealth, 5);
 	},
@@ -495,6 +498,10 @@ game.Enemy = me.Entity.extend({
 		return false;
 	},
 	
+	/*
+	 * The deactivate function destroys the enemy from outside of the enemyy.js file.
+	 * This is used for collisions that occur at the end of the map
+	 */
 	deactivate: function() {
 		this.updateData();
 	}

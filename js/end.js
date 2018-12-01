@@ -35,7 +35,6 @@ game.End = me.Entity.extend({
 		if (other.body.collisionType === me.collision.types.ENEMY_OBJECT) {
 			other.body.setCollisionMask(me.collision.types.NO_OBJECT);
 			other.deactivate();
-			//me.game.world.removeChild(other);
 			game.data.health--;
 			return false;
 		} 

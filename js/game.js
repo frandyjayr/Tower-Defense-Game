@@ -1,7 +1,7 @@
 /* Game namespace */
 var game = {
 
-    // an object where to store game information
+    // An object to store global game information
     data : {
 		health: 10,
 		currentlySpawned: 0,
@@ -58,9 +58,6 @@ var game = {
 		towerMap: null
     },
 
-	
-	
-	
     // Run on page load.
     "onload" : function () {
         // Initialize the video.
@@ -76,39 +73,24 @@ var game = {
         me.loader.preload(game.resources, this.loaded.bind(this));
 		
     },
-
-
 	
     // Run on game resources loaded.
     "loaded" : function () {
-		// add our enemy entity in the entity pool
+		// Register game objects to use later
 		me.pool.register("enemy", game.Enemy);
-		// add our end path entity in the entity pool
 		me.pool.register("end", game.End);
-		// add towers entities to the entity pool
-
-		// add the wave manager to the entity pool
 		me.pool.register("wavemanagereasy", game.waveManagerEasy);
-		// add the missiles to the entity pool
-
 		me.pool.register("missile", game.Missile);
-		// add the buttons to the entity pool
 		me.pool.register("buttonTower", game.ButtonTower);
-		// add the tower manager to the entity pool
 		me.pool.register("towermanager", game.TowerManager);
-		me.pool.register("tower", game.Tower);					
-		
+		me.pool.register("tower", game.Tower);							
 		me.pool.register("spawnTower", game.SpawnTower);
 		me.pool.register("inGameMenu", game.inGameMenu);
 		
 
-
+		// Set game Screens
 		me.state.set(me.state.MENU, new game.titlescreen());
-
-		
-        //me.state.set(me.state.MENU, new game.TitleScreen());
-        me.state.set(me.state.PLAY, new game.PlayScreen());
-		
+        me.state.set(me.state.PLAY, new game.PlayScreen());		
 		me.state.set(me.state.END, new game.EndScreen());
 
         // Start the game.

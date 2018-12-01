@@ -46,8 +46,10 @@ game.waveManagerEasy = me.Container.extend({
 	 */
 	startRound: function () {
 		var newTime = me.timer.getTime() / 1000;
+		// Generate new wave if the arbitrary spawn time has passed
 		if (newTime >= this.currentTime + this.spawnTime && this.numberSpawned < this.maxSpawn && game.data.waveStart) {
 			this.generateWave(game.data.waveNumber);
+			// Resets the time
 			this.currentTime = newTime;
 		}
 	},
@@ -60,6 +62,7 @@ game.waveManagerEasy = me.Container.extend({
 	 * size in this.wave;
 	 */
 	generateWave: function (wave) {
+		// Retrieves waves from the wave.js file
 		this.wave[game.data.waveNumber - 1][this.numberSpawned]();			
 		this.numberSpawned++;
 		game.data.currentlySpawned++;
@@ -85,6 +88,7 @@ game.waveManagerEasy = me.Container.extend({
 	 * next wave does not begin until the users clicks "P" on the keyboard.
 	 */
 	preRoundPreparation: function() {
+		// Ensure The Wave can only start if no spawn towers are active
 		if (me.input.isKeyPressed("P") && game.data.currentlySpawned === 0 && 		  game.data.towerButtonPressed === false) {
 			this.maxSpawn = this.wave[game.data.waveNumber - 1].length - 1;
 			this.spawnTime = this.wave[game.data.waveNumber - 1][this.wave[game.data.waveNumber - 1].length - 1];
