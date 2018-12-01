@@ -262,17 +262,20 @@
 		} else if (me.input.isKeyPressed("enter") && this.currentLocation === 'G' && this.towerMap[(this.pos.y + 64) / 32][(this.pos.x + 96) / 32] === 'X') {
 			var entity = this.getOverlappingTower();
 				if (this.sameTower(entity)) {
-					console.log("place2")
-					if (this.elementType === 'FINALUPGRADE' && game.data.gold >= game.data.finalUpgradeCost){
+					if (this.elementType === 'FINALUPGRADE' && game.data.gold >= game.data.finalUpgradeCost && entity.towerLevel === 4){
 						entity.upgradeTowerFinal();
+						game.data.lastPlacedTowerX = this.pos.x;
+						game.data.lastPlacedTowerY = this.pos.y;
+						me.game.world.removeChild(this);
 					}
-					else if (game.data.gold >= game.data.towerAirCost || game.data.gold >= game.data.towerFireCost || game.data.gold >= game.data.towerEarthCost ||
-					game.data.gold >= game.data.towerWaterCost){
+					else if ((game.data.gold >= game.data.towerAirCost || game.data.gold >= game.data.towerFireCost || game.data.gold >= game.data.towerEarthCost ||
+					game.data.gold >= game.data.towerWaterCost) && this.elementType !== 'FINALUPGRADE'){
 						entity.upgradeTower();
+						game.data.lastPlacedTowerX = this.pos.x;
+						game.data.lastPlacedTowerY = this.pos.y;
+						me.game.world.removeChild(this);
 					}
-					game.data.lastPlacedTowerX = this.pos.x;
-					game.data.lastPlacedTowerY = this.pos.y;
-					me.game.world.removeChild(this);
+
 				}
 
 		} else if (me.input.isKeyPressed("enter") && this.currentLocation !== 'G') {
