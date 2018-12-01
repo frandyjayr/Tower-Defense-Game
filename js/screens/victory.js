@@ -8,17 +8,13 @@ game.WinScreen = me.ScreenObject.extend({
         backgroundImage.anchorPoint.set(0, 0);
         backgroundImage.scale(me.game.viewport.width / backgroundImage.width, me.game.viewport.height / backgroundImage.height);
 
-        me.game.world.addChild(backgroundImage, 1); // add
-        //me.audio.playTrack("mp3,mainmenu"); 
+        me.game.world.addChild(backgroundImage, 1); // add 
         me.game.world.addChild(new (me.Renderable.extend ({
 
             init : function() {
                 this._super(me.Renderable, 'init', [0, 0, me.game.viewport.width, me.game.viewport.height]);
 
                 this.font = new me.BitmapFont(me.loader.getBinary('PressStart2P'), me.loader.getImage('PressStart2P'));
-                //this.font.lineWidth = "2";
-                //this.font.textAlign = "center";
-                //this.font.setOpacity (1);
                 this.title = "Congratulations! You Win!";
                 this.end = "Press Enter to Return to Menu";
                 

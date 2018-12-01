@@ -118,8 +118,7 @@ game.Missile = me.Entity.extend({
 		// The following formula was derived from the two sources above. They
 		// Calculate the relative distance and velocities between the missile
 		// and the target enemy unit and follows it until collision occurs
-		// https://www.youtube.com/watch?v=e3-TZ7TfJjA
-		// https://www.gamedev.net/forums/topic/339753-noob-need-code-on-2d-homing-missile/
+
 		var totalMovement = 1;
 		var xRelativeDistance = Math.abs(target.pos.x - this.pos.x);
 		var yRelativeDistance = Math.abs(target.pos.y - this.pos.y);

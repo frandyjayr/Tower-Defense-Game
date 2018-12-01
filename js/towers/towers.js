@@ -1,6 +1,3 @@
-// http://www.html5gamedevs.com/topic/30266-can-we-change-collision-check-with-and-height-of-the-image/
-// http://melonjs.github.io/tutorial-space-invaders/#part3
-
 game.Tower = me.Entity.extend({
 	init: function (x, y, settings) {
     	this._super(me.Entity, "init", [x, y, settings]);
@@ -308,4 +305,3 @@ game.Tower = me.Entity.extend({
 	}
 
 });
-	// https://groups.google.com/forum/#!topic/melonjs/O-On-pIJyUY

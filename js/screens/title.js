@@ -7,8 +7,7 @@ game.titlescreen = me.ScreenObject.extend({
         backgroundImage.anchorPoint.set(0, 0);
         backgroundImage.scale(me.game.viewport.width / backgroundImage.width, me.game.viewport.height / backgroundImage.height);
 
-        me.game.world.addChild(backgroundImage, 1); // add
-        //me.audio.playTrack("mp3,mainmenu"); 
+        me.game.world.addChild(backgroundImage, 1); // add 
         me.game.world.addChild(new (me.Renderable.extend ({
 
             init : function() {
