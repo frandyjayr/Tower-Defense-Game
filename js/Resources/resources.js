@@ -31,13 +31,5 @@ game.resources = [
 
 	
 
-
-
-
-
-
-
-
-
 ];
 
