@@ -477,6 +477,9 @@ game.Enemy = me.Entity.extend({
 		renderer.fillRect(-16, -25, 32, 5);
 		
 		var remainingHealth = (this.enemyHealth / this.maxHealth) * 32;
+		if (remainingHealth < 0) {
+			remainingHealth = 0;
+		}
 		
 		renderer.setColor("rgba(124,252,1)");
 		renderer.fillRect(-16, -25, remainingHealth, 5);
