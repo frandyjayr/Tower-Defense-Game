@@ -76,7 +76,7 @@ game.Tower = me.Entity.extend({
 		if (this.towerLevel < 5) {
 			if (this.elementType === "AIR"){
 				this.spawnTime = 0.1;
-				this.missileDamage += 10;
+				this.missileDamage += 20;
 				this.towerLevel++;
 				game.data.gold -= game.data.finalUpgradeCost;
 				this.upgradeComplete = true;
@@ -87,7 +87,7 @@ game.Tower = me.Entity.extend({
 				this.upgradeComplete = true;
 			} else if (this.elementType === "EARTH"){
 				this.spawnTime -= -0.5;
-				this.missileDamage += 150;
+				this.missileDamage += 300;
 				this.towerLevel++;
 				game.data.gold -= game.data.finalUpgradeCost;
 				this.upgradeComplete = true;
