@@ -66,7 +66,7 @@ game.inGameMenu = me.Container.extend({
 	 * to open the menu and pressing either "M" or "esc" to close the menu.
 	 */
 	toggleMenu: function() {
-		if (me.input.isKeyPressed("M")) {
+		if (me.input.isKeyPressed("M") && game.data.waveStart === false) {
 			game.data.menuOpened = true;
 			this.unbindGameKeys();
 		} else if (me.input.isKeyPressed("exit") || me.input.isKeyPressed("em")) {	

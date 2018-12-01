@@ -159,7 +159,8 @@ game.HUD.ScoreItem = me.Renderable.extend({
 				this.font.draw(renderer, "Press 'P' to Start Wave or", me.game.viewport.width / 2 + 115, me.game.viewport.height / 2 + 55);
 				
 				this.font.resize(0.6)
-				this.font.draw(renderer, "'M' For Menu/Game Instructions", me.game.viewport.width / 2 + 140, me.game.viewport.height / 2 + 75);
+				this.font.draw(renderer, "'M' For Menu/Game Instructions.", me.game.viewport.width / 2 + 140, me.game.viewport.height / 2 + 75);
+				this.font.draw(renderer, "Menu cannot be opened during a wave!", me.game.viewport.width / 2 + 200, me.game.viewport.height / 2 + 95);
 			}
 		}		
 	},
