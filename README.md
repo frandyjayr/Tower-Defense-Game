@@ -7,7 +7,7 @@ Elemental Tower Defense is a modified version of tower defense where the player 
 ## Download Instructions
 Download Instructions can be followed under the "melonJS boilerplate" section if a local copy is desired, however a working version of the game can be played [here](https://frandyjayr.github.io/Tower-Defense-Game/)
 
-# Controls
+## Controls
 - Use the Arrow keys to move around towers
 - Press 'Enter' to place towers and to choose menu options
 - Press the following to spawn respective towers:
@@ -18,8 +18,9 @@ Download Instructions can be followed under the "melonJS boilerplate" section if
 	- T: Upgrading Tower Tool
 - Press 'P' to start the current wave of enemies
 
-# Gameplay 
-
+## Gameplay 
+![title_screen](https://user-images.githubusercontent.com/23549050/52458684-b60b1d00-2b15-11e9-937a-f411088e18e0.png)
+![image1](https://user-images.githubusercontent.com/23549050/52458692-bf948500-2b15-11e9-818c-818b807520da.JPG)
 
 
 melonJS boilerplate
