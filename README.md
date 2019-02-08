@@ -19,8 +19,8 @@ Download Instructions can be followed under the "melonJS boilerplate" section if
 - Press 'P' to start the current wave of enemies
 
 ## Gameplay 
-![title_screen](https://user-images.githubusercontent.com/23549050/52458684-b60b1d00-2b15-11e9-937a-f411088e18e0.png = 800x560)
-![image1](https://user-images.githubusercontent.com/23549050/52458692-bf948500-2b15-11e9-818c-818b807520da.JPG = 800x560)
+![title_screen](https://user-images.githubusercontent.com/23549050/52458684-b60b1d00-2b15-11e9-937a-f411088e18e0.png)
+![image1](https://user-images.githubusercontent.com/23549050/52458692-bf948500-2b15-11e9-818c-818b807520da.JPG)
 
 
 melonJS boilerplate
